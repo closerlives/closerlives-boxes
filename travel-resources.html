@@ -74,6 +74,34 @@
       }
     }
   </script>
+<script>
+  function resizeParent() {
+    window.parent.postMessage(
+      { type: 'resize', height: document.body.scrollHeight },
+      '*'
+    );
+  }
+
+  // Resize once on load
+  window.addEventListener('load', resizeParent);
+
+  // Resize again after expanding
+  function toggleLinks() {
+    const linksContainer = document.getElementById('links-container');
+    const button = document.getElementById('toggleButton');
+
+    if (linksContainer.style.display === 'none') {
+      linksContainer.style.display = 'block';
+      button.innerHTML = 'Close <span style="font-size: 16px;">&#9650;</span>';
+    } else {
+      linksContainer.style.display = 'none';
+      button.innerHTML = 'Explore Travel Resources <span style="font-size: 16px;">&#9660;</span>';
+    }
+
+    // Let the parent know to resize
+    setTimeout(resizeParent, 300);
+  }
+</script>
 
 </body>
 </html>
