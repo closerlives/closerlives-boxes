@@ -3,59 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <style>
     html, body {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      overflow-x: hidden; /* Prevent horizontal scroll */
+      font-family: Lato, Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     *, *::before, *::after {
       box-sizing: inherit;
     }
+
+    .arrow {
+      display: inline-block;
+      transition: transform 0.3s ease;
+      margin-left: 6px;
+    }
+
+    .arrow.rotate {
+      transform: rotate(180deg);
+    }
   </style>
 </head>
 <body>
 
-  <div class="travel-resource-box" style="padding: 10px; max-width: 600px; margin: 5px auto; box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1); font-family: Lato, Arial, sans-serif; font-size: 16px; background: linear-gradient(to right, #66b3ff, #66d9b3); border-radius: 10px; color: #000;">
+  <div class="travel-resource-box" style="padding: 10px; max-width: 600px; margin: 5px auto; box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1); font-size: 16px; background: linear-gradient(to right, #66b3ff, #66d9b3); border-radius: 10px; color: #000;">
 
     <h2 style="text-align: center; margin-top: 5px; margin-bottom: 5px;">Save Big on Your<br>Next Adventure!</h2>
 
     <p style="text-align: center; margin: 10px 0;">
       Stay connected seamlessly while traveling with the 
       <a href="https://gigsky.pxf.io/6eJ7YN" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">GigSky eSIM</a>.
-      <br><br>Save 10% on your first order with code CLOSERLIVES10
+      <br><br>Save 10% on your first order with code <strong>CLOSERLIVES10</strong>
     </p>
 
-    <h3 style="text-align: center; margin-top: 10px;">Discover More Ways to<br> Save and Explore</h3>
+    <h3 style="text-align: center; margin-top: 10px;">Discover More Ways to Save and Explore</h3>
 
     <div style="text-align: center; margin-top: 5px;">
       <button onclick="toggleLinks()" id="toggleButton"
-        style="background-color: #3d3d3d; color: white; border: 1px solid #3d3d3d; padding: 8px 20px; border-radius: 10px; cursor: pointer; display: inline-block; margin-bottom: 15px; text-transform: uppercase;"
-        onmouseover="this.style.backgroundColor='#FFFFFF'; this.style.color='#3d3d3d'; this.style.borderColor='#3d3d3d';"
-        onmouseout="this.style.backgroundColor='#3d3d3d'; this.style.color='white'; this.style.borderColor='#3d3d3d';">
-        <span style="font-size: 16px; font-weight: bold;">Explore<br> Travel Resources <span style="font-size: 16px;">&#9660;</span></span>
+        style="background-color: #3d3d3d; color: white; border: 1px solid #3d3d3d; padding: 8px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 10px; text-transform: uppercase;">
+        <span style="font-size: 16px; font-weight: bold;">Explore Travel Resources <span id="arrowIcon" class="arrow">&#9660;</span></span>
       </button>
     </div>
 
-    <div id="links-container" style="display: none;">
+    <p style="text-align: center; font-size: 14px; margin-top: 5px;">
+      Having trouble? <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top" style="font-weight: bold; text-decoration: underline; color: #3d3d3d;">Tap here instead</a>
+    </p>
+
+    <div id="links-container" style="display: none; margin-top: 10px;">
       <ul style="list-style-type: none; padding-left: 0;">
-        <li style="margin-bottom: 10px;">
-          <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top" style="font-weight: bold; text-decoration: none; color: blue;">🌍 Save, Earn and Explore with us here at Closer Lives!</a>
-          - Whether you're booking flights, hotels, transport, or looking for ways to save on travel, this page has handpicked travel resources to help you get the best deals.<br><br>We’ve partnered with trusted brands like Expedia, Klook, Trusted Housesitters, and more to bring you exclusive discounts and money-saving tips.
-        </li>
-        <li style="margin-bottom: 10px;"><a href="https://expedia.stay22.com/closerlives/tSxuAFBYT7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">✈️ Cheap Flights</a> - Get fantastic deals on flights and transport.</li>
-        <li style="margin-bottom: 10px;"><a href="https://booking.stay22.com/closerlives/RYx2LG7TE7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Save on Local Accommodation</a> - Get top deals on budget hostels to luxury hotels.</li>
-        <li style="margin-bottom: 10px;"><a href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Tours, Tickets and Activities</a> - Skip the hassle and book in advance.</li>
-        <li style="margin-bottom: 10px;"><a href="https://hotelscom.stay22.com/closerlives/9OLfKoRBEK" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Flexible Hotels</a> - Save more with Member Prices and get free cancellations.</li>
-        <li style="margin-bottom: 10px;"><a href="https://vrbo.stay22.com/closerlives/jY_xM3o0Sq" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Rent Your Property Confidently with Vrbo</a> - Over 2 million bookable vacation rentals across an array of rental property types.</li>
-        <li style="margin-bottom: 10px;"><a href="https://tripadvisor.stay22.com/closerlives/aQ1L-D0xcs" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none; color: blue;">🌍 Read Reviews, Compare & Book Deals!</a> - Plan your perfect trip with the world's largest travel site.</li>
-        <li style="margin-bottom: 10px;"><a href="https://safetywing.com/nomad-insurance/?referenceID=26241735&campaign=blog-posts&utm_campaign=blog-posts&utm_source=26241735&utm_medium=Ambassador" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none; color: blue;">🩺 Insurance for Nomads</a> - Nomad Insurance covers extended travel and health worldwide. Choose from two coverage levels based on your needs.</li>
+        <li style="margin-bottom: 10px;"><a href="https://expedia.stay22.com/closerlives/tSxuAFBYT7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">✈️ Cheap Flights</a> - Fantastic deals on flights and transport.</li>
+        <li style="margin-bottom: 10px;"><a href="https://booking.stay22.com/closerlives/RYx2LG7TE7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Local Accommodation</a> - Great deals from hostels to hotels.</li>
+        <li style="margin-bottom: 10px;"><a href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Tours & Activities</a> - Book in advance, skip the hassle.</li>
+        <li style="margin-bottom: 10px;"><a href="https://hotelscom.stay22.com/closerlives/9OLfKoRBEK" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Flexible Hotels</a> - Free cancellation, member prices.</li>
+        <li style="margin-bottom: 10px;"><a href="https://vrbo.stay22.com/closerlives/jY_xM3o0Sq" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Vrbo Rentals</a> - Over 2 million properties worldwide.</li>
+        <li style="margin-bottom: 10px;"><a href="https://tripadvisor.stay22.com/closerlives/aQ1L-D0xcs" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Tripadvisor Deals</a> - Compare, read reviews, and book.</li>
+        <li style="margin-bottom: 10px;"><a href="https://safetywing.com/nomad-insurance/?referenceID=26241735&campaign=blog-posts&utm_campaign=blog-posts&utm_source=26241735&utm_medium=Ambassador" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🩺 Nomad Insurance</a> - Affordable global travel & health coverage.</li>
       </ul>
-      <p style="font-size: 16px; text-align: center; color: #777;">Please note that at no additional cost to you, we may earn a commission from purchases made through these links. 
-        <a href="https://www.closerlives.com/privacy-policy" target="_blank" style="font-weight: bold; text-decoration: none;"><br><br>Tap here</a> for more information.
+      <p style="font-size: 16px; text-align: center; color: #777;">We may earn a commission at no extra cost to you. 
+        <a href="https://www.closerlives.com/privacy-policy" target="_blank" style="font-weight: bold; text-decoration: none;"><br><br>Tap here</a> for details.
       </p>
     </div>
   </div>
@@ -63,45 +71,30 @@
   <script>
     function toggleLinks() {
       const linksContainer = document.getElementById('links-container');
+      const arrow = document.getElementById('arrowIcon');
       const button = document.getElementById('toggleButton');
 
-      if (linksContainer.style.display === 'none') {
-        linksContainer.style.display = 'block';
-        button.innerHTML = 'Close <span style="font-size: 16px;">&#9650;</span>';
-      } else {
-        linksContainer.style.display = 'none';
-        button.innerHTML = 'Explore Travel Resources <span style="font-size: 16px;">&#9660;</span>';
-      }
+      const isVisible = linksContainer.style.display === 'block';
+
+      linksContainer.style.display = isVisible ? 'none' : 'block';
+      arrow.classList.toggle('rotate', !isVisible);
+
+      setTimeout(() => {
+        window.parent.postMessage({
+          type: 'resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }, 300);
     }
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window.parent.postMessage({
+          type: 'resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }, 100);
+    });
   </script>
-<script>
-  function resizeParent() {
-    window.parent.postMessage(
-      { type: 'resize', height: document.body.scrollHeight },
-      '*'
-    );
-  }
-
-  // Resize once on load
-  window.addEventListener('load', resizeParent);
-
-  // Resize again after expanding
-  function toggleLinks() {
-    const linksContainer = document.getElementById('links-container');
-    const button = document.getElementById('toggleButton');
-
-    if (linksContainer.style.display === 'none') {
-      linksContainer.style.display = 'block';
-      button.innerHTML = 'Close <span style="font-size: 16px;">&#9650;</span>';
-    } else {
-      linksContainer.style.display = 'none';
-      button.innerHTML = 'Explore Travel Resources <span style="font-size: 16px;">&#9660;</span>';
-    }
-
-    // Let the parent know to resize
-    setTimeout(resizeParent, 300);
-  }
-</script>
-
 </body>
 </html>
