@@ -35,21 +35,22 @@
     .blog-container img {
       max-width: 100%;
       display: block;
-      margin: 0 auto 15px;
+      margin: 0 auto 12px;
       border-radius: 10px;
     }
 
     .blog-description {
       font-size: 16px;
       color: #222;
-      margin-bottom: 15px;
+      margin-bottom: 14px;
+      line-height: 1.4;
     }
 
     .blog-description strong {
       display: block;
       font-weight: bold;
       font-size: 18px;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .read-more {
@@ -83,33 +84,15 @@
 </head>
 <body>
   <div class="blog-container">
-    <img src="https://static.wixstatic.com/media/971500_2a2a7631df224f33a1c27162aeba2839~mv2.png" alt="World map with network lines and logo reading 'Lives Jenn & Leon Travel & Lifestyle'" />
+    <img src="https://static.wixstatic.com/media/971500_2a2a7631df224f33a1c27162aeba2839~mv2.png" alt="Country guides promo image" />
     <div class="blog-description">
-      <strong>Get our comprehensive Country Guides for over 20 countries!</strong>
-      With everything from visa information to culture and customs, transportation to health and safety, must-see places and handy maps, you'll get all you need to know before you go.<br><br>
-      Plus, they are totally FREE!
+      <strong>Free Country Guides for 20+ Destinations</strong>
+      Get essential travel info at a glance — visas, safety, customs, must-see places, and more. <br><br>
+      Updated regularly and totally free to use!
     </div>
     <a href="https://www.closerlives.com/travel-hub/country-guides" target="_top" class="read-more">
       <span>GET YOUR GUIDES</span>
     </a>
   </div>
-
-  <script>
-    function sendHeight() {
-      const height = document.body.scrollHeight;
-      window.parent.postMessage({ type: 'resize', height: height }, '*');
-    }
-
-    // Run height sync repeatedly for 2 seconds (catches late image loads)
-    window.addEventListener('load', () => {
-      sendHeight();
-      let count = 0;
-      const interval = setInterval(() => {
-        sendHeight();
-        count++;
-        if (count > 20) clearInterval(interval); // stop after ~2 seconds
-      }, 100);
-    });
-  </script>
 </body>
 </html>
