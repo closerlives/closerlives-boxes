@@ -88,5 +88,16 @@
       <span>GET YOUR GUIDES</span>
     </a>
   </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window.parent.postMessage({
+          type: 'resize',
+          height: document.body.scrollHeight
+        }, '*');
+      }, 100);
+    });
+  </script>
 </body>
 </html>
