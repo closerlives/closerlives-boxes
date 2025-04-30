@@ -82,7 +82,7 @@
   </style>
 </head>
 <body>
-  <div class="blog-container" id="box">
+  <div class="blog-container">
     <img src="https://static.wixstatic.com/media/971500_2a2a7631df224f33a1c27162aeba2839~mv2.png" alt="World map with network lines and logo reading 'Lives Jenn & Leon Travel & Lifestyle'" />
     <div class="blog-description">
       <strong>Get our comprehensive Country Guides for over 20 countries!</strong>
@@ -96,20 +96,19 @@
 
   <script>
     function sendHeight() {
-      window.parent.postMessage({
-        type: 'resize',
-        height: document.body.scrollHeight
-      }, '*');
+      const height = document.body.scrollHeight;
+      window.parent.postMessage({ type: 'resize', height: height }, '*');
     }
 
-    // Wait until image is loaded to calculate correct height
+    // Run height sync repeatedly for 2 seconds (catches late image loads)
     window.addEventListener('load', () => {
-      const img = document.querySelector('img');
-      if (img && !img.complete) {
-        img.onload = sendHeight;
-      } else {
-        setTimeout(sendHeight, 200);
-      }
+      sendHeight();
+      let count = 0;
+      const interval = setInterval(() => {
+        sendHeight();
+        count++;
+        if (count > 20) clearInterval(interval); // stop after ~2 seconds
+      }, 100);
     });
   </script>
 </body>
