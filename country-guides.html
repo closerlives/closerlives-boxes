@@ -30,6 +30,9 @@
       border: 1px solid #b0b0b0;
       text-align: center;
       transition: border 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .blog-container:hover {
@@ -39,14 +42,15 @@
     .blog-container img {
       width: 100%;
       border-radius: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .blog-description {
       font-size: 13.5px;
       color: #222;
-      margin-bottom: 12px;
       line-height: 1.35;
+      margin-bottom: 10px;
+      flex-grow: 1;
     }
 
     .blog-description strong {
@@ -72,6 +76,7 @@
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
       gap: 6px;
       text-transform: uppercase;
+      margin-top: 8px;
     }
 
     .read-more:hover {
@@ -87,10 +92,12 @@
 </head>
 <body>
   <div class="blog-container">
-    <img src="https://static.wixstatic.com/media/971500_2a2a7631df224f33a1c27162aeba2839~mv2.png" alt="Country guides promo image" />
-    <div class="blog-description">
-      <strong>Free Travel Guides</strong>
-      Get local tips, visa info & must-see spots for 20+ destinations. No sign-up needed.
+    <div>
+      <img src="https://static.wixstatic.com/media/971500_2a2a7631df224f33a1c27162aeba2839~mv2.png" alt="Country guides promo image" />
+      <div class="blog-description">
+        <strong>Free Travel Guides</strong>
+        Visas, tips, must-see spots & local advice for 20+ destinations. No sign-up needed.
+      </div>
     </div>
     <a href="https://www.closerlives.com/travel-hub/country-guides" target="_blank" rel="noopener noreferrer nofollow" class="read-more">
       <span>Get Your Guides</span>
