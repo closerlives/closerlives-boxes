@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: Lato, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .follow-box {
+      width: 280px;
+      height: 420px;
+      margin: 0 auto;
+      background: #000;
+      border: 1px solid #b0b0b0;
+      border-bottom: 6px solid #d0d0d0;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .follow-box:hover {
+      border: 2px solid #1a1a40;
+      border-bottom: 6px solid #1a1a40;
+    }
+
+    .follow-box::before {
+      content: "";
+      background: url('https://static.wixstatic.com/media/971500_d33d29c32c254e95ba6046e873214be2~mv2.jpg') no-repeat center center;
+      background-size: cover;
+      opacity: 0.9;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .follow-box-content {
+      position: relative;
+      z-index: 1;
+      color: #ffffff;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .follow-box img.logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 10px 0 10px;
+      border: 2px solid #fff;
+    }
+
+    .follow-box-content h2 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 10px;
+      color: #ffffff;
+    }
+
+    .follow-box-content p {
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0 0 20px;
+      color: #ffffff;
+      padding: 0 5px;
+    }
+
+    .follow-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .follow-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 8px 0;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      width: 100%;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      text-transform: uppercase;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .follow-button img {
+      position: absolute;
+      left: 10px;
+      width: 20px;
+      height: 20px;
+    }
+
+    .subscribe-btn {
+      background-color: #000000;
+      border-color: grey;
+    }
+
+    .instagram-btn {
+      background-color: #E95420;
+      border-color: #E95420;
+    }
+
+    .instagram-btn img {
+      border-radius: 5px;
+    }
+
+    .youtube-btn {
+      background-color: #FF0000;
+      border-color: #FF0000;
+    }
+
+    .youtube-btn img {
+      border: 2px solid white;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .follow-button:hover {
+      background-color: #ffffff;
+      color: #000000;
+      border-color: #000000;
+    }
+  </style>
+</head>
+<body>
+  <div class="follow-box">
+    <div class="follow-box-content">
+      <img src="https://static.wixstatic.com/media/971500_c658a15a9073476ba4857176287e5a6b~mv2.png" alt="Closer Lives Logo" class="logo" />
+      <h2>Join Our Community</h2>
+      <p>Follow Closer Lives for blogs, updates, and exclusive content on travel, lifestyle, and living outside the box.</p>
+      <div class="follow-buttons">
+        <a href="https://www.closerlives.com/subscribe" target="_blank" rel="noopener noreferrer nofollow" class="follow-button subscribe-btn">Subscribe to Closer Lives</a>
+        <a href="https://www.instagram.com/jennandleontravel/" target="_blank" rel="noopener noreferrer nofollow" class="follow-button instagram-btn">
+          <img src="https://static.wixstatic.com/media/971500_63d885e2f3ce416fbdb78148647bf098~mv2.jpg" alt="Instagram Icon">Instagram
+        </a>
+        <a href="https://www.youtube.com/@JennandLeon" target="_blank" rel="noopener noreferrer nofollow" class="follow-button youtube-btn">
+          <img src="https://static.wixstatic.com/media/971500_55f1be968bcd4505a7df17c17242c69d~mv2.png" alt="YouTube Icon">YouTube
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
