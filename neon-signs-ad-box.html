@@ -7,54 +7,50 @@
     html, body {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
-      overflow-x: hidden;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
     }
 
     .blog-container {
       max-width: 600px;
-      margin: 5px auto;
+      margin: 10px auto;
       background: white;
       border-radius: 10px;
       border: 1px solid #b0b0b0;
       border-bottom: 6px solid #d0d0d0;
       display: flex;
+      gap: 16px;
+      padding: 10px;
       flex-direction: row;
       flex-wrap: wrap;
-      padding: 10px;
-      gap: 10px;
-      box-sizing: border-box;
     }
 
-    .column-left, .column-right {
-      flex: 1;
+    .column-1, .column-2 {
+      flex: 1 1 250px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
 
-    .blog-title {
+    .column-1 strong {
       font-size: 16px;
       font-weight: bold;
       margin-bottom: 10px;
       text-align: center;
     }
 
-    .blog-container img {
+    .column-1 img {
       width: 100%;
       border-radius: 10px;
       margin-bottom: 10px;
     }
 
-    .blog-description {
-      font-size: 14px;
-      color: #222;
-      line-height: 1.4;
-    }
-
     .read-more {
-      margin-top: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -62,14 +58,13 @@
       padding: 10px 0;
       background-color: #3d3d3d;
       color: #ffffff;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       text-decoration: none;
       border: 1px solid #3d3d3d;
       border-radius: 10px;
       transition: background-color 0.3s, color 0.3s, border-color 0.3s;
       text-transform: uppercase;
-      gap: 8px;
     }
 
     .read-more:hover {
@@ -78,33 +73,44 @@
       border-color: #3d3d3d;
     }
 
-    @media (max-width: 480px) {
+    .blog-description {
+      font-size: 14px;
+      color: #222;
+      line-height: 1.4;
+      text-align: left;
+    }
+
+    @media (max-width: 600px) {
       .blog-container {
         flex-direction: column;
       }
 
-      .blog-title {
-        text-align: center;
-        margin-bottom: 10px;
+      .column-1, .column-2 {
+        width: 100%;
       }
 
-      .read-more {
-        margin-top: 15px;
+      .column-1 strong {
+        text-align: center;
+      }
+
+      .blog-description {
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
   <div class="blog-container">
-    <div class="column-left">
-      <div class="blog-title">Custom Neon Signs<br>for Your Bar or Restaurant</div>
-      <img src="https://static.wixstatic.com/media/971500_e209af28ded24a5a8a3a5270327a2e19~mv2.jpg" alt="Colorful neon bar signs including 'Open', 'Bar', and 'Cheers!' promote custom neon lights for restaurants or bars." />
-      <a href="https://www.neonsigns.com/custom-neon-signs" target="_top" class="read-more" rel="sponsored">Shop Now</a>
+    <div class="column-1">
+      <strong>Shop Custom Neon Signs</strong>
+      <img src="https://static.wixstatic.com/media/971500_e209af28ded24a5a8a3a5270327a2e19~mv2.jpg" alt="Colorful neon bar signs including 'Open', 'Bar', and 'Cheers!' promote custom neon lights for restaurants or bars.">
+      <a href="https://www.neonsigns.com/custom-neon-signs" target="_top" class="read-more" rel="sponsored">
+        Shop Now
+      </a>
     </div>
-    <div class="column-right">
+    <div class="column-2">
       <div class="blog-description">
-        CAVE Alux restaurant's colorful lighting often impresses diners. If you are also planning to open a restaurant or bar, it would be a good idea to decorate it with custom neon signs. Neon signs are a cool decoration, you can customize them with simple letters or complex logos, which are very practical, beautiful, and personalized.<br><br>
-        Not only can it bring you a better user experience, but it can also become an iconic element in the store, attracting more people.
+        CAVE Alux restaurant's colorful lighting often impresses diners. If you are also planning to open a restaurant or bar, it would be a good idea to decorate it with custom neon signs. Neon signs are a cool decoration, you can customize them with simple letters or complex logos, which are very practical, beautiful, and personalized.<br><br> Not only can it bring you a better user experience, but it can also become an iconic element in the store, attracting more people.
       </div>
     </div>
   </div>
