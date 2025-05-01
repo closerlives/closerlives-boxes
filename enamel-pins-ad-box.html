@@ -98,23 +98,22 @@
     }
 
     /* Mobile responsive */
-    @media (max-width: 600px) {
-      .blog-container {
-        flex-direction: column;
-      }
+    @media screen and (max-width: 600px) {
+  .blog-container {
+    flex-direction: column;
+    height: auto;
+  }
 
-      .left-side, .right-side {
-        width: 100%;
-      }
+  .column {
+    width: 100%;
+    text-align: center;
+  }
 
-      .left-side {
-        padding-bottom: 0;
-      }
-
-      .blog-description {
-        padding-top: 10px;
-      }
-    }
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+}
   </style>
 </head>
 <body>
