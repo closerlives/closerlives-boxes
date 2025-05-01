@@ -7,65 +7,52 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      overflow: hidden;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
-    }
-
-    *, *::before, *::after {
-      box-sizing: inherit;
+      overflow-x: hidden;
     }
 
     .blog-container {
-      width: 600px;
-      max-width: 100%;
-      margin: 0 auto;
+      max-width: 600px;
+      margin: 5px auto;
       background: white;
       border-radius: 10px;
-      padding: 10px;
       border: 1px solid #b0b0b0;
       border-bottom: 6px solid #d0d0d0;
       display: flex;
-      gap: 20px;
+      flex-direction: row;
+      padding: 10px;
+      gap: 10px;
     }
 
-    .blog-container:hover {
-      border: 2px solid #1a1a40;
-      border-bottom: 6px solid #1a1a40;
-    }
-
-    .left-side, .right-side {
-      width: 50%;
-    }
-
-    .left-side {
+    .column-left, .column-right {
+      flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      align-items: center;
-      text-align: center;
-      padding-top: 10px;
-      padding-bottom: 10px;
     }
 
-    .left-side strong {
+    .blog-title {
       font-size: 16px;
+      font-weight: bold;
       margin-bottom: 10px;
-      display: block;
+      text-align: center;
     }
 
-    .left-side img {
+    .blog-container img {
       width: 100%;
-      max-height: 160px;
-      object-fit: contain;
       border-radius: 10px;
       margin-bottom: 10px;
     }
 
+    .blog-description {
+      font-size: 14px;
+      color: #222;
+      line-height: 1.4;
+    }
+
     .read-more {
+      margin-top: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -73,7 +60,7 @@
       padding: 10px 0;
       background-color: #3d3d3d;
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       text-decoration: none;
       border: 1px solid #3d3d3d;
@@ -89,52 +76,33 @@
       border-color: #3d3d3d;
     }
 
-    .blog-description {
-      font-size: 14px;
-      color: #222;
-      line-height: 1.4;
-      display: flex;
-      align-items: center;
+    @media (max-width: 480px) {
+      .blog-container {
+        flex-direction: column;
+      }
+
+      .blog-title {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .read-more {
+        margin-top: 15px;
+      }
     }
-
-    /* Mobile responsive */
-    @media screen and (max-width: 600px) {
-  .blog-container {
-    flex-direction: column;
-    width: 280px;
-    height: auto;
-  }
-
-  .column {
-    width: 100%;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  .image-container img {
-    max-width: 100%;
-    height: auto;
-  }
-
-  .read-more {
-    width: 100%;
-  }
-}
   </style>
 </head>
 <body>
   <div class="blog-container">
-    <div class="left-side">
-      <strong>Travel Memories? Make Them Pins!</strong>
+    <div class="column-left">
+      <div class="blog-title">Commemorate Your Trip<br>with Enamel Pins</div>
       <img src="https://static.wixstatic.com/media/971500_5b6dce8b5fb4461ea76c9d6217fd4bae~mv2.jpg" alt="A paper boat decorated with travel-themed enamel pins like a cactus, maple leaf, and butterfly. Text reads 'Let's travel the world.'" />
-      <a href="https://www.gs-jj.com/enamel-pins/Custom-Enamel-Pins" target="_top" class="read-more" rel="sponsored">
-        <span>Read More</span>
-      </a>
+      <a href="https://www.gs-jj.com/enamel-pins/Custom-Enamel-Pins" target="_top" class="read-more" rel="sponsored">Read More</a>
     </div>
-    <div class="right-side">
+    <div class="column-right">
       <div class="blog-description">
-        Malaysia is indeed a great place to visit; not only does it have such a delicious Ramly Burger, but it also has a lot of beautiful scenery. If you are also planning to embark on a wonderful trip to Malaysia, you may wish to buy some gadgets to make some memories.<br><br>For example, Custom Enamel Pins are a great option. You can have memorable sights or other elements from your trip engraved on it. These pins can not only be collected but can also be used to decorate your clothes or bags!
+        Malaysia is indeed a great place to visit; not only does it have such a delicious Ramly Burger, but it also has a lot of beautiful scenery. If you are also planning to embark on a wonderful trip to Malaysia, you may wish to buy some gadgets to make some memories.<br><br>
+        For example, Custom Enamel Pins are a great option. You can have memorable sights or other elements from your trip engraved on it. These pins can not only be collected but can also be used to decorate your clothes or bags!
       </div>
     </div>
   </div>
