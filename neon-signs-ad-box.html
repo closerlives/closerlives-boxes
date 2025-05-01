@@ -20,7 +20,7 @@
     }
 
     .blog-container {
-      width: 740px;
+      width: 600px;
       max-width: 100%;
       margin: 0 auto;
       background: white;
@@ -91,19 +91,23 @@
     }
 
     /* Mobile responsive */
-    @media (max-width: 600px) {
-      .blog-container {
-        flex-direction: column;
-      }
+    @media screen and (max-width: 600px) {
+  .blog-container {
+    flex-direction: column;
+    height: auto;
+  }
 
-      .left-side, .right-side {
-        width: 100%;
-      }
+  .column {
+    width: 100%;
+    text-align: center;
+  }
 
-      .left-side {
-        margin-bottom: 15px;
-      }
-    }
+  .image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
   </style>
 </head>
 <body>
