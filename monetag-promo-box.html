@@ -1,0 +1,54 @@
+<div id="monetag-box" style="background:#f9f9f9; border-left:4px solid #00a86b; padding:16px; margin:6px 0; font-family:Lato, Arial, sans-serif; font-size:16px; box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1); max-width:100%; overflow:hidden; border-radius:10px;">
+  <strong id="monetag-heading" style="font-size:18px; display:block; margin-bottom:8px;">Loading...</strong>
+  <p id="monetag-message" style="margin:0 0 16px; line-height:1.5;">
+    Loading something interesting...
+  </p>
+  <a href="https://uvoonaix.top/4/9247038" target="_blank" rel="noopener noreferrer nofollow" style="display:inline-block; width:100%; text-align:center; padding:12px 16px; background:#00a86b; color:white; text-decoration:none; border-radius:6px; font-weight:bold; font-size:16px; box-sizing:border-box;">
+    Check It Out
+  </a>
+  <p style="font-size:12px; color:#555; margin-top:10px;">
+    Sponsored link – clicking helps keep our blog running. Thank you!
+  </p>
+</div>
+
+<script>
+  (function() {
+    const headings = [
+      "Just a Random Tip",
+      "Something Unexpected",
+      "Today’s Curious Click",
+      "A Surprise for You",
+      "Your Daily Discovery",
+      "Off the Beaten Path"
+    ];
+
+    const messages = [
+      "We found this little corner of the internet that might just surprise you. No promises — but it's worth a click.",
+      "Some of our readers found this site useful, others just got mildly entertained. You be the judge.",
+      "Could be helpful. Could be fun. Either way, we thought it was interesting enough to share.",
+      "It’s one of those mysterious links — sometimes helpful, sometimes weirdly satisfying.",
+      "If curiosity had a homepage, this might be it. We clicked. You can too.",
+      "Something strange, possibly useful, maybe fun. Definitely click-worthy.",
+      "This isn’t exactly a travel tip… but it might be the kind of surprise you didn’t know you needed.",
+      "This link goes somewhere. Where? That’s the fun part. Click and find out."
+    ];
+
+    const chosenHeading = headings[Math.floor(Math.random() * headings.length)];
+    const chosenIndex = Math.floor(Math.random() * messages.length);
+    const chosenMessage = messages[chosenIndex];
+
+    document.getElementById("monetag-heading").innerText = chosenHeading;
+    document.getElementById("monetag-message").innerText = chosenMessage;
+
+    const link = document.querySelector("#monetag-box a");
+    link.addEventListener("click", function() {
+      if (typeof gtag === "function") {
+        gtag('event', 'monetag_click', {
+          event_category: 'Monetag Promo Box',
+          event_label: `Message #${chosenIndex + 1}: ${chosenMessage}`,
+          value: chosenIndex + 1
+        });
+      }
+    });
+  })();
+</script>
