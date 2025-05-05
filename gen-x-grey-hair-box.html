@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: Lato, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .blog-container {
+      width: 280px;
+      height: 420px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #b0b0b0;
+      border-bottom: 6px solid #d0d0d0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .blog-container:hover {
+      border: 2px solid #1a1a40;
+      border-bottom: 6px solid #1a1a40;
+    }
+
+    .blog-container img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid black;
+    }
+
+    .blog-description {
+      font-size: 16px;
+      color: #222;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .blog-description strong {
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      margin-top: 10px;
+      margin-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #3d3d3d;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 1px solid #3d3d3d;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+
+    .read-more:hover {
+      background-color: #ffffff;
+      color: #3d3d3d;
+      border-color: #3d3d3d;
+    }
+
+    .read-more span {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="blog-container">
+    <img src="https://static.wixstatic.com/media/971500_9f55c8e53f554936a1c457e942e29e0e~mv2.jpg" alt="A woman with long gray hair and sunglasses sits on a bench. Text reads, 'Why it’s harder for Gen X to embrace natural hair & the history as to why.' The background showcases a close-up of Grombre Grey Hair. Instagram handle: @embracingthesilverlining.">
+
+    <div class="blog-description">
+      <strong>Added Pressures Gen X Women Face with Grey Hair</strong>
+      In a world obsessed with perfection, the journey of Gen X women embracing their natural grey hair is nothing short of revolutionary.
+    </div>
+
+    <a href="https://www.closerlives.com/blog/post/gen-x-women-grey-hair-pressures" target="_top" class="read-more">
+      <span>Read More</span>
+    </a>
+  </div>
+</body>
+</html>
