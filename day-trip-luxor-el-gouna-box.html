@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: Lato, Arial, sans-serif;
+      background-color: #ffffff;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .blog-container {
+      width: 280px;
+      height: 420px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #b0b0b0;
+      border-bottom: 6px solid #d0d0d0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+    }
+
+    .blog-container:hover {
+      border: 2px solid #1a1a40;
+      border-bottom: 6px solid #1a1a40;
+    }
+
+    .blog-container img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      border: 1px solid black;
+    }
+
+    .blog-description {
+      font-size: 16px;
+      color: #222;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .blog-description strong {
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .read-more {
+      margin-top: 10px;
+      margin-bottom: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #3d3d3d;
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 1px solid #3d3d3d;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+
+    .read-more:hover {
+      background-color: #ffffff;
+      color: #3d3d3d;
+      border-color: #3d3d3d;
+    }
+
+    .read-more span {
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="blog-container">
+    <img src="https://static.wixstatic.com/media/971500_79df1ecc7ebe4b848ad72017402798d3~mv2.jpg" alt="A woman stands between carved stone pillars, holding them with both hands. She wears a black outfit and hat. The Egyptian flag is on the left. Text reads: 'Day Trip Tour from El Gouna to Luxor, including the Valley of the Kings.'">
+    <div class="blog-description">
+      <strong>Day Trip to Luxor</strong>
+      Discover ancient wonders in Luxor from El Gouna. Visit the Valley of the Kings, Karnak Temple & more on this epic Egypt tour.
+    </div>
+    <a href="https://www.closerlives.com/blog/post/day-trip-luxor-from-el-gouna" target="_top" class="read-more">
+      <span>Read More</span>
+    </a>
+  </div>
+</body>
+</html>
