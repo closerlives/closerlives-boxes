@@ -1,86 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Affiliate Disclosure</title>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
       font-family: Lato, Arial, sans-serif;
-      background-color: #fff;
-      overflow: hidden;
+      font-size: 16px;
+      background: white;
     }
 
-    .disclosure-container {
+    .box-container {
       width: 280px;
-      border: 1px solid #b0b0b0;
+      height: 420px;
       border-radius: 10px;
-      padding: 10px;
-      background: #f9f9f9;
-      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1); margin-bottom: 6px;
-      text-align: left;
+      border: 1px solid #ccc;
+      border-bottom: 6px solid #d0d0d0;
+      padding: 20px;
       box-sizing: border-box;
+      overflow: hidden;
+      text-align: center;
     }
 
-    .disclosure-toggle {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
+    .toggle-button {
       font-size: 18px;
       font-weight: bold;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      transition: color 0.3s;
     }
 
-    .disclosure-content {
-      margin-top: 10px;
-      display: none;
-      font-size: 16px;
-      color: #222;
-      line-height: 1.4;
-    }
-
-    .disclosure-content a {
+    .toggle-button:hover {
       color: #0077cc;
-      text-decoration: none;
     }
 
-    .disclosure-content a:hover {
-      color: #000;
+    .toggle-icon {
+      margin-left: 8px;
+      font-size: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .content {
+      display: none;
+      text-align: left;
+      margin-top: 10px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #444;
+      max-height: 1000px;
+      overflow-y: auto;
+      padding-right: 5px;
+    }
+
+    .content::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .content::-webkit-scrollbar-thumb {
+      background-color: #bbb;
+      border-radius: 4px;
+    }
+
+    .box-container.expanded {
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <div class="disclosure-container">
-    <div class="disclosure-toggle" onclick="toggleDisclosure(this)">
-      Affiliate Disclosure <span>+</span>
-    </div>
-    <div class="disclosure-content">
-      <p>Please note that some of the links in this post are affiliate links.</p>
-      <p>At no additional cost to you, we may earn a commission if you purchase through these links, which helps support our blog and keeps it free to use.</p>
-      <p><a href="https://www.closerlives.com/privacy-policy" target="_blank" rel="noopener noreferrer nofollow">ℹ️ Privacy Policy</a></p>
+  <div class="box-container" id="affiliateBox">
+    <button class="toggle-button" onclick="toggleDisclosure()">
+      Affiliate Disclosure <span id="toggleIcon" class="toggle-icon">+</span>
+    </button>
+    <div class="content" id="disclosureContent">
+      <p>
+        Some links on our blog are affiliate links. This means we may earn a small commission if you make a purchase, at no extra cost to you. We only recommend products and services we genuinely love, use ourselves, or believe will be useful to our readers.
+      </p>
     </div>
   </div>
 
   <script>
-    function toggleDisclosure(el) {
-      const content = el.nextElementSibling;
-      const icon = el.querySelector("span");
-      if (content.style.display === "block") {
-        content.style.display = "none";
-        icon.textContent = "+";
-        parent.postMessage({ type: "resize", height: 60 }, "*");
+    function toggleDisclosure() {
+      const box = document.getElementById('affiliateBox');
+      const content = document.getElementById('disclosureContent');
+      const icon = document.getElementById('toggleIcon');
+
+      if (content.style.display === 'block') {
+        content.style.display = 'none';
+        icon.textContent = '+';
+        box.classList.remove('expanded');
+        window.parent.postMessage({ type: 'resize', height: 420 }, '*');
       } else {
-        content.style.display = "block";
-        icon.textContent = "−";
-        parent.postMessage({ type: "resize", height: 210 }, "*");
+        content.style.display = 'block';
+        icon.textContent = '–';
+        box.classList.add('expanded');
+        // Allow time for expansion before sending resize
+        setTimeout(() => {
+          window.parent.postMessage({ type: 'resize', height: box.scrollHeight }, '*');
+        }, 150);
       }
     }
 
-    // Initial resize message for compact view
-    window.addEventListener("load", function() {
-      parent.postMessage({ type: "resize", height: 60 }, "*");
-    });
+    // Auto-resize on load (for closed state)
+    window.onload = () => {
+      const box = document.getElementById('affiliateBox');
+      window.parent.postMessage({ type: 'resize', height: box.scrollHeight }, '*');
+    };
   </script>
 </body>
 </html>
