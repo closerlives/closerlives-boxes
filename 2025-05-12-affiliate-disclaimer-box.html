@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,63 +9,80 @@
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%;
       font-family: Lato, Arial, sans-serif;
-      background: transparent;
+      background-color: #fff;
       overflow: hidden;
     }
 
-    .wrapper {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .disclosure-box {
+    .disclosure-container {
       width: 280px;
-      height: 210px;
-      background: #f9f9f9;
-      border-left: 4px solid #black;
+      border: 1px solid #b0b0b0;
       border-radius: 10px;
+      padding: 10px;
+      background: #f9f9f9;
       box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
-      padding: 16px;
-      box-sizing: border-box;
-      font-size: 16px;
-      line-height: 1.45;
       text-align: left;
-      color: #222;
+      box-sizing: border-box;
     }
 
-    .disclosure-box strong {
+    .disclosure-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
       font-size: 18px;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .disclosure-box a {
-      color: #0077cc;
-      text-decoration: none;
       font-weight: bold;
     }
 
-    .disclosure-box a:hover {
+    .disclosure-content {
+      margin-top: 10px;
+      display: none;
+      font-size: 16px;
+      color: #222;
+      line-height: 1.4;
+    }
+
+    .disclosure-content a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    .disclosure-content a:hover {
       color: #000;
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <div class="disclosure-box">
-      <strong>Affiliate Disclosure</strong>
-      Some links in this post are affiliate links. If you make a purchase, we may earn a small commission at no extra cost to you.
-      <br><br>
-      <a href="https://www.closerlives.com/privacy-policy" target="_blank" rel="noopener noreferrer nofollow">
-        ℹ️ Privacy Policy
-      </a>
+  <div class="disclosure-container">
+    <div class="disclosure-toggle" onclick="toggleDisclosure(this)">
+      Affiliate Disclosure <span>+</span>
+    </div>
+    <div class="disclosure-content">
+      <p>Please note that some of the links in this post are affiliate links.</p>
+      <p>At no additional cost to you, we may earn a commission if you purchase through these links, which helps support our blog and keeps it free to use.</p>
+      <p><a href="https://www.closerlives.com/privacy-policy" target="_blank" rel="noopener noreferrer nofollow">ℹ️ Privacy Policy</a></p>
     </div>
   </div>
+
+  <script>
+    function toggleDisclosure(el) {
+      const content = el.nextElementSibling;
+      const icon = el.querySelector("span");
+      if (content.style.display === "block") {
+        content.style.display = "none";
+        icon.textContent = "+";
+        parent.postMessage({ type: "resize", height: 60 }, "*");
+      } else {
+        content.style.display = "block";
+        icon.textContent = "−";
+        parent.postMessage({ type: "resize", height: 210 }, "*");
+      }
+    }
+
+    // Initial resize message for compact view
+    window.addEventListener("load", function() {
+      parent.postMessage({ type: "resize", height: 60 }, "*");
+    });
+  </script>
 </body>
 </html>
