@@ -1,110 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=300, initial-scale=1.0"/>
   <style>
     html, body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
-      font-family: Lato, Arial, sans-serif;
-      height: 250px;
       width: 300px;
+      height: 250px;
+      overflow: hidden;
+      font-family: Lato, Arial, sans-serif;
+      box-sizing: border-box;
     }
-
     *, *::before, *::after {
       box-sizing: inherit;
     }
-
-    #monetag-box {
-      background: #f4fff9; /* green tint */
-      border-left: 4px solid #00a86b;
-      padding: 16px;
-      margin: 6px 0;
-      font-family: Lato, Arial, sans-serif;
-      font-size: 16px;
-      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
+    #nordvpn-box {
+      position: relative;
       width: 100%;
-      height: 230px;
-      overflow: hidden;
+      height: 100%;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
       border-radius: 10px;
+      overflow: hidden;
     }
-
-    #monetag-box strong {
-      font-size: 18px;
+    #nordvpn-box img {
       display: block;
-      margin-bottom: 8px;
-    }
-
-    #monetag-message {
-      margin: 0 0 16px;
-      line-height: 1.5;
-    }
-
-    #monetag-box a {
-      display: inline-block;
       width: 100%;
-      text-align: center;
-      padding: 12px 16px;
-      background: #00a86b;
-      color: white;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-
-    #monetag-box a:hover {
-      background: #007a52;
-    }
-
-    #monetag-box p:last-of-type {
-      font-size: 12px;
-      color: #555;
-      margin-top: 10px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
     }
   </style>
 </head>
 <body>
-  <div id="monetag-box">
-    <strong>Just a Random Tip</strong>
-    <p id="monetag-message">Loading something interesting...</p>
-    <a href="https://uvoonaix.top/4/9247038" target="_blank" rel="noopener noreferrer nofollow">Check It Out</a>
-    <p>Sponsored link – clicking helps keep our blog running. Thank you!</p>
+  <div id="nordvpn-box">
+    <a href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content&utm_campaign=off15&utm_source=aff120331"
+       target="_blank" rel="sponsored noopener noreferrer">
+      <img src="https://static.wixstatic.com/media/971500_9b389122588b4ddcae7736724bc0ba94~mv2.png"
+           alt="NordVPN ad offering up to 76% off plus an Amazon.co.uk gift card. Text says, 'The bigger the plan, the better the reward!' with a red button labeled 'Get NordVPN' and images of gift cards.">
+    </a>
   </div>
-
-  <script>
-    (function() {
-      const messages = [
-        "We found this little corner of the internet that might just surprise you. No promises — but it's worth a click.",
-        "Some of our readers found this site useful, others just got mildly entertained. You be the judge.",
-        "Could be helpful. Could be fun. Either way, we thought it was interesting enough to share.",
-        "It’s one of those mysterious links — sometimes helpful, sometimes weirdly satisfying.",
-        "If curiosity had a homepage, this might be it. We clicked. You can too.",
-        "Something strange, possibly useful, maybe fun. Definitely click-worthy.",
-        "This isn’t exactly a travel tip… but it might be the kind of surprise you didn’t know you needed.",
-        "This link goes somewhere. Where? That’s the fun part. Click and find out."
-      ];
-
-      const chosenIndex = Math.floor(Math.random() * messages.length);
-      const chosenMessage = messages[chosenIndex];
-      const messageElement = document.getElementById("monetag-message");
-      const link = document.querySelector("#monetag-box a");
-
-      messageElement.innerText = chosenMessage;
-
-      link.addEventListener("click", function() {
-        if (typeof gtag === "function") {
-          gtag('event', 'monetag_click', {
-            event_category: 'Monetag Promo Box',
-            event_label: `Message #${chosenIndex + 1}: ${chosenMessage}`,
-            value: chosenIndex + 1
-          });
-        }
-      });
-    })();
-  </script>
 </body>
 </html>
