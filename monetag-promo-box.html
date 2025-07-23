@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=280, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=300, initial-scale=1.0"/>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Lato, Arial, sans-serif;
-      height: 200px;
-      width: 280px;
+      width: 300px;
+      height: 250px;
       overflow: hidden;
+      font-family: Lato, Arial, sans-serif;
     }
-
     *, *::before, *::after {
       box-sizing: inherit;
     }
-
     #saily-box {
-      background: #f4fff9;
-      border-left: 4px solid #00a86b;
-      padding: 10px;
-      text-align: center;
-      box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1);
-      border-radius: 10px;
-      height: 200px;
+      position: relative;
       width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
-
     #saily-box img {
-      max-width: 100%;
-      border-radius: 6px;
+      display: block;
+      width: 100%;
       height: auto;
     }
-
-    #saily-box p {
+    #discount-banner {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(0, 168, 107, 0.9);
+      color: white;
       font-size: 14px;
-      color: #333;
-      margin: 6px 0 0;
+      font-weight: bold;
+      padding: 4px 8px;
+      border-radius: 4px;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
   <div id="saily-box">
+    <div id="discount-banner">EXTRA 5% off – code SPECIAL5</div>
     <a href="https://go.saily.site/aff_c?offer_id=101&aff_id=7919" target="_blank" rel="sponsored noopener noreferrer">
-      <img src="https://static.wixstatic.com/media/971500_9a1ce987f1524dcbad9d7f460511f3da~mv2.jpg" alt="A yellow pool float with a smartphone on it floats in a blue pool. Text reads: “Up to 5% cashback in Saily credits! Get an eSIM now.” Saily logo is at the top right.">
+      <img src="https://static.wixstatic.com/media/971500_9a1ce987f1524dcbad9d7f460511f3da~mv2.jpg"
+           alt="A yellow pool float with a smartphone on it floats in a blue pool. Text reads: “Up to 5% cashback in Saily credits! Get an eSIM now.” Saily logo is at the top right.">
     </a>
-    <p>For an <strong>EXTRA 5% off</strong> use code <strong>SPECIAL5</strong></p>
   </div>
 </body>
 </html>
