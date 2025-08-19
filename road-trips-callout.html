@@ -13,21 +13,32 @@
       height: 180px;
       font-family: Lato, Arial, sans-serif;
       font-size: 16px;
-      background: #ffffff;
+      background: #f5f8fa; /* subtle background color */
+      border: 1px solid #ccc; /* thin border for definition */
       border-radius: 10px;
       border-bottom: 6px solid #d0d0d0;
       padding: 18px;
       text-align: center;
       box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .box strong {
       font-size: 18px;
+      margin-bottom: 8px;
       display: block;
-      margin-bottom: 10px;
+    }
+    .content {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 5px;
     }
     .read-more {
-      display: inline-block;
-      margin-top: 14px;
+      display: block;
       padding: 10px;
       width: 100%;
       background: #2a7ae4;
@@ -36,6 +47,7 @@
       border-radius: 6px;
       font-size: 16px;
       font-weight: bold;
+      box-sizing: border-box;
     }
     .read-more:hover {
       background: #1d5bbf;
@@ -44,9 +56,12 @@
 </head>
 <body>
   <div class="box">
-    <strong>Love Road Trips?</strong>
-    Explore epic itineraries, driving tips, and must-see stops from Türkiye to the USA.
-    <br><br>
+    <div>
+      <strong>Love Road Trips?</strong>
+      <div class="content">
+        Explore epic itineraries, driving tips, and must-see stops from Türkiye to the USA.
+      </div>
+    </div>
     <a href="https://www.closerlives.com/travel-and-lifestyle-blog/tags/road-trips" target="_blank" class="read-more" rel="noopener noreferrer nofollow">
       Explore Road Trips
     </a>
