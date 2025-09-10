@@ -17,37 +17,42 @@
 <style>
   .stay22-box {
     width: 280px;
-    height: 250px;
+    height: 250px; /* fixed size */
     background: #ffffff;
     border: 1px solid #e6e6e6;
     border-radius: 10px;
     border-bottom: 6px solid #d0d0d0; /* shadow effect */
     font-family: Lato, Arial, sans-serif;
     text-align: center;
-    padding: 20px 16px;
     box-sizing: border-box;
     overflow: hidden; /* no scrollbars */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* push button to bottom */
+    padding: 12px;
   }
 
   .stay22-logo {
     width: 120px;
-    height: auto;
-    margin: 0 auto 20px auto;
+    max-height: 80px; /* keeps logo compact */
+    margin: 0 auto;
     display: block;
+    flex-shrink: 0;
   }
 
   .stay22-btn {
-    display: inline-block;
+    display: block;
     width: 100%;
-    padding: 14px;
     font-size: 16px;
     font-weight: bold;
     color: #ffffff;
     background: #007BFF;
     border: none;
     border-radius: 8px;
+    padding: 14px 0;
     text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
+    flex-shrink: 0;
   }
 
   .stay22-btn:hover,
