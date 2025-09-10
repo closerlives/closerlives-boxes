@@ -1,4 +1,4 @@
-<!-- Monetag 280x140 button — no scrollbars -->
+<!-- Monetag 280x140 button — with shadow, no scrollbars -->
 <a href="https://monetag.com/?ref_id=zsAh"
    target="_blank"
    rel="noopener noreferrer sponsored"
@@ -11,15 +11,15 @@
 </a>
 
 <style>
-  /* Hard reset to kill iframe defaults that cause scrollbars */
+  /* Reset iframe defaults */
   html, body { margin: 0; padding: 0; height: 100%; }
   * { box-sizing: border-box; }
 
-  /* Fixed canvas so nothing can exceed 280x140 */
+  /* Lock canvas */
   body {
     width: 280px;
     height: 140px;
-    overflow: hidden; /* block any scrollbar */
+    overflow: hidden; /* force no scrollbars */
     font-family: Lato, Arial, sans-serif;
   }
 
@@ -27,16 +27,17 @@
     display: flex;
     width: 280px;
     height: 140px;
-    margin: 0;               /* no external margins */
-    padding: 0;              /* no internal padding */
+    margin: 0;
+    padding: 0;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    background: #6fdc6f;     /* lighter green */
+    background: #6fdc6f; /* lighter green */
     color: #ffffff;
     border-radius: 10px;
     border: 2px solid transparent;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* shadow added */
     transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
   }
 
@@ -44,22 +45,22 @@
   .btn:focus {
     background: #ffffff;
     color: #28a745;
-    border-color: #000000;   /* 2px black border on hover */
+    border-color: #000000;   /* black border on hover */
     transform: translateY(-1px);
   }
 
   .logo {
     display: block;
-    width: 150px;            /* large, but safe within 140px height total */
+    width: 150px;
     height: auto;
-    margin: 0 0 6px 0;       /* tiny space above label */
+    margin: 0 0 6px 0;
   }
 
   .label {
     display: block;
-    font-size: 14px;         /* tuned to avoid overflow on small screens */
+    font-size: 14px;
     font-weight: 700;
-    line-height: 1;          /* no extra vertical bleed */
+    line-height: 1;
     letter-spacing: 0.4px;
   }
 </style>
