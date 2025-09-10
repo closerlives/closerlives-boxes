@@ -6,19 +6,21 @@
     src="https://static.wixstatic.com/media/971500_9df7ac4e90474e41ba75bbac71afd0f6~mv2.webp" 
     alt="Stay22 logo with map pin icon" 
     class="stay22-logo">
-  Join Stay22 Today
+  <span>Join Stay22 Today</span>
 </a>
 
 <style>
   .stay22-btn {
     display: flex;
+    flex-direction: column; /* stack logo above text */
     align-items: center;
     justify-content: center;
-    gap: 8px;
     width: 280px;
-    padding: 14px;
+    padding: 16px 12px;
+    font-family: Lato, Arial, sans-serif;
     font-size: 16px;
     font-weight: bold;
+    text-align: center;
     color: #ffffff;
     background: #007BFF;
     border-radius: 10px;
@@ -27,13 +29,16 @@
     transition: background 0.2s ease, transform 0.2s ease;
   }
 
-  .stay22-btn:hover {
+  .stay22-btn:hover,
+  .stay22-btn:focus {
     background: #0056cc;
     transform: translateY(-2px);
   }
 
   .stay22-logo {
-    width: 28px;
+    width: 80px; /* larger logo */
     height: auto;
+    margin-bottom: 10px;
+    display: block;
   }
 </style>
