@@ -1,63 +1,39 @@
-<div class="stay22-box" role="region" aria-label="Stay22 promo box">
+<a class="stay22-btn" 
+   href="https://www.stay22.com/referral-program?referred_by=closerlives" 
+   target="_blank" 
+   rel="noopener noreferrer sponsored">
   <img 
     src="https://static.wixstatic.com/media/971500_9df7ac4e90474e41ba75bbac71afd0f6~mv2.webp" 
-    alt="The image features the word stay in lowercase blue letters, followed by a blue map pin icon containing the number 22 in black text. The background is white." 
-    class="stay22-logo" 
-    loading="lazy"
-  >
-
-  <a class="stay22-btn" 
-     href="https://www.stay22.com/referral-program?referred_by=closerlives" 
-     target="_blank" 
-     rel="noopener noreferrer sponsored">
-    Join Stay22 Today
-  </a>
-</div>
+    alt="Stay22 logo with map pin icon" 
+    class="stay22-logo">
+  Join Stay22 Today
+</a>
 
 <style>
-  .stay22-box {
-    width: 280px;
-    height: 250px; /* fixed size */
-    background: #ffffff;
-    border: 1px solid #e6e6e6;
-    border-radius: 10px;
-    border-bottom: 6px solid #d0d0d0; /* shadow effect */
-    font-family: Lato, Arial, sans-serif;
-    text-align: center;
-    box-sizing: border-box;
-    overflow: hidden; /* no scrollbars */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* push button to bottom */
-    padding: 12px;
-  }
-
-  .stay22-logo {
-    width: 120px;
-    max-height: 80px; /* keeps logo compact */
-    margin: 0 auto;
-    display: block;
-    flex-shrink: 0;
-  }
-
   .stay22-btn {
-    display: block;
-    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 280px;
+    padding: 14px;
     font-size: 16px;
     font-weight: bold;
     color: #ffffff;
     background: #007BFF;
-    border: none;
-    border-radius: 8px;
-    padding: 14px 0;
+    border-radius: 10px;
     text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: background 0.2s ease, transform 0.2s ease;
-    flex-shrink: 0;
   }
 
-  .stay22-btn:hover,
-  .stay22-btn:focus {
+  .stay22-btn:hover {
     background: #0056cc;
     transform: translateY(-2px);
+  }
+
+  .stay22-logo {
+    width: 28px;
+    height: auto;
   }
 </style>
