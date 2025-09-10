@@ -1,47 +1,65 @@
-<a href="https://monetag.com/?ref_id=zsAh" 
-   target="_blank" 
-   rel="noopener noreferrer sponsored" 
-   class="monetag-btn">
-  <img 
-    src="https://static.wixstatic.com/media/971500_becf70fac6444d03897b03277e7fef09~mv2.webp" 
-    alt='The image features the word "monêtag" in dark blue text on a white background. The "ê" is styled in light green.' 
-    class="monetag-logo">
-  <span>START EARNING TODAY</span>
+<!-- Monetag 280x140 button — no scrollbars -->
+<a href="https://monetag.com/?ref_id=zsAh"
+   target="_blank"
+   rel="noopener noreferrer sponsored"
+   class="btn">
+
+  <img src="https://static.wixstatic.com/media/971500_becf70fac6444d03897b03277e7fef09~mv2.webp"
+       alt='The image features the word "monêtag" in dark blue text on a white background. The "ê" is styled in light green.'
+       class="logo">
+  <span class="label">START EARNING TODAY</span>
 </a>
 
 <style>
-  .monetag-btn {
+  /* Hard reset to kill iframe defaults that cause scrollbars */
+  html, body { margin: 0; padding: 0; height: 100%; }
+  * { box-sizing: border-box; }
+
+  /* Fixed canvas so nothing can exceed 280x140 */
+  body {
+    width: 280px;
+    height: 140px;
+    overflow: hidden; /* block any scrollbar */
+    font-family: Lato, Arial, sans-serif;
+  }
+
+  .btn {
     display: flex;
+    width: 280px;
+    height: 140px;
+    margin: 0;               /* no external margins */
+    padding: 0;              /* no internal padding */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 280px;
-    height: 140px; /* exact size */
-    background: #136207; /* lighter green */
-    color: #ffffff;
-    font-family: Lato, Arial, sans-serif;
-    font-size: 14px;
-    font-weight: bold;
     text-decoration: none;
+    background: #6fdc6f;     /* lighter green */
+    color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     border: 2px solid transparent;
-    box-sizing: border-box;
-    text-align: center;
-    overflow: hidden; /* absolutely no scrollbars */
+    transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
   }
 
-  .monetag-btn:hover {
+  .btn:hover,
+  .btn:focus {
     background: #ffffff;
     color: #28a745;
-    border: 2px solid #000000;
+    border-color: #000000;   /* 2px black border on hover */
+    transform: translateY(-1px);
   }
 
-  .monetag-logo {
-    width: 120px;  /* balanced for 140px height */
-    height: auto;
-    margin: 0 0 4px 0; /* tiny margin only */
-    padding: 0; /* prevent overflow */
+  .logo {
     display: block;
+    width: 150px;            /* large, but safe within 140px height total */
+    height: auto;
+    margin: 0 0 6px 0;       /* tiny space above label */
+  }
+
+  .label {
+    display: block;
+    font-size: 14px;         /* tuned to avoid overflow on small screens */
+    font-weight: 700;
+    line-height: 1;          /* no extra vertical bleed */
+    letter-spacing: 0.4px;
   }
 </style>
