@@ -1,49 +1,44 @@
-<a class="monetag-btn" 
-   href="https://monetag.com/?ref_id=zsAh" 
+<a href="https://monetag.com/?ref_id=zsAh" 
    target="_blank" 
-   rel="noopener noreferrer sponsored">
+   rel="noopener noreferrer sponsored" 
+   class="monetag-btn">
   <img 
     src="https://static.wixstatic.com/media/971500_becf70fac6444d03897b03277e7fef09~mv2.webp" 
     alt='The image features the word "monêtag" in dark blue text on a white background. The "ê" is styled in light green.' 
     class="monetag-logo">
-  <span>START EARNING TODAY</span>
+  START EARNING TODAY
 </a>
 
 <style>
   .monetag-btn {
     display: flex;
-    flex-direction: column; /* logo above text */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 280px;
-    height: 160px; /* fixed button height */
+    height: 200px; /* fixed, no scrollbars */
+    background: #28a745; /* green */
+    color: #ffffff;
     font-family: Lato, Arial, sans-serif;
     font-size: 16px;
     font-weight: bold;
-    text-align: center;
-    color: #ffffff;
-    background: #28a745; /* Monetag green */
-    border-radius: 10px;
     text-decoration: none;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    transition: all 0.2s ease-in-out;
     border: 2px solid transparent;
     box-sizing: border-box;
-    padding: 12px;
+    text-align: center;
   }
 
-  .monetag-btn:hover,
-  .monetag-btn:focus {
+  .monetag-btn:hover {
     background: #ffffff;
-    color: #28a745; /* text turns green */
+    color: #28a745;
     border: 2px solid #000000;
-    transform: translateY(-2px);
   }
 
   .monetag-logo {
-    width: 200px; /* maxed out within button */
+    width: 160px; /* large logo */
     height: auto;
     margin-bottom: 10px;
-    display: block;
   }
 </style>
