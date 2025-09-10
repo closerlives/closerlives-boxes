@@ -12,13 +12,13 @@
 <style>
   .monetag-btn {
     display: flex;
-    flex-direction: column; /* logo above text */
+    flex-direction: column; /* stack logo and text */
     align-items: center;
     justify-content: center;
     width: 280px;
-    padding: 16px 12px;
+    padding: 20px 12px;
     font-family: Lato, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     text-align: center;
     color: #ffffff;
@@ -28,20 +28,21 @@
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     transition: all 0.2s ease-in-out;
     border: 2px solid transparent;
+    min-height: 300px; /* taller button */
   }
 
   .monetag-btn:hover,
   .monetag-btn:focus {
     background: #ffffff;
-    color: #28a745; /* text turns green */
-    border: 2px solid #000000; /* black border */
+    color: #28a745;
+    border: 2px solid #000000;
     transform: translateY(-2px);
   }
 
   .monetag-logo {
-    width: 140px; /* bigger logo */
+    width: 180px; /* much larger logo */
     height: auto;
-    margin-bottom: 12px;
+    margin-bottom: 20px;
     display: block;
   }
 </style>
