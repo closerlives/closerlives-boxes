@@ -22,47 +22,52 @@
       margin: 0 auto;
       background: white;
       border-radius: 10px;
-      padding: 0;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      overflow: hidden;
+      padding: 10px;
+      border: 1px solid #b0b0b0;
+      border-bottom: 6px solid #d0d0d0;
+      box-shadow: 0 4px 2px rgba(0,0,0,0.1);
       display: flex;
       flex-direction: column;
       text-align: center;
     }
+    .blog-container:hover {
+      border: 2px solid #1a1a40;
+      border-bottom: 6px solid #1a1a40;
+    }
     .blog-container img {
       width: 100%;
-      height: auto;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
     }
     .blog-description {
-      padding: 12px;
       font-size: 16px;
       color: #222;
       line-height: 1.4;
+      margin-bottom: 20px;
       flex: 1;
     }
     .blog-description strong {
       display: block;
-      font-size: 18px;
       font-weight: bold;
-      margin-bottom: 8px;
+      font-size: 18px;
+      margin-bottom: 12px;
     }
     .read-more {
+      margin-top: 10px;
+      margin-bottom: 0;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      padding: 12px 0;
+      padding: 10px 0;
       background-color: #3d3d3d;
       color: #ffffff;
       font-size: 16px;
       font-weight: bold;
       text-decoration: none;
       border: 1px solid #3d3d3d;
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      transition: background-color 0.3s, color 0.3s;
+      border-radius: 10px;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
       text-transform: uppercase;
       gap: 8px;
     }
@@ -78,15 +83,13 @@
 </head>
 <body>
   <div class="blog-container">
-    <a href="https://www.closerlives.com/blog/post/bodrum-kos-ferry-guide" target="_top" rel="noopener noreferrer">
-      <img src="https://static.wixstatic.com/media/971500_29e286e96a2e4addb3a7057557e4f64a~mv2.jpg"
-           alt="An orange lifebuoy frames a view of the sea and distant shore, with Turkish and Greek flags above the text “Bodrum - Kos by Ferry” in bold letters." />
-    </a>
+    <img src="https://static.wixstatic.com/media/971500_29e286e96a2e4addb3a7057557e4f64a~mv2.jpg"
+         alt="An orange lifebuoy frames a view of the sea and distant shore, with Turkish and Greek flags above the text ‘Bodrum - Kos by Ferry’ in bold letters." />
     <div class="blog-description">
       <strong>Bodrum → Kos by Ferry</strong>
-      Cross the Aegean in ~20–30 minutes. Ferries run daily from 08:30 to 18:00.  
-      Expect passport control on both sides.  
-      Plan ahead for tickets in summer.  
+      Cross the Aegean in ~20–30 minutes with passport checks.<br>
+      Ferries run daily 08:30–18:00; book ahead in summer.<br>
+      Expect lines, bring your documents and patience.
     </div>
     <a href="https://www.closerlives.com/blog/post/bodrum-kos-ferry-guide" target="_top" class="read-more">
       <span>Read More</span>
