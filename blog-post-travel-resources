@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Closer Lives – Travel Resources Section</title>
+<style>
+  html, body { margin:0; padding:0; width:100%; height:100%; background:#ffffff; overflow:hidden; font-family:Lato,sans-serif; }
+  *, *::before, *::after { box-sizing:border-box; }
+  body { font-size:16px; color:#111; }
+
+  .wrap { max-width:560px; min-width:300px; width:100%; margin:0 auto; display:grid; gap:14px; }
+
+  /* Headings */
+  .section-title { margin:0; font-size:28px; font-weight:800; text-align:center; }
+  .section-subtitle { margin:0 0 10px 0; font-size:20px; font-weight:700; color:#0b2a6f; text-align:center; }
+
+  /* Cards */
+  .card { border:1px solid #b0b0b0; border-bottom:6px solid #d0d0d0; border-radius:10px; background:#fff; overflow:hidden; }
+  .theme-blue { background:rgba(227,238,255,0.55); }
+  .theme-green { background:rgba(233,251,233,0.5); }
+  .theme-rose { background:rgba(255,235,238,0.55); }
+  .theme-beige { background:rgba(245,240,232,0.6); }
+
+  /* Accordion */
+  details { border-radius:10px; }
+  summary { list-style:none; cursor:pointer; user-select:none; }
+  summary::-webkit-details-marker { display:none; }
+
+  .bar { display:flex; align-items:center; gap:10px; padding:12px 14px; }
+  .logo { width:56px; height:56px; border-radius:10px; background:#f2f2f2; display:flex; align-items:center; justify-content:center; font-size:28px; overflow:hidden; }
+  .logo img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
+  .headings { flex:1; }
+  h3.title { margin:0; font-weight:800; font-size:18px; line-height:1.2; }
+  h4.strap { margin:2px 0 0 0; font-weight:700; font-size:16px; color:#0b2a6f; font-style:italic; }
+  .chev { width:10px; height:10px; border-right:2px solid #111; border-bottom:2px solid #111; transform:rotate(45deg); transition:transform 0.2s ease; }
+  details[open] .chev { transform:rotate(225deg); }
+
+  .panel { padding:0 14px 14px; }
+
+  /* Media */
+  .hero { width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:10px; margin:0 0 10px 0; }
+  .desc-2 { margin:0 0 10px 0; }
+  .btn { display:inline-block; width:100%; text-align:center; padding:10px 12px; font-size:16px; font-weight:700; background:#111; color:#fff; text-decoration:none; border-radius:10px; }
+  .btn:hover { filter:brightness(0.95); }
+
+  .btn-red { background:#c62828; margin-top:20px; }
+
+  /* 2-col hubs */
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:stretch; }
+  .col { border:1px solid #d9d9d9; border-radius:10px; padding:12px; background:#fafafa; display:flex; flex-direction:column; gap:8px; }
+  .title { font-size:16px; font-weight:800; margin:0; }
+  .desc-3lines { font-size:16px; line-height:1.3; margin:0; }
+  .col .btn { margin-top:auto; white-space:nowrap; font-size:clamp(14px,1.8vw,16px); }
+  .col img.hero { width:100%; height:auto; }
+
+  @media (max-width:400px){
+    .row{gap:10px;}
+    .logo{width:54px;height:54px;flex-basis:54px;font-size:12px;}
+    .map-frame{height:300px;}
+    .grid2{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<main class="wrap" role="region" aria-label="Travel resources and helpful links">
+  <h2 class="section-title">Travel Resources</h2>
+  <p class="section-subtitle">Your trusted tools for smarter, safer, and easier journeys</p>
+
+  <!-- SafetyWing -->
+  <section class="card theme-blue" id="card-sw" aria-label="Nomad insurance by SafetyWing">
+    <details>
+      <summary class="bar">
+        <div class="logo" aria-hidden="true">🛡️</div>
+        <div class="headings">
+          <h3 class="title">Nomad Insurance by SafetyWing</h3>
+          <h4 class="strap">Global adventures, local coverage</h4>
+        </div>
+        <div class="chev" aria-hidden="true"></div>
+      </summary>
+      <div class="panel">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_183ff5aa96744b4d908931ed91b9a49e~mv2.png" alt="SafetyWing promotional visual" />
+        <p class="desc-2">For peace of mind, we recommend travel insurance. SafetyWing's Essential & Complete plans cover travel and medical emergencies, with options for adventure sports and electronics theft.</p>
+        <a class="btn" href="https://safetywing.com/nomad-insurance/?referenceID=26241735&campaign=blog-posts&utm_campaign=blog-posts&utm_source=26241735&utm_medium=Ambassador" target="_blank" rel="noopener noreferrer sponsored" aria-label="Open SafetyWing Nomad Insurance in a new tab" style="background:#0b5fff;">GET INSURED</a>
+      </div>
+    </details>
+  </section>
+
+  <!-- 12Go -->
+  <section class="card theme-green" id="card-12go" aria-label="Book transport with 12Go">
+    <details>
+      <summary class="bar">
+        <div class="logo" aria-hidden="true">🚆</div>
+        <div class="headings">
+          <h3 class="title">Easy Booking for Taxis, Trains, Buses, Ferries & Flights with 12Go Asia</h3>
+          <h4 class="strap">Book transport worldwide, compare timetables and prices</h4>
+        </div>
+        <div class="chev" aria-hidden="true"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Book from over 12,000+ destinations worldwide, with clear timetables and comparisons. QR code tickets, no printing needed. Top deals, a handy member dashboard, and easy tracking of your bookings.</p>
+        <form action="https://booking.closerlives.com/en" method="get" target="_blank" rel="noopener sponsored" style="display:flex;flex-direction:column;gap:10px;">
+          <input type="text" name="origin" placeholder="Origin" style="padding:10px;border-radius:10px;border:1px solid #ccc;">
+          <input type="text" name="destination" placeholder="Destination" style="padding:10px;border-radius:10px;border:1px solid #ccc;">
+          <input type="date" name="date" style="padding:10px;border-radius:10px;border:1px solid #ccc;">
+          <button type="submit" class="btn" style="background:#2e8b57;">Search</button>
+        </form>
+        <div style="text-align:center;font-size:14px;margin-top:8px;">Powered by <a href="https://12go.asia/?z=9193611" target="_blank" rel="noopener sponsored">12Go system</a></div>
+      </div>
+    </details>
+  </section>
+
+  <!-- Wanderlog (cleaned & restored) -->
+  <section class="card theme-rose" id="card-wl" aria-label="Interactive Wanderlog map">
+    <details>
+      <summary class="bar">
+        <div class="logo" aria-hidden="true">🗺️</div>
+        <div class="headings">
+          <h3 class="title">The Philippines – Our Journey</h3>
+          <h4 class="strap">Interactive Map</h4>
+        </div>
+        <div class="chev" aria-hidden="true"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Check out all of the places we visited in the Philippines courtesy of this interactive map from Wanderlog, a free travel planning app where you can organize shared itineraries, flights, hotels, and car reservations.</p>
+
+        <!-- Wanderlog Map Widget Start -->
+        <div class="simple-widget" style="border-radius:10px; overflow:hidden; border:1px solid transparent; border-bottom:4px solid #cfd1dc; width:100%; max-width:100%; box-sizing:border-box; min-height:436px;">
+          <script>
+            (function(){
+              window.wanderlogEmbedKeys = window.wanderlogEmbedKeys || [];
+              window.wanderlogEmbedOptions = {
+                alwaysShowRouteLines:true,
+                version:2,
+                omitExternalLinks:true,
+                omitWebsitePhone:true,
+                omitDescription:true
+              };
+              var key = 'mjnfsczfvsjotxdr';
+              window.wanderlogEmbedKeys.push(key);
+
+              var already = false;
+              document.querySelectorAll('script').forEach(function(s){ if (s.src === 'https://wanderlog.com/embed.js') already = true; });
+              if (!already) { var e = document.createElement('script'); e.async = true; e.src = 'https://wanderlog.com/embed.js'; document.body.appendChild(e); }
+            })();
+          </script>
+          <div id="Wanderlog__mapEmbed_mjnfsczfvsjotxdr" style="display:block; width:100%;"></div>
+          <div style="font-size:smaller; margin:8px 0 0 0;">Map created using <a href="https://wanderlog.com/" target="_blank" rel="noopener">Wanderlog, a trip planner app</a></div>
+        </div>
+        <!-- Wanderlog Map Widget End -->
+        <a class="btn btn-red" href="https://wanderlog.com/u/closerlives">Explore our Wanderlog</a>
+      </div>
+    </details>
+  </section>
+
+  <!-- Hubs 2-col (equal size + tweaked spacing) -->
+  <section class="card theme-beige" id="card-hubs" aria-label="Explore our hubs">
+    <details>
+      <summary class="bar">
+        <div class="logo" aria-hidden="true">🧭</div>
+        <div class="headings">
+          <h3 class="title">Resource Hub & Travel Hub</h3>
+          <h4 class="strap">Banking, Travel, Earn Online • Destinations, Tips & More</h4>
+        </div>
+        <div class="chev" aria-hidden="true"></div>
+      </summary>
+      <div class="panel">
+        <div class="grid2">
+          <article class="col" style="padding:12px;">
+            <img class="hero" src="https://static.wixstatic.com/media/971500_1c005104394147ada069a27c8e2418aa~mv2.jpg" alt="Silhouetted couple at sunset with mountain backdrop. Resource Hub." />
+            <p class="title">Resource Hub</p>
+            <p class="desc-3lines">We built this hub to share what really works. These aren’t random affiliate links. They’re resources we use, rely on, and recommend, from our full-time travels.</p>
+            <a class="btn" href="https://www.closerlives.com/travel-hub/travel-resources">GO TO THE RESOURCE HUB</a>
+          </article>
+          <article class="col" style="padding:12px;">
+            <img class="hero" src="https://static.wixstatic.com/media/971500_6de8c916b3134130b811f5ae6cee3867~mv2.jpg" alt="Two people on red ATVs in a desert with pyramids. Travel Hub." />
+            <p class="title">Travel Hub</p>
+            <p class="desc-3lines">Head over to our Travel Hub – it’s packed with free country guides, helpful travel blogs, videos from the road, and tips to help you travel smarter (and cheaper!).</p>
+            <a class="btn" href="https://www.closerlives.com/travel-hub">TAKE ME TO THE TRAVEL HUB</a>
+          </article>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- Affiliate Disclaimer -->
+  <section class="card" id="affiliate-disclaimer" aria-label="Affiliate disclosure">
+    <details>
+      <summary class="bar">
+        <div class="logo" aria-hidden="true">ℹ️</div>
+        <div class="headings">
+          <h3 class="title">Sponsored & Advertisements</h3>
+          <h4 class="strap">Transparency and Independence</h4>
+        </div>
+        <div class="chev" aria-hidden="true"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Sponsored content and affiliate links may appear on our site. Advertisements are clearly marked, and our editorial content remains entirely independent from our ad partners. See our <a href="https://www.closerlives.com/affiliate-disclosure">Affiliate Disclosure</a> for more information.</p>
+      </div>
+    </details>
+  </section>
+
+</main>
+</body>
+</html>
