@@ -10,7 +10,6 @@
     margin: 0;
     padding: 0;
     width: 100%;
-    height: 100%;
     background: #ffffff;
     overflow-x: hidden;
     font-family: Lato, Arial, sans-serif;
@@ -52,6 +51,7 @@
   .theme-blue { background: rgba(227,238,255,0.55); }
   .theme-green { background: rgba(233,251,233,0.5); }
   .theme-rose { background: rgba(255,235,238,0.55); }
+  .theme-orange { background: rgba(255,243,224,0.7); }
   .theme-beige { background: rgba(245,240,232,0.6); }
 
   details { border-radius: 10px; }
@@ -87,13 +87,15 @@
     padding: 10px 12px;
     font-size: 16px;
     font-weight: 700;
-    background: #111;
     color: #fff;
     border-radius: 10px;
     text-decoration: none;
   }
   .btn:hover { filter: brightness(0.95); }
+  .btn-lightblue { background: #5fa8ff; }
+  .btn-deeporange { background: #ff9800; }
   .btn-red { background: #c62828; margin-top: 20px; }
+  .btn-black { background: #000000; color: #fff; }
 
   .grid2 {
     display: grid;
@@ -115,9 +117,10 @@
     gap: 8px;
   }
 
-  .col .btn { margin-top: auto; white-space: nowrap; font-size: clamp(13px, 2.2vw, 16px); }
-  .col .title { font-weight: 800; font-size: 17px; margin-bottom: 12px; }
-  .col .desc-2 { font-size: 15px; }
+  .col .hero { margin-bottom: 10px; }
+  .col .title { font-weight: 800; font-size: 17px; margin: 0 0 8px 0; }
+  .col .desc-2 { font-size: 15px; margin-top: 8px; }
+  .col .btn { margin-top: 12px; white-space: nowrap; font-size: clamp(13px, 2.2vw, 16px); }
 
   @media (max-width: 400px) {
     .grid2 { grid-template-columns: 1fr; }
@@ -132,6 +135,20 @@
     margin-top: 40px;
   }
 </style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const allDetails = document.querySelectorAll('details');
+    allDetails.forEach((detail) => {
+      detail.addEventListener('toggle', () => {
+        if (detail.open) {
+          allDetails.forEach((other) => {
+            if (other !== detail) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+  });
+</script>
 </head>
 <body>
 <main class="wrap" role="region" aria-label="Travel resources and helpful links">
@@ -151,7 +168,7 @@
       <div class="panel">
         <img class="hero" src="https://static.wixstatic.com/media/971500_183ff5aa96744b4d908931ed91b9a49e~mv2.png" alt="SafetyWing promotional visual">
         <p class="desc-2">For peace of mind, we recommend travel insurance. SafetyWing's Essential & Complete plans cover travel and medical emergencies, with options for adventure sports and electronics theft.</p>
-        <a class="btn" href="https://safetywing.com/nomad-insurance/?referenceID=26241735&campaign=blog-posts&utm_campaign=blog-posts&utm_source=26241735&utm_medium=Ambassador" target="_blank" rel="noopener noreferrer sponsored">GET INSURED</a>
+        <a class="btn btn-lightblue" href="https://safetywing.com/nomad-insurance/?referenceID=26241735&campaign=blog-posts&utm_campaign=blog-posts&utm_source=26241735&utm_medium=Ambassador" target="_blank" rel="noopener noreferrer sponsored">GET INSURED</a>
       </div>
     </details>
   </section>
@@ -179,6 +196,24 @@
     </details>
   </section>
 
+  <section class="card theme-orange">
+    <details>
+      <summary>
+        <div class="logo">🎟️</div>
+        <div class="headings">
+          <h3 class="title">Discover Tours & Experiences with GetYourGuide</h3>
+          <h4 class="strap">Skip-the-line tickets, guided tours, and local experiences</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_ceab9447f68a401384126fb51cda910d~mv2.webp" alt="A tour boat sails on the Seine River in Paris, with the Eiffel Tower in the background under a blue sky. The text ‘GET YOUR GUIDE’ is displayed in orange on the right side.">
+        <p class="desc-2">Explore top attractions and unforgettable experiences with GetYourGuide. From city tours and cultural excursions to bucket-list adventures, find and book activities in minutes — all with verified reviews and instant confirmation.</p>
+        <a class="btn btn-deeporange" href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="noopener noreferrer sponsored">FIND ACTIVITIES & TOURS</a>
+      </div>
+    </details>
+  </section>
+
   <section class="card theme-rose">
     <details>
       <summary>
@@ -193,20 +228,12 @@
         <p class="desc-2">Check out all of the places we visited in the Philippines courtesy of this interactive map from Wanderlog, a free travel planning app where you can organize shared itineraries, flights, hotels, and car reservations.</p>
         <div class="simple-widget" style="border-radius:10px; overflow:hidden; border-bottom:4px solid #cfd1dc; width:100%; min-height:436px;">
           <script>
-            (function(){
-              window.wanderlogEmbedKeys = window.wanderlogEmbedKeys || [];
-              window.wanderlogEmbedOptions = { alwaysShowRouteLines:true, version:2, omitExternalLinks:true, omitWebsitePhone:true, omitDescription:true };
-              var key='mjnfsczfvsjotxdr';
-              window.wanderlogEmbedKeys.push(key);
-              var already=false;
-              document.querySelectorAll('script').forEach(function(s){if(s.src==='https://wanderlog.com/embed.js')already=true;});
-              if(!already){var e=document.createElement('script');e.async=true;e.src='https://wanderlog.com/embed.js';document.body.appendChild(e);}
-            })();
+            (function(){window.wanderlogEmbedKeys=window.wanderlogEmbedKeys||[];window.wanderlogEmbedOptions={alwaysShowRouteLines:true,version:2,omitExternalLinks:true,omitWebsitePhone:true,omitDescription:true};var key='mjnfsczfvsjotxdr';window.wanderlogEmbedKeys.push(key);var already=false;document.querySelectorAll('script').forEach(function(s){if(s.src==='https://wanderlog.com/embed.js')already=true;});if(!already){var e=document.createElement('script');e.async=true;e.src='https://wanderlog.com/embed.js';document.body.appendChild(e);}})();
           </script>
           <div id="Wanderlog__mapEmbed_mjnfsczfvsjotxdr" style="display:block;width:100%;"></div>
           <div style="font-size:smaller;margin-top:8px;">Map created using <a href="https://wanderlog.com/" target="_blank" rel="noopener">Wanderlog, a trip planner app</a></div>
         </div>
-        <a class="btn btn-red" href="https://wanderlog.com/u/closerlives">Explore our Wanderlog</a>
+        <a class="btn btn-red" href="https://wanderlog.com/u/closerlives" style="margin-top:20px;">Explore our Wanderlog</a>
       </div>
     </details>
   </section>
@@ -227,13 +254,13 @@
             <img class="hero" src="https://static.wixstatic.com/media/971500_1c005104394147ada069a27c8e2418aa~mv2.jpg" alt="Silhouetted couple at sunset with mountain backdrop. Resource Hub.">
             <p class="title">Resource Hub</p>
             <p class="desc-2">We built this hub to share what really works. These aren’t random affiliate links. They’re resources we use, rely on, and recommend, from our full-time travels.</p>
-            <a class="btn" href="https://www.closerlives.com/travel-hub/travel-resources">GO TO RESOURCE HUB</a>
+            <a class="btn btn-black" href="https://www.closerlives.com/travel-hub/travel-resources">🔗 GO TO RESOURCE HUB</a>
           </article>
           <article class="col">
             <img class="hero" src="https://static.wixstatic.com/media/971500_6de8c916b3134130b811f5ae6cee3867~mv2.jpg" alt="Two people on red ATVs in a desert with pyramids. Travel Hub.">
             <p class="title">Travel Hub</p>
             <p class="desc-2">Head over to our Travel Hub – it’s packed with free country guides, helpful travel blogs, videos from the road, and tips to help you travel smarter (and cheaper!).</p>
-            <a class="btn" href="https://www.closerlives.com/travel-hub">GO TO TRAVEL HUB</a>
+            <a class="btn btn-black" href="https://www.closerlives.com/travel-hub">🔗 GO TO THE TRAVEL HUB</a>
           </article>
         </div>
       </div>
