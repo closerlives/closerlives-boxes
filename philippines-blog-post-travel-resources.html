@@ -286,5 +286,19 @@
     <p class="desc-2">Sponsored content and affiliate links may appear on our site. Advertisements are clearly marked, and our editorial content remains entirely independent from our ad partners. See our <a href="https://www.closerlives.com/affiliate-disclosure"><strong>Affiliate Disclosure</strong></a> for more information.</p>
   </section>
 </main>
+
+<!-- Auto height script for Wix -->
+<script>
+  (function () {
+    function sendHeight() {
+      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
+    }
+    window.addEventListener("load", sendHeight);
+    new ResizeObserver(sendHeight).observe(document.body);
+    setInterval(sendHeight, 1500);
+  })();
+</script>
+
 </body>
 </html>
