@@ -106,31 +106,35 @@
     }
 
     .cl-btn {
-      display: inline-block;
-      width: 100%;
-      padding: 10px;
-      text-align: center;
-      border-radius: 9999px;
-      font-size: 16px;
-      text-decoration: none;
-      border: 1px solid #222222;
-      background-color: #222222;
-      color: #ffffff;
-      transition: background-color 0.2s ease;
-    }
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  padding: 10px 14px;
+  margin: 0 auto;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 9999px;
+  border: 1px solid #222222;
+  background-color: #222222;
+  color: #ffffff;
+  box-sizing: border-box;   /* <— this prevents overflow */
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
 
-    .cl-btn.cl-btn-secondary {
-      background-color: #ffffff;
-      color: #222222;
-    }
+.cl-btn.cl-btn-secondary {
+  background-color: #ffffff;
+  color: #222222;
+}
 
-    .cl-btn:hover,
-    .cl-btn:focus,
-    .cl-btn.cl-btn-secondary:hover,
-    .cl-btn.cl-btn-secondary:focus {
-      background-color: #90caf9;
-      color: #000000;
-    }
+.cl-btn:hover,
+.cl-btn:focus,
+.cl-btn.cl-btn-secondary:hover,
+.cl-btn.cl-btn-secondary:focus {
+  background-color: #90caf9;
+  color: #000000;
+}
 
     /* Colour coding */
     .cl-h-ig-recovery { background-color: #d81b60; }
