@@ -61,6 +61,10 @@
       background-color: #ffffff;
     }
 
+    .cl-accordion:last-of-type {
+      margin-bottom: 0;
+    }
+
     .cl-accordion-header {
       width: 100%;
       display: flex;
@@ -166,13 +170,6 @@
     .cl-accordion-header:focus-visible {
       outline: 2px solid #1976d2;
       outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        scroll-behavior: auto;
-        transition: none !important;
-      }
     }
   </style>
 </head>
@@ -374,6 +371,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Auto resize to Wix iframe -->
@@ -403,10 +401,10 @@
           var panel = acc.querySelector(".cl-accordion-panel");
           var icon = acc.querySelector(".cl-accordion-icon");
 
-          header.addaddEventListener("click", function () {
+          header.addEventListener("click", function () {
+
             var isOpen = header.getAttribute("aria-expanded") === "true";
 
-            /* close all others */
             accordions.forEach(function (other) {
               var h = other.querySelector(".cl-accordion-header");
               var p = other.querySelector(".cl-accordion-panel");
