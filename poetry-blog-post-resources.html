@@ -135,11 +135,6 @@
       color: #222222;
     }
 
-    .cl-small {
-      font-size: 14px;
-      color: #555555;
-    }
-
     .cl-note {
       font-size: 14px;
       color: #444444;
@@ -248,35 +243,24 @@
             Explore our full poetry collection, from personal pieces to creative reflections on identity, travel, and change.
           </p>
 
-          <ul>
-            <li>
-              Visit the 
-              <a href="https://www.closerlives.com/blogs/poetry" target="_blank" rel="noopener noreferrer nofollow">
-                Poetry Hub
-              </a>.
-            </li>
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/blogs/poetry" target="_blank" rel="noopener noreferrer nofollow">
+              Visit the Poetry Hub
+            </a>
 
-            <li>
-              Learn about Leon’s poetry book,
-              <a href="https://www.closerlives.com/about-us/leon-gregori#outoftheshadows" target="_blank" rel="noopener noreferrer nofollow">
-                Out of the Shadows
-              </a>.
-            </li>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/about-us/leon-gregori#outoftheshadows" target="_blank" rel="noopener noreferrer nofollow">
+              Explore Leon’s Book – Out of the Shadows
+            </a>
 
-            <li>
-              Read Leon’s popular poem
-              <a href="https://www.closerlives.com/blog/post/conscience-poem-morality-struggles" target="_blank" rel="noopener noreferrer nofollow">
-                Conscience – A Poem About Morality & Inner Conflict
-              </a>.
-            </li>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blog/post/conscience-poem-morality-struggles" target="_blank" rel="noopener noreferrer nofollow">
+              Read “Conscience” by Leon
+            </a>
 
-            <li>
-              Read Jenn’s poem
-              <a href="https://www.closerlives.com/blog/post/glossy-poem-by-jennifer-david" target="_blank" rel="noopener noreferrer nofollow">
-                Glossy – A Poem About Grey Hair & Self-Image
-              </a>.
-            </li>
-          </ul>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blog/post/glossy-poem-by-jennifer-david" target="_blank" rel="noopener noreferrer nofollow">
+              Read “Glossy” by Jennifer David
+            </a>
+          </div>
+
         </div>
       </div>
     </div>
@@ -324,9 +308,8 @@
 
           <h2>Write for Closer Lives</h2>
 
-          <p>
-            We welcome thoughtful writers who want to share poetry, creative essays, travel stories, or personal reflections.
-          </p>
+          <p><strong>We accept poetry submissions for free.</strong><br>
+          Fees only apply to guest posts in other categories.</p>
 
           <h3>Guest Post (Client Provided) – $100 USD</h3>
           <ul>
@@ -341,7 +324,7 @@
             <li>Content created by the Closer Lives editorial team.</li>
             <li>Includes topic ideation, SEO research, drafting, and editing.</li>
             <li>Up to 2 relevant outbound links.</li>
-            <li>Submission form required, no exceptions.</li>
+            <li>Submission form required.</li>
           </ul>
 
           <div class="cl-btn-wrap">
@@ -353,6 +336,7 @@
               View Writer Guidelines
             </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -367,15 +351,25 @@
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
 
-          <p class="cl-small">
+          <p>
             Some links across Closer Lives are affiliate links.  
             This means we may earn a small commission if you choose to make a purchase through them, at no extra cost to you.
           </p>
 
-          <p class="cl-small">
+          <p>
             We only recommend services we genuinely use or believe are helpful.  
             These commissions support our work and help us continue creating free poems, stories, and resources.
           </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">
+              View our Affiliate Policy
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/about-us/work-with-us/media-and-partnerships" target="_blank" rel="noopener noreferrer">
+              View Media & Partnerships Info
+            </a>
+          </div>
 
         </div>
       </div>
@@ -409,7 +403,7 @@
           var panel = acc.querySelector(".cl-accordion-panel");
           var icon = acc.querySelector(".cl-accordion-icon");
 
-          header.addEventListener("click", function () {
+          header.addaddEventListener("click", function () {
             var isOpen = header.getAttribute("aria-expanded") === "true";
 
             /* close all others */
