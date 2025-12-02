@@ -121,11 +121,25 @@
       color: #ffffff;
       box-sizing: border-box;
       cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .cl-btn.cl-btn-secondary {
       background-color: #ffffff;
       color: #222222;
+    }
+
+    /* 🌟 NEW HOVER COLOUR: Vibrant Light Blue #90caf9 */
+    .cl-btn:hover,
+    .cl-btn:focus {
+      background-color: #90caf9;
+      color: #000000;
+    }
+
+    .cl-btn.cl-btn-secondary:hover,
+    .cl-btn.cl-btn-secondary:focus {
+      background-color: #90caf9;
+      color: #000000;
     }
 
     .cl-small {
@@ -139,34 +153,34 @@
       margin-top: 4px;
     }
 
-    /* Lifestyle colour coding (Option B) */
+    /* Lifestyle colour coding */
     .cl-h-wellness {
-      background-color: #00695c; /* deep teal */
+      background-color: #00695c;
     }
 
     .cl-h-greyhair {
-      background-color: #d81b60; /* warm rose */
+      background-color: #d81b60;
     }
 
     .cl-h-creativity {
-      background-color: #8e24aa; /* lavender purple */
+      background-color: #8e24aa;
     }
 
     .cl-h-digital {
-      background-color: #1976d2; /* ocean blue */
+      background-color: #1976d2;
     }
 
     .cl-h-nomad {
-      background-color: #f9a825; /* soft gold */
+      background-color: #f9a825;
       color: #222222;
     }
 
     .cl-h-social {
-      background-color: #6d4c41; /* warm taupe */
+      background-color: #6d4c41;
     }
 
     .cl-h-affiliate {
-      background-color: #424242; /* neutral dark */
+      background-color: #424242;
     }
 
     .cl-accordion-header:focus-visible {
@@ -185,22 +199,25 @@
       max-width: 100%;
       height: auto;
       border-radius: 12px;
+      margin-bottom: 12px;
     }
   </style>
 </head>
 
 <body>
   <div class="cl-wrapper">
-  <h1 style="text-align:center; font-style:italic;" h1>
-  Lifestyle tools to feel grounded, creative, and supported
-</h1>
+
+    <h1 style="text-align:center; font-style:italic;">
+      Lifestyle tools to feel grounded, creative, and supported
+    </h1>
+
     <p class="cl-intro">
       Lifestyle is more than routines, it is how you protect your energy, your money, and your dreams.  
       Here you will find the tools, communities, and resources that we use in our own lives.<br><br>  
       Explore what you need right now, from grey hair confidence and wellness to creativity, digital safety, social media support, and nomad life.
     </p>
 
-    <!-- Everyday Lifestyle Tools / Wellness -->
+    <!-- Everyday Lifestyle Tools -->
     <div class="cl-accordion" aria-label="Everyday lifestyle tools and wellness resources">
       <button class="cl-accordion-header cl-h-wellness" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Everyday Lifestyle Tools</span>
@@ -209,21 +226,22 @@
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Stay balanced on the move</h2>
 
           <p>
             Staying well while you travel or juggle a busy life starts with simple, sustainable habits.  
-            Inside our Health &amp; Wellness community, you will find real conversations about movement, food, sleep, and mental health that fit a life in motion.
+            Inside our Health & Wellness community, you will find real conversations about movement, food, sleep, and mental health that fit a life in motion.
           </p>
 
           <p>
             Pair that with smart money tools like Wise and you create more space for what matters.  
-            Wise helps reduce fees when you move money or live between countries, which keeps more of your income available for daily life and future plans.
+            Wise helps reduce fees when you move money or live between countries, keeping more of your income available for daily life and future plans.
           </p>
 
           <div class="cl-btn-wrap">
             <a class="cl-btn" href="https://www.closerlives.com/community-group/closer-lives-travel-health-wellness-community" target="_blank" rel="noopener noreferrer">
-              Join the Health &amp; Wellness Community
+              Join the Health & Wellness Community
             </a>
 
             <a class="cl-btn cl-btn-secondary" href="https://wise.com/invite/ihpc/jenniferd2026" target="_blank" rel="noopener noreferrer">
@@ -236,6 +254,7 @@
           </div>
 
           <p class="cl-note">The Wise link uses our referral partnership. You pay the same or less.</p>
+
         </div>
       </div>
     </div>
@@ -249,12 +268,12 @@
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Confidence for your silver era</h2>
 
           <img 
             src="https://static.wixstatic.com/media/3f9ac3_a195708029a44f3584131a02a52db1b3~mv2.png"
             alt="A smiling woman with long silver hair stands in front of a starry background. Text reads: ‘Community for Confident Pro-Aging, Wellness, and YES to Going Grey. Embracing the Silver Lining of beauty and aging.’."
-            style="margin-bottom:12px;"
           />
 
           <p>
@@ -275,6 +294,7 @@
               Read the Grey Hair Journey blogs
             </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -282,18 +302,18 @@
     <!-- Creativity & Personal Development -->
     <div class="cl-accordion" aria-label="Creativity and personal development tools">
       <button class="cl-accordion-header cl-h-creativity" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Creativity &amp; Personal Development</span>
+        <span class="cl-accordion-title">Creativity & Personal Development</span>
         <span class="cl-accordion-icon">+</span>
       </button>
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Keep your creative brain switched on</h2>
 
           <img 
             src="https://static.wixstatic.com/media/971500_fb80ebf1f3a54f049d0b6d6843f1622d~mv2.png"
-            alt="A bright, glowing brain inside a human head silhouette on a teal background with light rays and bokeh. Text reads: 'Are you a genius? 13 quirky signs you might have a creative brain.'"
-            style="margin-bottom:12px;"
+            alt="Bright glowing brain illustration promoting creative thinking."
           />
 
           <p>
@@ -302,7 +322,7 @@
           </p>
 
           <p>
-            Whether you write, draw, build online projects, or simply love language, the Closer Lives Poetry Collective is a low pressure space to share your words and be inspired by others.
+            Whether you write, draw, build online projects, or simply love language, the Closer Lives Poetry Collective is a low-pressure space to share your words and be inspired by others.
           </p>
 
           <div class="cl-btn-wrap">
@@ -322,6 +342,7 @@
           <p class="cl-note">
             Look out for future creative tools, including printable prompts.
           </p>
+
         </div>
       </div>
     </div>
@@ -329,12 +350,13 @@
     <!-- Digital Safety & Online Confidence -->
     <div class="cl-accordion" aria-label="Digital safety and online confidence resources">
       <button class="cl-accordion-header cl-h-digital" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Digital Safety &amp; Online Confidence</span>
+        <span class="cl-accordion-title">Digital Safety & Online Confidence</span>
         <span class="cl-accordion-icon">+</span>
       </button>
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Protect your logins, accounts, and peace of mind</h2>
 
           <p>
@@ -343,7 +365,7 @@
           </p>
 
           <p>
-            If you are already dealing with an account restriction or deactivation, our Instagram Disabled Accounts Support &amp; Tips group gives you grounded guidance.
+            If you are already dealing with an account restriction or deactivation, our Instagram Disabled Accounts Support & Tips group gives you grounded guidance.
           </p>
 
           <div class="cl-btn-wrap">
@@ -351,7 +373,7 @@
               Join the Instagram Support Group
             </a>
 
-            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content&utm_campaign=off15&utm_source=aff120331" target="_blank" rel="noopener noreferrer">
+            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank" rel="noopener noreferrer">
               Learn more about NordVPN
             </a>
 
@@ -367,6 +389,7 @@
           <p class="cl-note">
             Our NordVPN link is an affiliate partnership. We recommend using a VPN when traveling or using shared networks.
           </p>
+
         </div>
       </div>
     </div>
@@ -374,21 +397,22 @@
     <!-- Remote Work & Nomad Life -->
     <div class="cl-accordion" aria-label="Remote work and nomad lifestyle tools">
       <button class="cl-accordion-header cl-h-nomad" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Remote Work &amp; Nomad Life</span>
+        <span class="cl-accordion-title">Remote Work & Nomad Life</span>
         <span class="cl-accordion-icon">+</span>
       </button>
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Tools that support life between places</h2>
 
           <p>
             Full time travel or long stays abroad work best when your logistics are simple.  
-            For medical and travel coverage, we compare nomad friendly insurance options, and for phone connectivity we use eSIMs so we stay online without chasing local SIM cards in every country.
+            For medical and travel coverage, we compare nomad-friendly insurance options, and for connectivity we use eSIMs so we stay online without chasing SIM cards in every country.
           </p>
 
           <p>
-            If you are planning a long term lifestyle shift, resources like Trusted Housesitters let you experience new locations more slowly and with lower accommodation costs.
+            If you are planning a long-term lifestyle shift, resources like Trusted Housesitters let you experience new locations slowly and affordably.
           </p>
 
           <ul>
@@ -406,10 +430,11 @@
               Check best nomad insurance options
             </a>
 
-            <a class="cl-btn cl-btn-secondary" href="https://www.trustedhousesitters.com/refer/RAF778513/?utm_source=copy-link&utm_medium=refer-a-friend&utm_campaign=refer-a-friend" target="_blank" rel="noopener noreferrer">
+            <a class="cl-btn cl-btn-secondary" href="https://www.trustedhousesitters.com/refer/RAF778513/?utm_source=copy-link&utm_medium=refer-a-friend" target="_blank" rel="noopener noreferrer">
               Learn about Trusted Housesitters
             </a>
           </div>
+
         </div>
       </div>
     </div>
@@ -417,12 +442,13 @@
     <!-- Social Media Growth & Recovery -->
     <div class="cl-accordion" aria-label="Social media growth and account recovery resources">
       <button class="cl-accordion-header cl-h-social" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Social Media Growth &amp; Recovery</span>
+        <span class="cl-accordion-title">Social Media Growth & Recovery</span>
         <span class="cl-accordion-icon">+</span>
       </button>
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <h2>Grow your platforms without losing yourself</h2>
 
           <p>
@@ -431,7 +457,7 @@
           </p>
 
           <p>
-            If you want to grow on social media in a more intentional way, you will find tips on content, boundaries, and community building in our blogs and groups.
+            If you want to grow on social media in a more intentional way, you will find tips on content, boundaries, and community-building in our blogs and groups.
           </p>
 
           <div class="cl-btn-wrap">
@@ -443,40 +469,42 @@
               Browse Social Media advice blogs
             </a>
           </div>
+
         </div>
       </div>
     </div>
 
-    <!-- Sponsored note -->
+    <!-- Sponsored & Affiliate Notice -->
     <div class="cl-accordion" aria-label="Sponsored content and affiliate link notice">
       <button class="cl-accordion-header cl-h-affiliate" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Sponsored Content &amp; Affiliates</span>
+        <span class="cl-accordion-title">Sponsored Content & Affiliates</span>
         <span class="cl-accordion-icon">+</span>
       </button>
 
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
+
           <p class="cl-small">
             Some of the links and tools above are part of affiliate or referral partnerships.  
             You never pay extra because of this, and sometimes you receive a discount.  
             We only recommend services that fit how we actually live.  
-            For more details, read our Media &amp; Partnerships information.
+            For more details, read our Media & Partnerships information.
           </p>
 
           <div class="cl-btn-wrap">
             <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/about-us/work-with-us/media-and-partnerships" target="_blank" rel="noopener noreferrer">
-              View our Media &amp; Partnerships info
+              View our Media & Partnerships info
             </a>
-          </div>
 
-          <div class="cl-btn-wrap">
             <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">
               View our Affiliate Policy
             </a>
           </div>
+
         </div>
       </div>
     </div>
+
   </div>
 
   <!-- Auto resize to Wix iframe -->
@@ -559,5 +587,6 @@
       });
     })();
   </script>
+
 </body>
 </html>
