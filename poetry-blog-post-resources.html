@@ -132,10 +132,24 @@
       color: #ffffff;
       box-sizing: border-box;
       cursor: pointer;
+      transition: background-color 0.2s ease, color 0.2s ease;
     }
 
     .cl-btn.cl-btn-secondary {
       background-color: #ffffff;
+      color: #222222;
+    }
+
+    /* 🔥 Hover states (added) */
+    .cl-btn:hover,
+    .cl-btn:focus {
+      background-color: #000000;
+      color: #ffffff;
+    }
+
+    .cl-btn.cl-btn-secondary:hover,
+    .cl-btn.cl-btn-secondary:focus {
+      background-color: #eeeeee;
       color: #222222;
     }
 
@@ -305,7 +319,7 @@
 
           <h2>Write for Closer Lives</h2>
 
-          <p><strong>We accept poetry submissions for free.</strong><br>
+          <p><strong>We accept poetry submissions for FREE!</strong><br><br>
           Fees only apply to guest posts in other categories.</p>
 
           <h3>Guest Post (Client Provided) – $100 USD</h3>
@@ -359,7 +373,7 @@
           </p>
 
           <div class="cl-btn-wrap">
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">
+            <a class="cl-btn" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">
               View our Affiliate Policy
             </a>
 
