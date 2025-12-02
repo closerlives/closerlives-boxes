@@ -41,20 +41,7 @@
       margin: 0 0 10px;
     }
 
-    ul {
-      padding-left: 20px;
-      margin: 0 0 10px;
-    }
-
-    li {
-      margin-bottom: 4px;
-    }
-
-    .cl-intro {
-      margin-bottom: 16px;
-    }
-
-    /* Accordion base */
+    /* Accordion styling */
     .cl-accordion {
       border-radius: 10px;
       border: 1px solid #e0e0e0;
@@ -76,11 +63,9 @@
       box-sizing: border-box;
       border: none;
       cursor: pointer;
-      background-color: #1976d2;
-      color: #ffffff;
-      text-align: left;
       font-size: 16px;
       font-weight: 600;
+      color: #ffffff;
     }
 
     .cl-accordion-title {
@@ -108,8 +93,7 @@
     }
 
     img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
       border-radius: 12px;
       margin-bottom: 12px;
     }
@@ -124,17 +108,15 @@
     .cl-btn {
       display: inline-block;
       width: 100%;
-      padding: 10px 14px;
+      padding: 10px;
       text-align: center;
-      text-decoration: none;
-      font-size: 16px;
       border-radius: 9999px;
+      font-size: 16px;
+      text-decoration: none;
       border: 1px solid #222222;
       background-color: #222222;
       color: #ffffff;
-      box-sizing: border-box;
-      cursor: pointer;
-      transition: background-color 0.2s ease, color 0.2s ease;
+      transition: background-color 0.2s ease;
     }
 
     .cl-btn.cl-btn-secondary {
@@ -142,94 +124,158 @@
       color: #222222;
     }
 
-    /* Hover effect: vibrant light blue */
     .cl-btn:hover,
-    .cl-btn:focus {
-      background-color: #90caf9;
-      color: #000000;
-    }
-
+    .cl-btn:focus,
     .cl-btn.cl-btn-secondary:hover,
     .cl-btn.cl-btn-secondary:focus {
       background-color: #90caf9;
       color: #000000;
     }
 
-    .cl-note {
-      font-size: 14px;
-      color: #444444;
-      margin-top: 4px;
-    }
+    /* Colour coding */
+    .cl-h-ig-recovery { background-color: #d81b60; }
+    .cl-h-ig-tracking { background-color: #8e24aa; }
+    .cl-h-ig-safety   { background-color: #1976d2; }
+    .cl-h-ig-mindset  { background-color: #f9a825; color:#222222; }
+    .cl-h-affiliate   { background-color: #00695c; }
+
   </style>
 </head>
 
 <body>
   <div class="cl-wrapper">
 
-    <h1>Social Media tools to grow safely, calmly, and confidently</h1>
+    <h1>Social media tools to feel safer, calmer, and more in control</h1>
 
     <p class="cl-intro">
-      Social media can feel chaotic, especially when accounts get restricted or growth stalls.  
-      These tools are here to support your confidence, protect your login security, and help you grow with intention — not stress.
+      Social media can be a powerful way to share your work, but it can also be stressful when platforms change the rules.  
+      These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
     </p>
 
-    <!-- Social Media Accordion -->
-    <div class="cl-accordion" aria-label="Social Media Growth and Recovery">
-      <button class="cl-accordion-header" type="button" aria-expanded="false">
-        <span class="cl-accordion-title">Social Media Growth & Recovery</span>
+    <!-- 1. Instagram Recovery -->
+    <div class="cl-accordion">
+      <button class="cl-accordion-header cl-h-ig-recovery" aria-expanded="false">
+        <span class="cl-accordion-title">Instagram Recovery & Support</span>
         <span class="cl-accordion-icon">+</span>
       </button>
-
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <h2>Support for creators rebuilding or protecting their accounts</h2>
 
           <img 
             src="https://static.wixstatic.com/media/54ba72_bdaad8c9075349e1b4f8640db66a6ffa~mv2.jpg"
             alt="A guide on reactivating a disabled Instagram account, depicted with a visual metaphor of a padlocked chain."
           />
 
-          <p>
-            If your Instagram account has been disabled or restricted, you are not alone.  
-            Our recovery guide, support group, and step-by-step tools help you understand the process and rebuild with clarity.
-          </p>
+          <h2>When your Instagram account is disabled or restricted</h2>
 
           <p>
-            If you are focused on growth, our Social Media category covers boundaries, creator mindset, algorithm changes, and strategies that protect your wellbeing.
+            If your Instagram account has been disabled, restricted, or is under review, you are not alone.  
+            Our recovery resources walk you through realistic timelines, appeal routes, and what to expect.
           </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank">Join the Instagram Support Group</a>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank">Read the Instagram Recovery Guide</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Tracking Tools -->
+    <div class="cl-accordion">
+      <button class="cl-accordion-header cl-h-ig-tracking" aria-expanded="false">
+        <span class="cl-accordion-title">Track & Understand Your Growth</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
 
           <img 
             src="https://static.wixstatic.com/media/971500_155cacb06b0941e48540af9063ef0f6e~mv2.jpg"
-            alt="A person holding a smartphone displaying the Instagram logo and 'from Meta' text. Overlaid text reads: 'Stop using 3rd-party apps to unfollow! Find non-followers without getting disabled.'"
+            alt="A person holding a smartphone displaying the Instagram logo and from Meta text, warning not to use 3rd-party apps to unfollow."
           />
 
+          <h2>See what is really happening with your account</h2>
+
+          <p>
+            Our follower tracking guide helps you spot drops, shadowbans, or new growth patterns  
+            without obsessing over every number.
+          </p>
+
           <div class="cl-btn-wrap">
-            <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank" rel="noopener noreferrer">
-              Join the Instagram Support Group
-            </a>
-
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank" rel="noopener noreferrer">
-              Read the Instagram Recovery Guide
-            </a>
-
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank" rel="noopener noreferrer">
-              Use the Instagram Follower Tracker
-            </a>
-
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/travel-and-lifestyle-blog/categories/social-media" target="_blank" rel="noopener noreferrer">
-              Browse Social Media Growth Advice
-            </a>
-
-            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank" rel="noopener noreferrer">
-              Learn More About NordVPN
-            </a>
+            <a class="cl-btn" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank">Use the Follower Tracking Guide</a>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/travel-and-lifestyle-blog/categories/social-media" target="_blank">Browse Social Media Growth Blogs</a>
           </div>
 
-          <p class="cl-note">
-            The NordVPN link is an affiliate partnership.  
-            We recommend using a VPN when traveling or logging in on shared networks.
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Digital Safety -->
+    <div class="cl-accordion">
+      <button class="cl-accordion-header cl-h-ig-safety" aria-expanded="false">
+        <span class="cl-accordion-title">Safer Logins & Online Security</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Protect your accounts before something goes wrong</h2>
+
+          <p>
+            Many creator problems start with shared Wi-Fi or insecure logins.  
+            A VPN adds a layer of protection that helps keep your accounts safe.
           </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn More About NordVPN</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Creator Mindset -->
+    <div class="cl-accordion">
+      <button class="cl-accordion-header cl-h-ig-mindset" aria-expanded="false">
+        <span class="cl-accordion-title">Content, Boundaries & Creator Mindset</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Grow your platforms without burning out</h2>
+
+          <p>
+            We focus on realistic posting rhythms, boundaries, and treating your audience like a community.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank">Read Our Instagram Recovery Story</a>
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media" target="_blank">Browse All Social Media Blogs</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Affiliate Disclosure -->
+    <div class="cl-accordion">
+      <button class="cl-accordion-header cl-h-affiliate" aria-expanded="false">
+        <span class="cl-accordion-title">Affiliate Disclosure</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <p>
+            Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank">View Affiliate Policy</a>
+          </div>
 
         </div>
       </div>
@@ -237,23 +283,13 @@
 
   </div>
 
-  <!-- Auto resize to Wix iframe (updated v6 logic) -->
+  <!-- Auto-resize script -->
   <script>
     (function () {
       function sendHeight() {
-        var h =
-          document.documentElement.scrollHeight ||
-          document.body.scrollHeight ||
-          600;
-
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage(
-            {
-              type: "CL_RESIZE",
-              height: h,
-            },
-            "*"
-          );
+        var h = document.documentElement.scrollHeight || document.body.scrollHeight || 600;
+        if (window.parent !== window) {
+          window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
         }
       }
 
@@ -265,7 +301,6 @@
           var icon = acc.querySelector(".cl-accordion-icon");
 
           header.addEventListener("click", function () {
-
             var isOpen = header.getAttribute("aria-expanded") === "true";
 
             accordions.forEach(function (other) {
@@ -273,24 +308,18 @@
               var p = other.querySelector(".cl-accordion-panel");
               var i = other.querySelector(".cl-accordion-icon");
 
-              if (h && p && i) {
-                h.setAttribute("aria-expanded", "false");
-                p.style.maxHeight = null;
-                i.textContent = "+";
-              }
+              h.setAttribute("aria-expanded", "false");
+              p.style.maxHeight = null;
+              i.textContent = "+";
             });
 
             if (!isOpen) {
               header.setAttribute("aria-expanded", "true");
               panel.style.maxHeight = panel.scrollHeight + "px";
               icon.textContent = "–";
-            } else {
-              header.setAttribute("aria-expanded", "false");
-              panel.style.maxHeight = null;
-              icon.textContent = "+";
             }
 
-            setTimeout(sendHeight, 240);
+            setTimeout(sendHeight, 260);
           });
         });
       }
@@ -301,32 +330,17 @@
         setTimeout(sendHeight, 350);
       });
 
-      // Extra height sync to fix Wix iframe oversizing
-      let clExtraSyncCount = 0;
-      function clExtraHeightSync() {
-        if (clExtraSyncCount < 10) {
+      let sync = 0;
+      function extraSync() {
+        if (sync < 10) {
           sendHeight();
-          clExtraSyncCount++;
-          setTimeout(clExtraHeightSync, 300);
+          sync++;
+          setTimeout(extraSync, 300);
         }
       }
-      clExtraHeightSync();
-
-      window.addEventListener("resize", function () {
-        var panels = document.querySelectorAll(".cl-accordion-panel");
-        panels.forEach(function (panel) {
-          var header = panel.parentElement.querySelector(
-            ".cl-accordion-header"
-          );
-
-          if (header && header.getAttribute("aria-expanded") === "true") {
-            panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
-
-        setTimeout(sendHeight, 200);
-      });
+      extraSync();
     })();
   </script>
+
 </body>
 </html>
