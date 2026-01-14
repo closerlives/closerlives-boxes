@@ -1,5 +1,5 @@
-<!-- NordVPN Black Friday Promo Banner (940×200, image-only, blue border) -->
-<section aria-label="Sponsored VPN Deal – NordVPN Black Friday Offer" role="region" style="width:100%; height:100%;">
+<!-- NordVPN Promo Banner (940×200, image-only, blue border) -->
+<section aria-label="Affiliate promotion – NordVPN" role="region" style="width:100%; height:100%;">
   <style>
     html, body { margin:0; padding:0; height:100%; }
     * { box-sizing: border-box; }
@@ -9,7 +9,7 @@
     <a href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331"
        target="_blank"
        rel="sponsored noopener noreferrer"
-       aria-label="Get 74% off plus 3 months extra with NordVPN’s Black Friday deal."
+       aria-label="Get NordVPN and protect from digital threats."
        role="link"
        style="
          position:absolute; top:50%; left:50%;
@@ -20,8 +20,8 @@
          border:2px solid #0072ce; border-radius:10px;
          overflow:hidden; box-shadow:0 4px 2px rgba(0,0,0,0.1);
        ">
-      <img src="https://static.wixstatic.com/media/971500_b2cd868cf0fe4c799fdb4075188ada76~mv2.png"
-           alt="Banner ad for NordVPN’s Black Friday deal. Text reads “Get 74% off + 3 months extra.” A hand holds a smartphone in front of a large blue “74%.” There’s a red button that says “Get NordVPN” on the right."
+      <img src="https://static.wixstatic.com/media/971500_1be08e44461f45dc8cd22b9e8e03692b~mv2.png"
+           alt="Banner ad for NordVPN. Text reads "Protect your digital life from cyberthreats." A hand holds a phone showing a map with a VPN connected. Right side has a green "Get NordVPN" button. Background is blue."
            style="width:100%; height:auto; display:block; border-radius:10px;">
     </a>
   </div>
