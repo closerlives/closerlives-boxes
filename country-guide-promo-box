@@ -1,58 +1,65 @@
-<!-- NordVPN Promo Banner (940×200, image-only, blue border) -->
-<section aria-label="Affiliate promotion – NordVPN" role="region" style="width:100%; height:200px; overflow:hidden;">
+<!-- nordvpn-banner-940x200.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NordVPN Promo Banner</title>
   <style>
-    * {
-      box-sizing: border-box;
-      max-width: 100%;
-    }
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      background: transparent;
+      overflow: hidden; /* no scrollbars */
+    }
+    * { box-sizing: border-box; }
+
+    /* Center the fixed-size banner inside whatever iframe size Wix gives it */
+    .wrap {
+      width: 100vw;
+      height: 100vh;
+      display: grid;
+      place-items: center;
       overflow: hidden;
+      font-family: Lato, Arial, sans-serif;
+    }
+
+    /* The banner itself (fixed 940×200) */
+    .banner-link {
+      width: 940px;
+      height: 200px;
+      display: block;
+      border: 2px solid #0072ce;
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .banner-img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover; /* fills exactly 940×200 */
     }
   </style>
+</head>
 
-  <div style="
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    font-family: Lato, Arial, sans-serif;
-    overflow: hidden;
-  ">
+<body>
+  <div class="wrap">
     <a
+      class="banner-link"
       href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content&utm_campaign=off15&utm_source=aff120331"
       target="_blank"
       rel="sponsored noopener noreferrer"
       aria-label="Get NordVPN and protect your digital life from cyber threats"
-      role="link"
-      style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 940px;
-        height: 200px;
-        transform: translate(-50%, -50%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        background: #ffffff;
-        border: 2px solid #0072ce;
-        border-radius: 10px;
-        overflow: hidden;
-      "
     >
       <img
+        class="banner-img"
         src="https://static.wixstatic.com/media/971500_1be08e44461f45dc8cd22b9e8e03692b~mv2.png"
         alt="NordVPN banner ad. Text reads Protect your digital life from cyber threats. A hand holds a phone showing a connected VPN map. A green Get NordVPN button appears on the right over a blue background."
-        style="
-          width: 100%;
-          height: auto;
-          display: block;
-          border-radius: 8px;
-        "
-      >
+      />
     </a>
   </div>
-</section>
+</body>
+</html>
