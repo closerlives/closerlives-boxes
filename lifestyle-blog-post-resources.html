@@ -477,19 +477,31 @@
 
   </div>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      /* Keep only one open at a time */
-      var allDetails = document.querySelectorAll("details");
-      allDetails.forEach(function (detail) {
-        detail.addEventListener("toggle", function () {
-          if (detail.open) {
-            allDetails.forEach(function (other) {
-              if (other !== detail) other.removeAttribute("open");
+ <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const allDetails = document.querySelectorAll("details");
+
+    allDetails.forEach(function (detail) {
+      detail.addEventListener("toggle", function () {
+        if (detail.open) {
+
+          /* Close other sections */
+          allDetails.forEach(function (other) {
+            if (other !== detail) other.removeAttribute("open");
+          });
+
+          /* 🔑 ALWAYS scroll the opened header into view */
+          requestAnimationFrame(function () {
+            detail.querySelector("summary").scrollIntoView({
+              block: "start"
             });
-          }
-        });
+          });
+        }
       });
+    });
+  });
+</script>
+
 
       /* Wix iframe auto height, stable */
       function sendHeight() {
