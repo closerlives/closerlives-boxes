@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
-
     html, body {
       margin: 0;
       padding: 0;
@@ -17,13 +15,13 @@
       line-height: 1.6;
       background-color: #ffffff;
       color: #222222;
-      width: 100%;
     }
 
     .cl-wrapper {
       max-width: 560px;
       margin: 0 auto;
       padding: 20px 16px 10px;
+      box-sizing: border-box;
     }
 
     h1, h2, h3 {
@@ -35,22 +33,27 @@
     h1 {
       font-size: 18px;
       margin-bottom: 10px;
-      text-align: center;
-      font-style: italic;
     }
 
-    p { margin: 0 0 10px; }
+    p {
+      margin: 0 0 10px;
+    }
 
     ul {
       padding-left: 20px;
       margin: 0 0 10px;
     }
 
-    li { margin-bottom: 4px; }
+    li {
+      margin-bottom: 4px;
+    }
 
-    .cl-intro { margin-bottom: 16px; }
+    .cl-intro {
+      margin-bottom: 16px;
+    }
 
-    .cl-card {
+    /* Accordion base */
+    .cl-accordion {
       border-radius: 10px;
       border: 1px solid #e0e0e0;
       margin-bottom: 10px;
@@ -58,46 +61,44 @@
       background-color: #ffffff;
     }
 
-    details { border-radius: 10px; }
-
-    summary {
-      list-style: none;
-      cursor: pointer;
-      user-select: none;
+    .cl-accordion-header {
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 14px;
+      box-sizing: border-box;
       border: none;
+      cursor: pointer;
+      background-color: #f5f5f5;
+      color: #ffffff;
       text-align: left;
       font-size: 16px;
       font-weight: 600;
-      color: #ffffff;
     }
 
-    summary::-webkit-details-marker { display: none; }
-
-    .cl-summary-title {
+    .cl-accordion-title {
       display: inline-flex;
       align-items: center;
       gap: 8px;
     }
 
-    .cl-summary-icon {
+    .cl-accordion-icon {
       font-size: 18px;
       font-weight: 700;
-      line-height: 1;
-      margin-left: 12px;
     }
 
-    details .cl-summary-icon::before { content: "+"; }
-    details[open] .cl-summary-icon::before { content: "–"; }
-
-    .cl-panel {
-      padding: 12px 14px 14px;
-      border-top: 1px solid #e0e0e0;
+    .cl-accordion-panel {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
       background-color: #ffffff;
+      border-top: 1px solid #e0e0e0;
+    }
+
+    .cl-accordion-inner {
+      padding: 12px 14px 14px;
+      box-sizing: border-box;
     }
 
     .cl-btn-wrap {
@@ -118,6 +119,7 @@
       border: 1px solid #222222;
       background-color: #222222;
       color: #ffffff;
+      box-sizing: border-box;
       cursor: pointer;
       transition: background-color 0.2s ease, color 0.2s ease;
     }
@@ -127,12 +129,22 @@
       color: #222222;
     }
 
+    /* 🌟 NEW HOVER COLOUR: Vibrant Light Blue #90caf9 */
     .cl-btn:hover,
-    .cl-btn:focus,
+    .cl-btn:focus {
+      background-color: #90caf9;
+      color: #000000;
+    }
+
     .cl-btn.cl-btn-secondary:hover,
     .cl-btn.cl-btn-secondary:focus {
       background-color: #90caf9;
       color: #000000;
+    }
+
+    .cl-small {
+      font-size: 14px;
+      color: #555555;
     }
 
     .cl-note {
@@ -141,93 +153,463 @@
       margin-top: 4px;
     }
 
+    /* Lifestyle colour coding */
+    .cl-h-wellness {
+      background-color: #00695c;
+    }
+
+    .cl-h-greyhair {
+      background-color: #d81b60;
+    }
+
+    .cl-h-creativity {
+      background-color: #8e24aa;
+    }
+
+    .cl-h-digital {
+      background-color: #1976d2;
+    }
+
+    .cl-h-nomad {
+      background-color: #f9a825;
+      color: #222222;
+    }
+
+    .cl-h-social {
+      background-color: #6d4c41;
+    }
+
+    .cl-h-affiliate {
+      background-color: #424242;
+    }
+
+    .cl-accordion-header:focus-visible {
+      outline: 2px solid #1976d2;
+      outline-offset: 2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+        transition: none !important;
+      }
+    }
+
     img {
       max-width: 100%;
       height: auto;
       border-radius: 12px;
       margin-bottom: 12px;
     }
-
-    .cl-h-wellness { background-color: #00695c; }
-    .cl-h-greyhair { background-color: #d81b60; }
-    .cl-h-creativity { background-color: #8e24aa; }
-    .cl-h-digital { background-color: #1976d2; }
-    .cl-h-nomad { background-color: #f9a825; color: #222222; }
-    .cl-h-social { background-color: #6d4c41; }
-    .cl-h-affiliate { background-color: #424242; }
-
-    summary:focus-visible {
-      outline: 2px solid #1976d2;
-      outline-offset: 2px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      * { transition: none !important; scroll-behavior: auto; }
-    }
   </style>
 </head>
 
 <body>
-<div class="cl-wrapper">
+  <div class="cl-wrapper">
 
-  <!-- YOUR FULL CONTENT — UNCHANGED -->
-  <!-- (all sections exactly as you supplied) -->
+    <h1 style="text-align:center; font-style:italic;">
+      Lifestyle tools to feel grounded, creative, and supported
+    </h1>
 
-  <!-- 🔽 KEEP ALL YOUR SECTIONS HERE EXACTLY AS IS 🔽 -->
+    <p class="cl-intro">
+      Lifestyle is more than routines, it is how you protect your energy, your money, and your dreams.  
+      Here you will find the tools, communities, and resources that we use in our own lives.<br><br>  
+      Explore what you need right now, from grey hair confidence and wellness to creativity, digital safety, social media support, and nomad life.
+    </p>
 
-</div>
+    <!-- Everyday Lifestyle Tools -->
+    <div class="cl-accordion" aria-label="Everyday lifestyle tools and wellness resources">
+      <button class="cl-accordion-header cl-h-wellness" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Everyday Lifestyle Tools</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
 
-<!-- ✅ SINGLE, CORRECT SCRIPT (TRAVEL RESOURCES BEHAVIOUR) -->
-<script>
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Stay balanced on the move</h2>
+
+           <img 
+            src="https://static.wixstatic.com/media/971500_5bb3e40c82f0432bb9f12d21ebcfc02b~mv2.webp"
+            alt="Two people in helmets sit on ATVs, giving thumbs-up gestures, on a dirt path beside a lake surrounded by green trees and tall grass, under a partly cloudy sky."
+          />
+
+          <p>
+            Staying well while you travel or juggle a busy life starts with simple, sustainable habits.  
+            Inside our Health & Wellness community, you will find real conversations about movement, food, sleep, and mental health that fit a life in motion.
+          </p>
+
+          <p>
+            Pair that with smart money tools like Wise and you create more space for what matters.  
+            Wise helps reduce fees when you move money or live between countries, keeping more of your income available for daily life and future plans.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/community-group/closer-lives-travel-health-wellness-community" target="_blank" rel="noopener noreferrer">
+              Join the Health & Wellness Community
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://wise.com/invite/ihpc/jenniferd2026" target="_blank" rel="noopener noreferrer">
+              Explore Wise for everyday money
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/lifestyle" target="_blank" rel="noopener noreferrer">
+              Visit the Lifestyle Hub
+            </a>
+          </div>
+
+          <p class="cl-note">The Wise link uses our referral partnership. You pay the same or less.</p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Grey Hair Journey Essentials -->
+    <div class="cl-accordion" aria-label="Grey hair journey essentials and community support">
+      <button class="cl-accordion-header cl-h-greyhair" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Grey Hair Journey Essentials</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Confidence for your silver era</h2>
+
+          <img 
+            src="https://static.wixstatic.com/media/971500_5675df26e8f44684babd93071ef0ce6b~mv2.webp"
+            alt="A smiling woman with long silver hair stands in front of a starry background. Text reads: ‘Community for Confident Pro-Aging, Wellness, and YES to Going Grey. Embracing the Silver Lining of beauty and aging.’."
+          />
+
+          <p>
+            Going grey in public, online, and on camera is personal and powerful.  
+            Jenn shares her real experience of questions, judgments, and freedom in our grey hair blogs and community spaces.
+          </p>
+
+          <p>
+            If you are embracing your own silver journey, our Embracing the Silver Lining community gives you a space to talk through the emotional side and practical care tips.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/community-group/embracing-the-silver-lining-community-group" target="_blank" rel="noopener noreferrer">
+              Join the Silver Lining Community
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/embracing-the-silver-lining" target="_blank" rel="noopener noreferrer">
+              Read the Grey Hair Journey blogs
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Creativity & Personal Development -->
+    <div class="cl-accordion" aria-label="Creativity and personal development tools">
+      <button class="cl-accordion-header cl-h-creativity" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Creativity & Personal Development</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Keep your creative brain switched on</h2>
+
+          <img 
+            src="https://static.wixstatic.com/media/971500_3eeb364f5b684749a8d4a8a7b43b182b~mv2.webp"
+            alt="Silhouette of a head with a brain illustration, bright teal and white light effects behind. Text reads: "Are you a genius? 13 quirky signs you might have a creative brain."
+          />
+
+          <p>
+            Creativity is not a hobby, it is a way to process the world.  
+            Leon started Closer Lives with poetry, and the Creative Brain Workbook grew from that same need to turn ideas into something real.
+          </p>
+
+          <p>
+            Whether you write, draw, build online projects, or simply love language, the Closer Lives Poetry Collective is a low-pressure space to share your words and be inspired by others.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/community-group/closer-lives-poetry-collective" target="_blank" rel="noopener noreferrer">
+              Join the Poetry Collective
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/about-us/leon-gregori" target="_blank" rel="noopener noreferrer">
+              Discover Leon's poetry book
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://97150092-793c-401b-b10d-7b0cc47aa5cc.usrfiles.com/ugd/971500_e1b68015c4954c139181042c80c3a94d.pdf" target="_blank" rel="noopener noreferrer">
+              Download the Creative Brain Workbook
+            </a>
+          </div>
+
+          <p class="cl-note">
+            Look out for future creative tools, including printable prompts.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Digital Safety & Online Confidence -->
+    <div class="cl-accordion" aria-label="Digital safety and online confidence resources">
+      <button class="cl-accordion-header cl-h-digital" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Digital Safety & Online Confidence</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Protect your logins, accounts, and peace of mind</h2>
+
+           <img 
+            src="https://static.wixstatic.com/media/971500_4e34256d6e50410a857b3835221dcc25~mv2.webp"
+            alt="Close-up of the Instagram app icon on a screen, showing a square camera logo with a gradient background of pink, purple, orange, and yellow, and the word "Instagram" written below it."
+          />
+
+          <p>
+            After seeing how many people lose access to Instagram and other platforms, we take digital safety seriously.  
+            Using a VPN like NordVPN adds another layer of protection when you log in on public or shared networks.
+          </p>
+
+          <p>
+            If you are already dealing with an account restriction or deactivation, our Instagram Disabled Accounts Support & Tips group gives you grounded guidance.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank" rel="noopener noreferrer">
+              Join the Instagram Support Group
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank" rel="noopener noreferrer">
+              Learn more about NordVPN
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank" rel="noopener noreferrer">
+              Instagram Disabled Recovery Guide
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank" rel="noopener noreferrer">
+              Instagram Follower Tracking Guide
+            </a>
+          </div>
+
+          <p class="cl-note">
+            Our NordVPN link is an affiliate partnership. We recommend using a VPN when traveling or using shared networks.
+          </p>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Remote Work & Nomad Life -->
+    <div class="cl-accordion" aria-label="Remote work and nomad lifestyle tools">
+      <button class="cl-accordion-header cl-h-nomad" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Remote Work & Nomad Life</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Tools that support life between places</h2>
+
+           <img 
+            src="https://static.wixstatic.com/media/971500_53e2e90325994ad3b2abb498c05f8eeb~mv2.webp"
+            alt="Two people on red ATVs pose on a rocky desert landscape with the pyramids of Giza in the background; large text above them reads 'Resource Hub.'."
+          />
+
+          <p>
+            Full time travel or long stays abroad work best when your logistics are simple.  
+            For medical and travel coverage, we compare nomad-friendly insurance options, and for connectivity we use eSIMs so we stay online without chasing SIM cards in every country.
+          </p>
+
+          <p>
+            If you are planning a long-term lifestyle shift, resources like Trusted Housesitters let you experience new locations slowly and affordably.
+          </p>
+
+          <ul>
+            <li>Compare the eSIMs we have tested in our Best eSIMs for Travel guide.</li>
+            <li>Explore nomad insurance options that fit flexible travel.</li>
+            <li>Look into house sitting as an affordable way to explore new places.</li>
+          </ul>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/travel-hub/best-esims-for-travel" target="_blank" rel="noopener noreferrer">
+              Compare our favourite eSIMs
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/travel-hub/best-insurance-for-digital-nomads-2026" target="_blank" rel="noopener noreferrer">
+              Check best nomad insurance options
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.trustedhousesitters.com/refer/RAF778513/?utm_source=copy-link&utm_medium=refer-a-friend" target="_blank" rel="noopener noreferrer">
+              Learn about Trusted Housesitters
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Growth & Recovery -->
+    <div class="cl-accordion" aria-label="Social media growth and account recovery resources">
+      <button class="cl-accordion-header cl-h-social" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Social Media Growth & Recovery</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <h2>Grow your platforms without losing yourself</h2>
+
+          <img 
+            src="https://static.wixstatic.com/media/971500_4a7aa55e3e1d4e0dac5200e6a12170f6~mv2.webp"
+            alt="Colorful 3D cubes featuring popular social media logos, including Instagram, WhatsApp, Facebook, Twitter, and YouTube, are stacked and scattered against a black background."
+          />
+
+          <p>
+            Our most read blog is about getting an Instagram account back after deactivation, which shows how stressful this process is for people.  
+            We focus on practical steps, realistic timelines, and strategies that protect your mental health.
+          </p>
+
+          <p>
+            If you want to grow on social media in a more intentional way, you will find tips on content, boundaries, and community-building in our blogs and groups.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank" rel="noopener noreferrer">
+              Read our Instagram recovery story
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/travel-and-lifestyle-blog/categories/social-media" target="_blank" rel="noopener noreferrer">
+              Browse Social Media advice blogs
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Sponsored & Affiliate Notice -->
+    <div class="cl-accordion" aria-label="Sponsored content and affiliate link notice">
+      <button class="cl-accordion-header cl-h-affiliate" type="button" aria-expanded="false">
+        <span class="cl-accordion-title">Sponsored Content & Affiliates</span>
+        <span class="cl-accordion-icon">+</span>
+      </button>
+
+      <div class="cl-accordion-panel">
+        <div class="cl-accordion-inner">
+
+          <p>
+            Some of the links and tools above are part of affiliate or referral partnerships.  
+            You never pay extra because of this, and sometimes you receive a discount.  
+            We only recommend services that fit how we actually live.  
+            For more details, read our Media & Partnerships information.
+          </p>
+
+          <div class="cl-btn-wrap">
+            <a class="cl-btn" href="https://www.closerlives.com/about-us/work-with-us/media-and-partnerships" target="_blank" rel="noopener noreferrer">
+              View our Media & Partnerships info
+            </a>
+
+            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">
+              View our Affiliate Policy
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Auto resize to Wix iframe -->
+  <script>
   (function () {
-
-    const allDetails = document.querySelectorAll("details");
-
-    allDetails.forEach(detail => {
-      detail.addEventListener("toggle", () => {
-        if (detail.open) {
-
-          // close others
-          allDetails.forEach(other => {
-            if (other !== detail) other.removeAttribute("open");
-          });
-
-          // always scroll opened header into view
-          requestAnimationFrame(() => {
-            const summary = detail.querySelector("summary");
-            if (summary) {
-              summary.scrollIntoView({ block: "start" });
-            }
-          });
-        }
-
-        sendHeight();
-      });
-    });
-
     function sendHeight() {
-      const h = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      );
+      var h =
+        document.documentElement.scrollHeight ||
+        document.body.scrollHeight ||
+        600;
 
       if (window.parent && window.parent !== window) {
         window.parent.postMessage(
-          { type: "CL_RESIZE", height: h },
+          {
+            type: "CL_RESIZE",
+            height: h,
+          },
           "*"
         );
       }
     }
 
-    window.addEventListener("load", sendHeight);
-    window.addEventListener("resize", sendHeight);
+    function setupAccordions() {
+      var accordions = document.querySelectorAll(".cl-accordion");
 
-    if ("ResizeObserver" in window) {
-      new ResizeObserver(sendHeight).observe(document.body);
+      accordions.forEach(function (acc) {
+        var header = acc.querySelector(".cl-accordion-header");
+        var panel = acc.querySelector(".cl-accordion-panel");
+        var icon = acc.querySelector(".cl-accordion-icon");
+
+        header.addEventListener("click", function () {
+          var isOpen = header.getAttribute("aria-expanded") === "true";
+
+          /* Close all others */
+          accordions.forEach(function (other) {
+            var h = other.querySelector(".cl-accordion-header");
+            var p = other.querySelector(".cl-accordion-panel");
+            var i = other.querySelector(".cl-accordion-icon");
+
+            if (h && p && i) {
+              h.setAttribute("aria-expanded", "false");
+              p.style.maxHeight = null;
+              i.textContent = "+";
+            }
+          });
+
+          if (!isOpen) {
+            header.setAttribute("aria-expanded", "true");
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            icon.textContent = "–";
+
+            /* UX polish: lock header position, open downward */
+            requestAnimationFrame(function () {
+              header.scrollIntoView({ block: "start" });
+            });
+          } else {
+            header.setAttribute("aria-expanded", "false");
+            panel.style.maxHeight = null;
+            icon.textContent = "+";
+          }
+
+          setTimeout(sendHeight, 260);
+        });
+      });
     }
 
-    setInterval(sendHeight, 1500);
+    window.addEventListener("load", function () {
+      setupAccordions();
+      sendHeight();
+      setTimeout(sendHeight, 350);
+    });
 
+    window.addEventListener("resize", function () {
+      var panels = document.querySelectorAll(".cl-accordion-panel");
+
+      panels.forEach(function (panel) {
+        var header = panel.parentElement.querySelector(".cl-accordion-header");
+
+        if (header && header.getAttribute("aria-expanded") === "true") {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+
+      setTimeout(sendHeight, 200);
+    });
   })();
 </script>
 
