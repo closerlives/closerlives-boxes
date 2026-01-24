@@ -529,84 +529,89 @@
 
   <!-- Auto resize to Wix iframe -->
   <script>
-    (function () {
-      function sendHeight() {
-        var h =
-          document.documentElement.scrollHeight ||
-          document.body.scrollHeight ||
-          600;
+  (function () {
+    function sendHeight() {
+      var h =
+        document.documentElement.scrollHeight ||
+        document.body.scrollHeight ||
+        600;
 
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage(
-            {
-              type: "CL_RESIZE",
-              height: h,
-            },
-            "*"
-          );
-        }
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage(
+          {
+            type: "CL_RESIZE",
+            height: h,
+          },
+          "*"
+        );
       }
+    }
 
-      function setupAccordions() {
-        var accordions = document.querySelectorAll(".cl-accordion");
-        accordions.forEach(function (acc) {
-          var header = acc.querySelector(".cl-accordion-header");
-          var panel = acc.querySelector(".cl-accordion-panel");
-          var icon = acc.querySelector(".cl-accordion-icon");
+    function setupAccordions() {
+      var accordions = document.querySelectorAll(".cl-accordion");
 
-          header.addEventListener("click", function () {
-            var isOpen = header.getAttribute("aria-expanded") === "true";
+      accordions.forEach(function (acc) {
+        var header = acc.querySelector(".cl-accordion-header");
+        var panel = acc.querySelector(".cl-accordion-panel");
+        var icon = acc.querySelector(".cl-accordion-icon");
 
-            /* close all others */
-            accordions.forEach(function (other) {
-              var h = other.querySelector(".cl-accordion-header");
-              var p = other.querySelector(".cl-accordion-panel");
-              var i = other.querySelector(".cl-accordion-icon");
+        header.addEventListener("click", function () {
+          var isOpen = header.getAttribute("aria-expanded") === "true";
 
-              if (h && p && i) {
-                h.setAttribute("aria-expanded", "false");
-                p.style.maxHeight = null;
-                i.textContent = "+";
-              }
-            });
+          /* Close all others */
+          accordions.forEach(function (other) {
+            var h = other.querySelector(".cl-accordion-header");
+            var p = other.querySelector(".cl-accordion-panel");
+            var i = other.querySelector(".cl-accordion-icon");
 
-            if (!isOpen) {
-              header.setAttribute("aria-expanded", "true");
-              panel.style.maxHeight = panel.scrollHeight + "px";
-              icon.textContent = "–";
-            } else {
-              header.setAttribute("aria-expanded", "false");
-              panel.style.maxHeight = null;
-              icon.textContent = "+";
+            if (h && p && i) {
+              h.setAttribute("aria-expanded", "false");
+              p.style.maxHeight = null;
+              i.textContent = "+";
             }
-
-            setTimeout(sendHeight, 240);
           });
-        });
-      }
 
-      window.addEventListener("load", function () {
-        setupAccordions();
-        sendHeight();
-        setTimeout(sendHeight, 350);
-      });
-
-      window.addEventListener("resize", function () {
-        var panels = document.querySelectorAll(".cl-accordion-panel");
-        panels.forEach(function (panel) {
-          var header = panel.parentElement.querySelector(
-            ".cl-accordion-header"
-          );
-
-          if (header && header.getAttribute("aria-expanded") === "true") {
+          if (!isOpen) {
+            header.setAttribute("aria-expanded", "true");
             panel.style.maxHeight = panel.scrollHeight + "px";
-          }
-        });
+            icon.textContent = "–";
 
-        setTimeout(sendHeight, 200);
+            /* UX polish: lock header position, open downward */
+            requestAnimationFrame(function () {
+              header.scrollIntoView({ block: "start" });
+            });
+          } else {
+            header.setAttribute("aria-expanded", "false");
+            panel.style.maxHeight = null;
+            icon.textContent = "+";
+          }
+
+          setTimeout(sendHeight, 260);
+        });
       });
-    })();
-  </script>
+    }
+
+    window.addEventListener("load", function () {
+      setupAccordions();
+      sendHeight();
+      setTimeout(sendHeight, 350);
+    });
+
+    window.addEventListener("resize", function () {
+      var panels = document.querySelectorAll(".cl-accordion-panel");
+
+      panels.forEach(function (panel) {
+        var header = panel.parentElement.querySelector(".cl-accordion-header");
+
+        if (header && header.getAttribute("aria-expanded") === "true") {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        }
+      });
+
+      setTimeout(sendHeight, 200);
+    });
+  })();
+</script>
 
 </body>
 </html>
