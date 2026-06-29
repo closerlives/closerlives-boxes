@@ -8,14 +8,13 @@
   <style>
     html, body {
       margin: 0;
-      padding: 0;
+      padding: 0; /* Reverted to 0 so the Wix iframe height script calculates perfectly */
       overflow-x: hidden;
       font-family: Lato, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      background-color: #fafafa;
+      background-color: transparent; /* Allows the container curve to cleanly silhouette */
       color: #222222;
-      border-radius: 10px;
     }
 
     .cl-wrapper {
@@ -23,6 +22,9 @@
       margin: 0 auto;
       padding: 20px 16px 10px;
       box-sizing: border-box;
+      background-color: #fafafa; /* Moved the background color here */
+      border-radius: 16px;       /* Applies the curved corners beautifully */
+      overflow: hidden;          /* Keeps elements inside from spilling past the curves */
     }
 
     h1, h2, h3 {
@@ -33,7 +35,7 @@
 
     h3 {
       font-size: 18px;
-      margin-bottom: 30px;
+      margin-bottom: 30px; /* Kept exactly at your original 30px gap */
     }
 
     p {
@@ -197,7 +199,6 @@
       Poetry is where Closer Lives began! Explore our community spaces, discover new poems, find lifestyle inspiration, and learn about guest writing opportunities.
     </p>
 
-    <!-- 1. Poetry Collective -->
     <div class="cl-accordion" aria-label="Join the Closer Lives Poetry Collective">
       <button class="cl-accordion-header cl-h-poetry-collective" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Join the Closer Lives Poetry Collective</span>
@@ -227,7 +228,6 @@
       </div>
     </div>
 
-    <!-- 2. Explore More Poetry -->
     <div class="cl-accordion" aria-label="Explore poems, Leon’s book, and popular pieces">
       <button class="cl-accordion-header cl-h-explore-poetry" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Explore More Poetry</span>
@@ -240,7 +240,7 @@
 
           <img 
             src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp"
-            alt="Black-and-white book cover featuring a moonlit coastal town, boats in a harbor, a lone figure by the water, and a lighthouse in the distance. Text: "Out of the Shadows" by Leon Gregori, “from darkness to light.”."
+            alt="Black-and-white book cover featuring a moonlit coastal town, boats in a harbor, a lone figure by the water, and a lighthouse in the distance. Text: &quot;Out of the Shadows&quot; by Leon Gregori, “from darkness to light.”."
           />
 
           <p>
@@ -258,7 +258,6 @@
       </div>
     </div>
 
-    <!-- 3. Lifestyle Inspiration -->
     <div class="cl-accordion" aria-label="Lifestyle inspiration for creative people">
       <button class="cl-accordion-header cl-h-lifestyle-creatives" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Lifestyle Inspiration for Creatives</span>
@@ -288,7 +287,6 @@
       </div>
     </div>
 
-    <!-- 4. Guest Writing -->
     <div class="cl-accordion" aria-label="Guest writing opportunities at Closer Lives">
       <button class="cl-accordion-header cl-h-guest-writing" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Guest Writing Opportunities</span>
@@ -327,7 +325,6 @@
       </div>
     </div>
 
-    <!-- 5. Affiliate Disclosure -->
     <div class="cl-accordion" aria-label="Affiliate disclosure notice">
       <button class="cl-accordion-header cl-h-affiliate" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Affiliate Disclosure</span>
@@ -358,7 +355,6 @@
 
   </div>
 
-  <!-- Auto resize to Wix iframe -->
   <script>
     (function () {
       function sendHeight() {
