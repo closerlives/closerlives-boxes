@@ -8,24 +8,24 @@
   <style>
     html, body {
       margin: 0;
-      padding: 12px;
-      box-sizing: border-box;
+      padding: 16px; /* Breathing room for the wrapper corners to show inside Wix */
       overflow-x: hidden;
       font-family: Lato, Arial, sans-serif;
       font-size: 16px;
       line-height: 1.6;
-      background-color: #fafafa;
+      background-color: #f4f4f4; /* Subtle backdrop to highlight the curved #fafafa block */
       color: #222222;
-      border-radius: 16px;
     }
 
     .cl-wrapper {
       max-width: 560px;
       margin: 0 auto;
-      padding: 20px 16px 10px;
+      padding: 24px 20px;
       box-sizing: border-box;
-      border-radius: 10px;
-      overflow: hidden;
+      background-color: #fafafa; /* Move the #fafafa background color HERE */
+      border-radius: 16px;       /* Beautifully curves the corners */
+      overflow: hidden;          /* Cookie-cutters the header buttons perfectly */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); /* Premium soft depth shadow */
     }
 
     h1, h2, h3 {
@@ -36,7 +36,11 @@
 
     h3 {
       font-size: 18px;
-      margin-bottom: 24px;
+      margin-top: 0;
+      margin-bottom: 24px; /* Increases the gap between the header and paragraph */
+      font-weight: bold;
+      text-align: center;
+      font-style: italic;
     }
 
     p {
@@ -194,13 +198,12 @@
 <body>
   <div class="cl-wrapper">
 
-    <h3 style="text-align:center; font-style:italic;">Poetry tools to feel inspired, expressive, and connected</h3>
+    <h3>Poetry tools to feel inspired, expressive, and connected</h3>
 
     <p class="cl-intro">
-      Poetry is where Closer Lives began!Explore our community spaces, discover new poems, find lifestyle inspiration, and learn about guest writing opportunities.
+      Poetry is where Closer Lives began! Explore our community spaces, discover new poems, find lifestyle inspiration, and learn about guest writing opportunities.
     </p>
 
-    <!-- 1. Poetry Collective -->
     <div class="cl-accordion" aria-label="Join the Closer Lives Poetry Collective">
       <button class="cl-accordion-header cl-h-poetry-collective" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Join the Closer Lives Poetry Collective</span>
@@ -212,7 +215,7 @@
           <h2>A creative space for sharing and connection</h2>
 
           <img 
-            src="https://static.wixstatic.com/media/971500_8d074aa31bbe4f0a84061907e2eb03b1~mv2.webp"
+            src="https://static.wixstatic.com/media/971500_7f73985849df4cb5bcf28cc7521f39b0~mv2.webp"
             alt="Closer Lives Poetry Collective cover with wooden letter tiles spelling POETRY."
           />
 
@@ -230,7 +233,6 @@
       </div>
     </div>
 
-    <!-- 2. Explore More Poetry -->
     <div class="cl-accordion" aria-label="Explore poems, Leon’s book, and popular pieces">
       <button class="cl-accordion-header cl-h-explore-poetry" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Explore More Poetry</span>
@@ -243,7 +245,7 @@
 
           <img 
             src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp"
-            alt="Black-and-white book cover featuring a moonlit coastal town, boats in a harbor, a lone figure by the water, and a lighthouse in the distance. Text: "Out of the Shadows" by Leon Gregori, “from darkness to light.”."
+            alt="Black-and-white book cover featuring a moonlit coastal town, boats in a harbor, a lone figure by the water, and a lighthouse in the distance. Text: &quot;Out of the Shadows&quot; by Leon Gregori, “from darkness to light.”."
           />
 
           <p>
@@ -261,7 +263,6 @@
       </div>
     </div>
 
-    <!-- 3. Lifestyle Inspiration -->
     <div class="cl-accordion" aria-label="Lifestyle inspiration for creative people">
       <button class="cl-accordion-header cl-h-lifestyle-creatives" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Lifestyle Inspiration for Creatives</span>
@@ -291,7 +292,6 @@
       </div>
     </div>
 
-    <!-- 4. Guest Writing -->
     <div class="cl-accordion" aria-label="Guest writing opportunities at Closer Lives">
       <button class="cl-accordion-header cl-h-guest-writing" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Guest Writing Opportunities</span>
@@ -305,7 +305,7 @@
           <p><strong>We accept poetry submissions for FREE.</strong>  
           Fees apply only to guest posts in other categories.</p>
 
-          <h3>Guest Post (Client Provided) – $100 USD</h3>
+          <h3 style="text-align: left; font-style: normal; margin-bottom: 10px;">Guest Post (Client Provided) – $100 USD</h3>
           <ul>
             <li>For writers/agencies with a finalized article ready to publish</li>
             <li>Unlimited word count, 10 images</li>
@@ -313,7 +313,7 @@
             <li>Submission form required</li>
           </ul>
 
-          <h3>Guest Post (We Write) – $200 USD</h3>
+          <h3 style="text-align: left; font-style: normal; margin-bottom: 10px;">Guest Post (We Write) – $200 USD</h3>
           <ul>
             <li>We write a full SEO-optimised article for you</li>
             <li>Includes research, drafting, editing</li>
@@ -330,7 +330,6 @@
       </div>
     </div>
 
-    <!-- 5. Affiliate Disclosure -->
     <div class="cl-accordion" aria-label="Affiliate disclosure notice">
       <button class="cl-accordion-header cl-h-affiliate" type="button" aria-expanded="false">
         <span class="cl-accordion-title">Affiliate Disclosure</span>
@@ -361,7 +360,6 @@
 
   </div>
 
-  <!-- Auto resize to Wix iframe -->
   <script>
     (function () {
       function sendHeight() {
