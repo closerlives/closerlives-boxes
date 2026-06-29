@@ -24,7 +24,7 @@
     gap: 14px;
     overflow: hidden;
     box-sizing: border-box;
-    padding: 0 10px; /* small buffer for mobile edge clipping */
+    padding: 20px 10px; /* buffer for mobile edge clipping */
   }
 
   @media (max-width: 400px) {
@@ -42,21 +42,14 @@
   a { color: #0000ff; font-weight: 700; text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  h2.section-title {
-    margin: 0;
-    font-size: 24px;
+  h3.section-title {
+    margin: 0 0 10px 0;
+    font-size: 20px;
     font-weight: 800;
     text-align: center;
-    color: #0b2a6f;
-  }
-
-  p.section-subtitle {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    font-weight: 700;
-    color: #111;
-    text-align: center;
+    color: #111111;
     font-style: italic;
+    line-height: 1.3;
   }
 
   .card {
@@ -67,12 +60,12 @@
     overflow: hidden;
   }
 
-  /* Theme Background Tints matched to original branding */
+  /* Theme Background Tints */
   .theme-purple { background: rgba(243, 229, 245, 0.6); }
   .theme-green { background: rgba(224, 242, 241, 0.6); }
   .theme-orange { background: rgba(255, 243, 224, 0.7); }
   .theme-blue { background: rgba(227, 238, 255, 0.55); }
-  .theme-grey { background: rgba(245, 245, 245, 0.7); }
+  .theme-grey { background: rgba(245, 245, 245, 0.8); }
 
   details { border-radius: 10px; }
   summary { list-style: none; cursor: pointer; user-select: none; padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
@@ -100,7 +93,7 @@
 
   .desc-2 { margin-bottom: 12px; font-size: 16px; line-height: 1.6; color: #222222; }
 
-  /* Buttons styling matched perfectly */
+  /* Buttons */
   .btn {
     display: block;
     width: 100%;
@@ -160,15 +153,6 @@
   @media (max-width: 500px) {
     .grid2 { grid-template-columns: 1fr; }
   }
-
-  .disclaimer-card {
-    background: #f5f5f5;
-    border: 1px solid #ccc;
-    border-bottom: 6px solid #d0d0d0;
-    border-radius: 10px;
-    padding: 16px;
-    margin-top: 20px;
-  }
 </style>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -186,9 +170,9 @@
 </script>
 </head>
 <body>
-<main class="wrap" role="region" aria-label="Poetry resources and community access hooks">
-  <h2 class="section-title">Poetry Resources</h2>
-  <p class="section-subtitle">Poetry tools to feel inspired, expressive, and connected</p>
+<main class="wrap" role="region" aria-label="Poetry resources and community tools">
+  
+  <h3 class="section-title">Poetry tools to feel inspired, expressive, and connected</h3>
 
   <p class="desc-2" style="text-align: center; margin-bottom: 16px;">
     Poetry is where Closer Lives began! Explore our community spaces, discover new poems, find lifestyle inspiration, and learn about guest writing opportunities.
@@ -205,7 +189,7 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_7f73985849df4cb5bcf28cc7521f39b0~mv2.webp" alt="Closer Lives Poetry Collective cover with wooden letter tiles spelling POETRY.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_7f73985849df4cb5bcf28cc7521f39b0~mv2.webp" alt="Closer Lives Poetry Collective cover">
         <p class="desc-2">A warm, collaborative community where writers share drafts, finished pieces, ideas, feedback, and inspiration.</p>
         <a class="btn btn-purple" href="https://www.closerlives.com/community-group/closer-lives-poetry-collective" target="_blank" rel="noopener noreferrer nofollow">Visit the Poetry Collective</a>
       </div>
@@ -218,12 +202,12 @@
         <div class="logo">📖</div>
         <div class="headings">
           <h3 class="title">Explore More Poetry</h3>
-          <h4 class="strap">Discover poems, stories, and Leon’s poetry book</h4>
+          <h4 class="strap">Discover poems, stories, and Leon’s book</h4>
         </div>
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp" alt="Black-and-white book cover featuring a moonlit coastal town, boats in a harbor, a lone figure by the water, and a lighthouse in the distance. Text: 'Out of the Shadows' by Leon Gregori, 'from darkness to light'.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp" alt="Leon Gregori Out of the Shadows Book Cover">
         <p class="desc-2">Explore our poetry hub, creative reflections, and two of our most-read poems.</p>
         <a class="btn btn-teal" href="https://www.closerlives.com/blogs/poetry" target="_blank" rel="noopener noreferrer">Visit the Poetry Hub</a>
         <a class="btn btn-secondary" href="https://www.closerlives.com/about-us/leon-gregori#outoftheshadows" target="_blank" rel="noopener noreferrer">Explore “Out of the Shadows”</a>
@@ -244,7 +228,7 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_ef9e0c194cd641faaff5b629ded023ce~mv2.webp" alt="A man and woman wearing sunglasses take a selfie on a rooftop with the Pyramids of Giza in the background at sunset.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_ef9e0c194cd641faaff5b629ded023ce~mv2.webp" alt="Couple with Pyramids background">
         <p class="desc-2">Explore identity, confidence, creativity, and everyday lifestyle stories for creative minds.</p>
         <a class="btn btn-orange" href="https://www.closerlives.com/blogs/lifestyle" target="_blank" rel="noopener noreferrer">Visit the Lifestyle Hub</a>
       </div>
@@ -292,12 +276,24 @@
     </details>
   </section>
 
-  <section class="disclaimer-card">
-    <h3 class="title" style="color:#0b2a6f;">Affiliate Disclosure</h3>
-    <p class="desc-2">Some of the links and tools above are part of affiliate or referral partnerships. You never pay extra because of this, and sometimes you receive a discount. We only recommend services that fit how we actually live. For more details, read our Media & Partnerships information.</p>
-    <a class="btn btn-grey" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">View our Affiliate Policy</a>
-    <a class="btn btn-secondary" href="https://www.closerlives.com/about-us/work-with-us/media-and-partnerships" target="_blank" rel="noopener noreferrer" style="margin-top:10px;">View Media & Partnerships Info</a>
+  <section class="card theme-grey">
+    <details>
+      <summary>
+        <div class="logo">📢</div>
+        <div class="headings">
+          <h3 class="title">Affiliate Disclosure</h3>
+          <h4 class="strap">Transparency & Partnerships</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Some of the links and tools above are part of affiliate or referral partnerships. You never pay extra because of this, and sometimes you receive a discount. We only recommend services that fit how we actually live. For more details, read our Media & Partnerships information.</p>
+        <a class="btn btn-grey" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">View our Affiliate Policy</a>
+        <a class="btn btn-secondary" href="https://www.closerlives.com/about-us/work-with-us/media-and-partnerships" target="_blank" rel="noopener noreferrer" style="margin-top:10px;">View Media & Partnerships Info</a>
+      </div>
+    </details>
   </section>
+
 </main>
 
 <script>
