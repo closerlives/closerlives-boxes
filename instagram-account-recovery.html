@@ -1,32 +1,149 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=280, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    html, body { margin: 0; padding: 0; width: 100%; height: 100%; box-sizing: border-box; overflow: hidden; font-family: Lato, Arial, sans-serif; background-color: #ffffff; }
-    *, *::before, *::after { box-sizing: inherit; }
-    .blog-container { width: 280px; height: 420px; margin: 0 auto; background: #fff6e5; border-radius: 10px; padding: 10px; border: 1px solid #b0b0b0; border-bottom: 6px solid #d0d0d0; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; text-align: center; }
-    .blog-container:hover { border: 2px solid #1a1a40; border-bottom: 6px solid #1a1a40; }
-    .blog-container img { width: 100%; border-radius: 10px; margin-bottom: 20px; }
-    .blog-description { font-size: 16px; color: #222; line-height: 1.4; margin-bottom: 20px; }
-    .blog-description strong { display: block; font-weight: bold; font-size: 18px; margin-bottom: 20px; }
-    .read-more { margin-top: 10px; margin-bottom: 0; display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 10px 0; background-color: #3d3d3d; color: #ffffff; font-size: 16px; font-weight: bold; text-decoration: none; border: 1px solid #3d3d3d; border-radius: 10px; transition: background-color 0.3s, color 0.3s, border-color 0.3s; text-transform: uppercase; gap: 8px; }
-    .read-more:hover { background-color: #ffffff; color: #3d3d3d; border-color: #3d3d3d; }
-    .read-more span { font-size: 16px; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: Lato, Arial, sans-serif;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .blog-container {
+      width: 270px;
+      height: 410px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .blog-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .blog-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blog-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1a1a40;
+      line-height: 1.25;
+      margin: 0;
+      text-align: left;
+      height: 48px;
+      overflow: hidden;
+    }
+
+    .blog-container img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .blog-description {
+      font-size: 13px;
+      color: #4a4a4a;
+      line-height: 1.45;
+      text-align: left;
+      height: 76px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto; 
+    }
+
+    .read-more {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #00a896;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: bold;
+      text-decoration: none;
+      border: 2px solid #00a896;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      margin-top: auto; 
+    }
+
+    .read-more:hover {
+      background-color: #ffffff;
+      color: #00a896;
+      border-color: #00a896;
+    }
+
+    .branding {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #7a7a7a;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
+
   <div class="blog-container">
-    <img src="https://static.wixstatic.com/media/971500_613f4756b2d04b8684ab6a9b6f128cdc~mv2.webp" alt="Hand holding a smartphone with Instagram logo crossed out; bold text says How to Get YOUR Account BACK in 2026."/>
-    <div class="blog-description">
-      <strong>Get Your IG Account Back</strong>
-      Your step-by-step process for appealing, contacting Meta, and ultimately recovering your disabled account.
+    <div class="blog-content">
+      <h3 class="blog-title">Discover More:<br>IG Account Recovery</h3>
+      
+      <img src="https://static.wixstatic.com/media/971500_613f4756b2d04b8684ab6a9b6f128cdc~mv2.webp" alt="Hand holding a smartphone with Instagram logo crossed out; bold text says How to Get YOUR Account BACK in 2026." />
+      
+      <div class="blog-description">
+        Your step-by-step process for appealing, contacting Meta, and ultimately recovering your disabled account.
+      </div>
     </div>
-    <a href="https://www.closerlives.com/blog/post/recover-disabled-instagram-account" target="_top" class="read-more">
-      <span>Read More</span>
-    </a>
+    
+    <div class="footer-section">
+      <a href="https://www.closerlives.com/blog/post/recover-disabled-instagram-account" target="_top" class="read-more">
+        Recover Your Account
+      </a>
+      <div class="branding">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span>From <em>Closer Lives</em></span>
+      </div>
+    </div>
   </div>
+
 </body>
 </html>
