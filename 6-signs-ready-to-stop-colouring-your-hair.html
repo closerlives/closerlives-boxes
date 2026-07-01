@@ -13,7 +13,6 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
-      /* Perfect vertical centering helper */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -55,6 +54,8 @@
       line-height: 1.25;
       margin: 0;
       text-align: left;
+      height: 48px; /* Fixed height for 2-line title spacing grid */
+      overflow: hidden;
     }
 
     .blog-container img {
@@ -69,6 +70,7 @@
       color: #4a4a4a;
       line-height: 1.45;
       text-align: left;
+      height: 76px; /* Fixed height for perfect 4-line boundary mapping */
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
@@ -80,7 +82,6 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
-      /* Anchors the footer segment to the container baseline */
       margin-top: auto; 
     }
 
@@ -98,7 +99,6 @@
       border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-      /* Float fix: handles varying text line heights beautifully */
       margin-top: auto; 
     }
 
@@ -123,12 +123,12 @@
 
   <div class="blog-container">
     <div class="blog-content">
-      <h3 class="blog-title">Discover More:<br>6 Signs You're Ready to Stop Colouring Your Hair</h3>
+      <h3 class="blog-title">Discover More:<br>Ready to stop dying your hair?</h3>
       
       <img src="https://static.wixstatic.com/media/971500_782612684ec444a8beae46e3a43f9798~mv2.webp" alt="A woman with long, natural grey hair looks toward the camera with a thoughtful expression. Overlaid text on the image reads, '6 Signs You Might Be Ready to Stop Colouring Your Hair.' In the background, small pink square icons containing question marks float in a softly blurred room.">
       
       <div class="blog-description">
-        Thinking about ditching the dye but not quite sure if it's the right moment? Explore these clear, telling signs that you are truly ready to embrace your natural silver crown.
+        Contemplating ditching the dye but not quite sure if it's the right moment? Explore these clear, telling signs that you are truly ready to embrace your natural silver crown.
       </div>
     </div>
     
