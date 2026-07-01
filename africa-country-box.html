@@ -13,7 +13,7 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
-      /* Vertically centers the box so the shadow clears perfectly */
+      /* Perfect vertical centering helper */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -25,7 +25,7 @@
 
     .blog-container {
       width: 270px;
-      height: 410px;
+      height: 410px; /* Locked uniform card height */
       background: #ffffff;
       border-radius: 12px;
       padding: 16px;
@@ -33,7 +33,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -80,6 +80,8 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
+      /* Anchors the footer segment to the container baseline */
+      margin-top: auto; 
     }
 
     .read-more {
@@ -96,6 +98,8 @@
       border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      /* Float fix: handles varying text line heights beautifully */
+      margin-top: auto; 
     }
 
     .read-more:hover {
@@ -111,6 +115,7 @@
       gap: 4px;
       font-size: 11px;
       color: #7a7a7a;
+      margin-top: 4px;
     }
   </style>
 </head>
