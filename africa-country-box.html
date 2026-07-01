@@ -55,6 +55,8 @@
       line-height: 1.25;
       margin: 0;
       text-align: left;
+      height: 48px; /* Fixed height for 2-line title spacing grid */
+      overflow: hidden;
     }
 
     .blog-container img {
@@ -69,6 +71,7 @@
       color: #4a4a4a;
       line-height: 1.45;
       text-align: left;
+      height: 76px; /* Fixed height for perfect 4-line boundary mapping */
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
@@ -80,7 +83,6 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
-      /* Anchors the footer segment to the container baseline */
       margin-top: auto; 
     }
 
@@ -98,7 +100,6 @@
       border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-      /* Float fix: handles varying text line heights beautifully */
       margin-top: auto; 
     }
 
@@ -128,7 +129,7 @@
       <img src="https://static.wixstatic.com/media/971500_a2d59456df7a4a42aeee8e25e9554939~mv2.webp" alt="A close-up view of a map showing the African continent, with the word 'AFRICA' prominently labeled across the landmass in bold letters. Surrounding oceans and neighboring land masses are also visible.">
       
       <div class="blog-description">
-        Plan smarter with our FREE Travel Guide – no sign-up needed. Find essential tips on transport, customs, connectivity, visas, and more.
+        Plan smarter with our FREE Travel Guide – no sign-up required. Find essential tips on transport, customs, connectivity, visas, and more.
       </div>
     </div>
     
