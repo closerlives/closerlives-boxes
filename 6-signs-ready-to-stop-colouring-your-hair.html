@@ -24,8 +24,8 @@
     }
 
     .blog-container {
-      width: 270px; /* Reduced slightly to give 5px breathing room for side shadows too */
-      height: 410px; /* Reduced slightly to give 15px buffer for top/bottom shadows inside the 440px viewport */
+      width: 270px;
+      height: 410px; /* Locked uniform card height */
       background: #ffffff;
       border-radius: 12px;
       padding: 16px;
@@ -33,7 +33,7 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -49,7 +49,7 @@
     }
 
     .blog-title {
-      font-size: 19px; /* Tweaked slightly to comfortably fit the tighter layout box */
+      font-size: 19px;
       font-weight: 800;
       color: #1a1a40;
       line-height: 1.25;
@@ -80,6 +80,8 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
+      /* Anchors the footer segment to the container baseline */
+      margin-top: auto; 
     }
 
     .read-more {
@@ -96,6 +98,8 @@
       border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      /* Float fix: handles varying text line heights beautifully */
+      margin-top: auto; 
     }
 
     .read-more:hover {
@@ -111,6 +115,7 @@
       gap: 4px;
       font-size: 11px;
       color: #7a7a7a;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -120,7 +125,7 @@
     <div class="blog-content">
       <h3 class="blog-title">Discover More:<br>6 Signs You're Ready to Stop Colouring Your Hair</h3>
       
-      <img src="https://static.wixstatic.com/media/971500_782612684ec444a8beae46e3a43f9798~mv2.webp" alt="A woman with long, natural grey hair looks toward the camera with a thoughtful expression. Overlaid text on the image reads, "6 Signs You Might Be Ready to Stop Colouring Your Hair." In the background, small pink square icons containing question marks float in a softly blurred room.">
+      <img src="https://static.wixstatic.com/media/971500_782612684ec444a8beae46e3a43f9798~mv2.webp" alt="A woman with long, natural grey hair looks toward the camera with a thoughtful expression. Overlaid text on the image reads, '6 Signs You Might Be Ready to Stop Colouring Your Hair.' In the background, small pink square icons containing question marks float in a softly blurred room.">
       
       <div class="blog-description">
         Thinking about ditching the dye but not quite sure if it's the right moment? Explore these clear, telling signs that you are truly ready to embrace your natural silver crown.
