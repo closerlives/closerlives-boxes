@@ -55,6 +55,8 @@
       line-height: 1.25;
       margin: 0;
       text-align: left;
+      height: 48px; /* Fixed height for 2-line title spacing grid */
+      overflow: hidden;
     }
 
     .blog-container img {
@@ -69,6 +71,7 @@
       color: #4a4a4a;
       line-height: 1.45;
       text-align: left;
+      height: 76px; /* Fixed height for perfect 4-line boundary mapping */
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
@@ -80,7 +83,6 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
-      /* Anchors the footer segment to the container baseline */
       margin-top: auto; 
     }
 
@@ -98,7 +100,6 @@
       border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
-      /* Float fix: handles varying text line heights beautifully */
       margin-top: auto; 
     }
 
