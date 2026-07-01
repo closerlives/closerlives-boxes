@@ -13,6 +13,9 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     *, *::before, *::after {
@@ -20,23 +23,22 @@
     }
 
     .blog-container {
-      width: 280px;
-      height: 420px;
-      margin: 0 auto;
+      width: 270px;
+      height: 410px;
       background: #ffffff;
       border-radius: 12px;
       padding: 16px;
       border: 1px solid #e0e0e0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .blog-container:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
     .blog-content {
@@ -46,17 +48,19 @@
     }
 
     .blog-title {
-      font-size: 20px;
-      font-weight: 900;
+      font-size: 19px;
+      font-weight: 800;
       color: #1a1a40;
       line-height: 1.25;
       margin: 0;
       text-align: left;
+      height: 48px;
+      overflow: hidden;
     }
 
     .blog-container img {
       width: 100%;
-      height: 135px;
+      height: 130px;
       object-fit: cover;
       border-radius: 8px;
     }
@@ -66,6 +70,7 @@
       color: #4a4a4a;
       line-height: 1.45;
       text-align: left;
+      height: 76px;
       display: -webkit-box;
       -webkit-line-clamp: 4;
       -webkit-box-orient: vertical;
@@ -77,6 +82,7 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
+      margin-top: auto; 
     }
 
     .read-more {
@@ -90,15 +96,16 @@
       font-size: 14px;
       font-weight: bold;
       text-decoration: none;
-      border: 2px solid #00a896; 
+      border: 2px solid #00a896;
       border-radius: 8px;
       transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      margin-top: auto; 
     }
 
     .read-more:hover {
       background-color: #ffffff;
-      color: #00a896;            
-      border-color: #00a896;     
+      color: #00a896;
+      border-color: #00a896;
     }
 
     .branding {
@@ -108,11 +115,7 @@
       gap: 4px;
       font-size: 11px;
       color: #7a7a7a;
-    }
-
-    .branding img {
-      width: 14px;
-      height: 14px;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -120,9 +123,9 @@
 
   <div class="blog-container">
     <div class="blog-content">
-      <h3 class="blog-title">Discover More:<br>What the Heck is Grombre? (Grey Hair Transition)</h3>
+      <h3 class="blog-title">Discover More:<br>What is Grombre?</h3>
       
-      <img src="https://static.wixstatic.com/media/971500_b919b13a89854041a72de6159f08ffbd~mv2.webp" alt="What the heck is a grombre?? A natural hair transition.">
+      <img src="https://static.wixstatic.com/media/971500_b919b13a89854041a72de6159f08ffbd~mv2.webp" alt="What the heck is a grombre?? A natural hair transition." />
       
       <div class="blog-description">
         Grombre is a powerful new movement celebrating the natural beauty of grey. If you've been ditching the dye, explore the inspiring Grombre revolution!
@@ -131,7 +134,7 @@
     
     <div class="footer-section">
       <a href="https://www.closerlives.com/blog/post/grombre-hair-trend" target="_top" class="read-more">
-        Ditch The Dye
+        Explore Grombre
       </a>
       <div class="branding">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -140,6 +143,7 @@
         <span>From <em>Closer Lives</em></span>
       </div>
     </div>
+  </div>
 
 </body>
 </html>
