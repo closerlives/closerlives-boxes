@@ -13,6 +13,9 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     *, *::before, *::after {
@@ -20,89 +23,127 @@
     }
 
     .blog-container {
-      width: 280px;
-      height: 420px;
-      margin: 0 auto;
-      background: #fff6e5;
-      border-radius: 10px;
-      padding: 10px;
-      border: 1px solid #b0b0b0;
-      border-bottom: 6px solid #d0d0d0;
+      width: 270px;
+      height: 410px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: flex-start;
-      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .blog-container:hover {
-      border: 2px solid #1a1a40;
-      border-bottom: 6px solid #1a1a40;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    .blog-content {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .blog-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1a1a40;
+      line-height: 1.25;
+      margin: 0;
+      text-align: left;
+      height: 48px;
+      overflow: hidden;
     }
 
     .blog-container img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: 20px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
     .blog-description {
-      font-size: 16px;
-      color: #222;
-      line-height: 1.4;
-      margin-bottom: 20px;
+      font-size: 13px;
+      color: #4a4a4a;
+      line-height: 1.45;
+      text-align: left;
+      height: 76px;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    .blog-description strong {
-      display: block;
-      font-weight: bold;
-      font-size: 18px;
-      margin-bottom: 20px;
+    .footer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto; 
     }
 
     .read-more {
-      margin-top: 10px;
-      margin-bottom: 0px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       padding: 10px 0;
-      background-color: #3d3d3d;
+      background-color: #00a896;
       color: #ffffff;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       text-decoration: none;
-      border: 1px solid #3d3d3d;
-      border-radius: 10px;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-      gap: 8px;
-      text-transform: uppercase;
+      border: 2px solid #00a896;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      margin-top: auto; 
     }
 
     .read-more:hover {
       background-color: #ffffff;
-      color: #3d3d3d;
-      border-color: #3d3d3d;
+      color: #00a896;
+      border-color: #00a896;
     }
 
-    .read-more span {
-      font-size: 16px;
+    .branding {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #7a7a7a;
+      margin-top: 4px;
     }
   </style>
 </head>
 <body>
-  <div class="blog-container">
-    <img src="https://static.wixstatic.com/media/971500_1a834ba6db6b4a1eb75ff924b916632d~mv2.webp" alt="Sunset fine dining sushi at Tora Cancun, Mexico" />
-    
-    <div class="blog-description">
-      <strong>5-Star Dining in Cancun</strong>
-      This epic night out included sushi, fire shows, ocean views, and top-tier service. A must if you're seeking atmosphere and elegance!
-    </div>
 
-    <a href="https://www.closerlives.com/blog/post/tora-restaurant-cancun-japanese-dining-review" target="_top" class="read-more">
-      <span>Read More</span>
-    </a>
+  <div class="blog-container">
+    <div class="blog-content">
+      <h3 class="blog-title">Discover More:<br>Tora Cancun</h3>
+      
+      <img src="https://static.wixstatic.com/media/971500_1a834ba6db6b4a1eb75ff924b916632d~mv2.webp" alt="Sunset fine dining sushi at Tora Cancun, Mexico" />
+      
+      <div class="blog-description">
+        This epic night out included sushi, fire shows, ocean views, and top-tier service. A must if you're seeking atmosphere and elegance!
+      </div>
+    </div>
+    
+    <div class="footer-section">
+      <a href="https://www.closerlives.com/blog/post/tora-restaurant-cancun-japanese-dining-review" target="_top" class="read-more">
+        Explore Tora
+      </a>
+      <div class="branding">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span>From <em>Closer Lives</em></span>
+      </div>
+    </div>
   </div>
+
 </body>
 </html>
