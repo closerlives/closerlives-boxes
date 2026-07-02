@@ -10,63 +10,266 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       overflow-x: hidden;
+      background: transparent;
     }
 
     *, *::before, *::after {
       box-sizing: inherit;
     }
 
+    /* Main Container */
+    .travel-resource-box {
+      padding: 20px;
+      max-width: 600px;
+      margin: 5px auto;
+      background: #ffffff;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 12px;
+      color: #333333;
+    }
+
+    /* Typography */
+    h2 {
+      text-align: center;
+      margin: 0 0 15px 0;
+      font-size: 22px;
+      color: #1a1a40;
+      line-height: 1.3;
+    }
+
+    h3 {
+      text-align: center;
+      margin: 20px 0 15px 0;
+      font-size: 18px;
+      color: #1a1a40;
+    }
+
+    /* Featured Promo Box */
+    .promo-box {
+      background: linear-gradient(135deg, #f0f7ff, #e6f9f3);
+      border: 1px solid #cce5ff;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .promo-text {
+      margin: 0 0 10px 0;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .promo-link {
+      display: inline-block;
+      background-color: #00a896;
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+
+    .promo-link:hover {
+      background-color: #008f7e;
+    }
+
+    .promo-code {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Main Toggle Button */
+    .toggle-wrapper {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .toggle-btn {
+      background-color: #1a1a40;
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s, transform 0.1s;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    .toggle-btn:hover {
+      background-color: #2d2d5e;
+    }
+
+    .toggle-btn:active {
+      transform: scale(0.98);
+    }
+
     .arrow {
       display: inline-block;
       transition: transform 0.3s ease;
-      margin-left: 6px;
+      margin-left: 8px;
     }
 
     .arrow.rotate {
       transform: rotate(180deg);
     }
+
+    /* Troubleshooting Link */
+    .fallback-text {
+      text-align: center;
+      font-size: 13px;
+      margin: 10px 0;
+      color: #666;
+    }
+
+    .fallback-link {
+      font-weight: bold;
+      color: #00a896;
+      text-decoration: none;
+    }
+
+    .fallback-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Resource Links Stack */
+    #links-container {
+      display: none;
+      margin-top: 15px;
+    }
+
+    .resource-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .resource-card {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      background-color: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      text-decoration: none;
+      color: #333333;
+      transition: all 0.2s ease;
+    }
+
+    .resource-card:hover {
+      background-color: #ffffff;
+      border-color: #00a896;
+      box-shadow: 0 2px 8px rgba(0, 168, 150, 0.15);
+      transform: translateY(-1px);
+    }
+
+    .resource-title {
+      font-weight: bold;
+      font-size: 15px;
+      margin-right: 8px;
+      color: #1a1a40;
+    }
+
+    .resource-desc {
+      font-size: 13px;
+      color: #555555;
+    }
+
+    /* Footer */
+    .disclaimer {
+      font-size: 12px;
+      text-align: center;
+      color: #888888;
+      margin-top: 20px;
+      line-height: 1.5;
+    }
+
+    .disclaimer a {
+      color: #888888;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
-  <div class="travel-resource-box" style="padding: 10px; max-width: 600px; margin: 5px auto; box-shadow: 0 4px 2px rgba(0, 0, 0, 0.1); font-size: 16px; background: linear-gradient(to right, #66b3ff, #66d9b3); border-radius: 10px; color: #000;">
+  <div class="travel-resource-box">
 
-    <h2 style="text-align: center; margin-top: 5px; margin-bottom: 5px;">Save Big on Your<br>Next Adventure!</h2>
+    <h2>Save Big on Your<br>Next Adventure!</h2>
 
-    <p style="text-align: center; margin: 10px 0;">
-      Stay connected seamlessly while traveling with the 
-      <a href="https://plans.gigsky.com/RMB354/2CTPL/" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">GigSky eSIM</a>.
-      <br><br>Save 10% on your first order with code <strong>CLOSERLIVES10</strong>
-    </p>
+    <div class="promo-box">
+      <p class="promo-text">Stay connected seamlessly while traveling with the <strong>GigSky eSIM</strong>.</p>
+      <a href="https://plans.gigsky.com/RMB354/2CTPL/" target="_blank" rel="sponsored" class="promo-link">Get Your eSIM</a>
+      <span class="promo-code">Save 10% on your first order with code: <strong>CLOSERLIVES10</strong></span>
+    </div>
 
-    <h3 style="text-align: center; margin-top: 10px;">Discover More Ways<br>to Save and Explore</h3>
+    <h3>Discover More Ways<br>to Save and Explore</h3>
 
-    <div style="text-align: center; margin-top: 5px;">
-      <button onclick="toggleLinks()" id="toggleButton"
-        style="background-color: #3d3d3d; color: white; border: 1px solid #3d3d3d; padding: 8px 20px; border-radius: 10px; cursor: pointer; margin-bottom: 10px; text-transform: uppercase; display: inline-block; font-size: 16px; font-weight: bold;">
+    <div class="toggle-wrapper">
+      <button onclick="toggleLinks()" id="toggleButton" class="toggle-btn">
         <span id="buttonText">Explore Travel Resources</span>
         <span id="arrowIcon" class="arrow">▾</span>
       </button>
     </div>
 
-    <p style="text-align: center; font-size: 14px; margin-top: 5px;">
-      Having trouble? <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top" style="font-weight: bold; text-decoration: underline; color: #3d3d3d;">Tap here instead</a>
+    <p class="fallback-text">
+      Having trouble? <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top" class="fallback-link">Tap here instead</a>
     </p>
 
-    <div id="links-container" style="display: none; margin-top: 10px;">
-      <ul style="list-style-type: none; padding-left: 0;">
-        <li style="margin-bottom: 10px;"><a href="https://expedia.stay22.com/closerlives/tSxuAFBYT7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">✈️ Cheap Flights</a> - Fantastic deals on flights and transport.</li>
-        <li style="margin-bottom: 10px;"><a href="https://booking.stay22.com/closerlives/RYx2LG7TE7" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Local Accommodation</a> - Great deals from hostels to hotels.</li>
-        <li style="margin-bottom: 10px;"><a href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Tours & Activities</a> - Book in advance, skip the hassle.</li>
-        <li style="margin-bottom: 10px;"><a href="https://hotelscom.stay22.com/closerlives/9OLfKoRBEK" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🏨 Flexible Hotels</a> - Free cancellation, member prices.</li>
-        <li style="margin-bottom: 10px;"><a href="https://vrbo.stay22.com/closerlives/jY_xM3o0Sq" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Vrbo Rentals</a> - Over 2 million properties worldwide.</li>
-        <li style="margin-bottom: 10px;"><a href="https://tripadvisor.stay22.com/closerlives/aQ1L-D0xcs" target="_blank" rel="sponsored" style="font-weight: bold; text-decoration: none;">🌍 Tripadvisor Deals</a> - Compare, read reviews, and book.</li>
-        <li style="margin-bottom: 10px;"><a href="https://www.closerlives.com/travel-hub/best-insurance-for-digital-nomads-2026" target="_top" rel="sponsored" style="font-weight: bold; text-decoration: none;">🩺 Nomad Insurance</a> - Affordable global travel & health coverage.</li>
-      </ul>
-      <p style="font-size: 16px; text-align: center; color: #777;">We may earn a commission at no extra cost to you. 
-        <a href="https://www.closerlives.com/privacy-policy" target="_blank" style="font-weight: bold; text-decoration: none;"><br><br>Tap here</a> for details.
+    <div id="links-container">
+      <div class="resource-stack">
+        <a href="https://expedia.stay22.com/closerlives/tSxuAFBYT7" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">✈️ Cheap Flights</span>
+          <span class="resource-desc">- Fantastic deals on flights and transport.</span>
+        </a>
+        
+        <a href="https://booking.stay22.com/closerlives/RYx2LG7TE7" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">🏨 Local Accommodation</span>
+          <span class="resource-desc">- Great deals from hostels to hotels.</span>
+        </a>
+        
+        <a href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">🌍 Tours & Activities</span>
+          <span class="resource-desc">- Book in advance, skip the hassle.</span>
+        </a>
+        
+        <a href="https://hotelscom.stay22.com/closerlives/9OLfKoRBEK" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">🏨 Flexible Hotels</span>
+          <span class="resource-desc">- Free cancellation, member prices.</span>
+        </a>
+        
+        <a href="https://vrbo.stay22.com/closerlives/jY_xM3o0Sq" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">🌍 Vrbo Rentals</span>
+          <span class="resource-desc">- Over 2 million properties worldwide.</span>
+        </a>
+        
+        <a href="https://tripadvisor.stay22.com/closerlives/aQ1L-D0xcs" target="_blank" rel="sponsored" class="resource-card">
+          <span class="resource-title">🌍 Tripadvisor Deals</span>
+          <span class="resource-desc">- Compare, read reviews, and book.</span>
+        </a>
+        
+        <a href="https://www.closerlives.com/travel-hub/best-insurance-for-digital-nomads-2026" target="_top" rel="sponsored" class="resource-card">
+          <span class="resource-title">🩺 Nomad Insurance</span>
+          <span class="resource-desc">- Affordable global travel & health coverage.</span>
+        </a>
+      </div>
+
+      <p class="disclaimer">
+        We may earn a commission at no extra cost to you. <br>
+        <a href="https://www.closerlives.com/privacy-policy" target="_blank">Tap here</a> for details.
       </p>
     </div>
+
   </div>
 
   <script>
