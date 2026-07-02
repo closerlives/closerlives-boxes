@@ -26,7 +26,7 @@
     .ad-container {
       width: 600px;
       height: 305px;
-      background: #f8f9fa;
+      background: #ffffff;
       border-radius: 12px;
       border: 2px solid #1a1a40; 
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -63,12 +63,13 @@
       flex: 1;
     }
 
-    /* Left Column: Image (Top) + Button (Bottom) */
+    /* Left Column: Image (Top) + Button (Bottom aligned naturally) */
     .left-col {
       width: 220px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; 
+      justify-content: flex-start; 
+      gap: 16px; /* Pushes the button naturally below the image to align with the text */
       flex-shrink: 0;
     }
 
@@ -160,7 +161,7 @@
             <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
-            <span>From <em>GS-JJ.com</em></span>
+            <span>From <em>Closer Lives</em></span>
           </div>
         </div>
       </div>
