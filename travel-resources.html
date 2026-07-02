@@ -122,24 +122,26 @@
     .resource-stack {
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 10px;
     }
 
+    /* Upgraded Colorful Resource Cards */
     .resource-card {
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 12px 16px;
-      background-color: #ffffff;
-      border: 1px solid #f0f0f0;
+      background-color: #f0fafa;
+      border: 1px solid #ccecee;
+      border-left: 5px solid #00a896;
       border-radius: 8px;
       text-decoration: none;
       transition: all 0.2s ease;
     }
 
     .resource-card:hover {
+      background-color: #e0f5f5;
       border-color: #00a896;
-      background-color: #fafdfc;
       transform: translateX(4px);
     }
 
@@ -152,7 +154,7 @@
 
     .resource-desc {
       font-size: 12px;
-      color: #666666;
+      color: #555555;
     }
 
     /* Footer / Fallback */
@@ -250,7 +252,10 @@
 
       linksContainer.style.display = isVisible ? 'none' : 'block';
       arrow.classList.toggle('rotate', !isVisible);
-      text.textContent = isVisible ? 'Close Resources' : 'Explore Travel Resources';
+      
+      // FIXED LOGIC: If it WAS visible, it is now hidden, so say 'Explore'.
+      // If it WAS NOT visible, it is now open, so say 'Close'.
+      text.textContent = isVisible ? 'Explore Travel Resources' : 'Close Resources';
 
       setTimeout(() => {
         window.parent.postMessage({
