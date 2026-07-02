@@ -22,60 +22,61 @@
       box-sizing: inherit;
     }
 
+    /* Bold dark border for sponsored cards */
     .ad-container {
       width: 600px;
       height: 305px;
       background: #ffffff;
       border-radius: 12px;
-      padding: 20px;
-      border: 1px solid #e0e0e0;
+      border: 2px solid #1a1a40; 
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
-      flex-direction: row;
-      gap: 20px;
+      flex-direction: column;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      overflow: hidden;
     }
 
     .ad-container:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
     }
 
-    .ad-image-wrapper {
-      width: 320px;
-      height: 100%;
+    /* The Top Banner */
+    .promo-banner {
+      background-color: #1a1a40;
+      color: #ffffff;
+      text-align: center;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 0;
       flex-shrink: 0;
     }
 
-    .ad-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 8px;
+    /* 2-Column Split */
+    .inner-content {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      padding: 20px;
+      flex: 1;
     }
 
-    .ad-content {
+    /* Left Column: Image (Top) + Button (Bottom) */
+    .left-col {
+      width: 220px;
       display: flex;
       flex-direction: column;
-      flex: 1;
-      justify-content: space-between;
+      justify-content: space-between; 
+      flex-shrink: 0;
     }
 
-    .ad-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: #1a1a40;
-      line-height: 1.25;
-      margin: 0 0 8px 0;
-      text-align: left;
-    }
-
-    .ad-description {
-      font-size: 13px;
-      color: #4a4a4a;
-      line-height: 1.45;
-      text-align: left;
-      flex-grow: 1;
+    .left-col img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
     }
 
     .footer-section {
@@ -83,7 +84,6 @@
       flex-direction: column;
       gap: 8px;
       width: 100%;
-      margin-top: 10px;
     }
 
     .read-more {
@@ -115,37 +115,64 @@
       gap: 4px;
       font-size: 11px;
       color: #7a7a7a;
-      margin-top: 4px;
+    }
+
+    /* Right Column: Text Block */
+    .right-col {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .ad-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1a1a40;
+      line-height: 1.25;
+      margin: 0 0 8px 0;
+      text-align: left;
+    }
+
+    .ad-description {
+      font-size: 13px;
+      color: #4a4a4a;
+      line-height: 1.45;
+      text-align: left;
+      overflow: hidden;
     }
   </style>
 </head>
 <body>
 
   <div class="ad-container">
-    <div class="ad-image-wrapper">
-      <img src="https://static.wixstatic.com/media/971500_87b3e2e479d84fc1b709c3c5e006c43f~mv2.webp" alt="A paper boat decorated with travel-themed enamel pins like a cactus, maple leaf, and butterfly. Text reads 'Let's travel the world.'" />
-    </div>
+    <div class="promo-banner">Sponsored Promotion</div>
     
-    <div class="ad-content">
-      <div>
-        <h3 class="ad-title">Discover More:<br>Custom Enamel Pins</h3>
+    <div class="inner-content">
+      
+      <div class="left-col">
+        <img src="https://static.wixstatic.com/media/971500_87b3e2e479d84fc1b709c3c5e006c43f~mv2.webp" alt="A paper boat decorated with travel-themed enamel pins like a cactus, maple leaf, and butterfly. Text reads 'Let's travel the world.'" />
+        
+        <div class="footer-section">
+          <a href="https://www.gs-jj.com/enamel-pins/Custom-Enamel-Pins" target="_top" class="read-more" rel="sponsored">
+            Design Your Pins
+          </a>
+          <div class="branding">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span>From <em>Closer Lives</em></span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="right-col">
+        <h3 class="ad-title">Custom Enamel Pins</h3>
         <div class="ad-description">
           If you are also planning to embark on a wonderful trip to Malaysia, you may wish to buy some gadgets to make some memories.<br><br>
           For example, Custom Enamel Pins are a great option. You can have memorable sights or other elements from your trip engraved on it. These pins can not only be collected but can also be used to decorate your clothes or bags!
         </div>
       </div>
-      
-      <div class="footer-section">
-        <a href="https://www.gs-jj.com/enamel-pins/Custom-Enamel-Pins" target="_top" class="read-more" rel="sponsored">
-          Design Your Pins
-        </a>
-        <div class="branding">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-          </svg>
-          <span>From <em>Closer Lives</em></span>
-        </div>
-      </div>
+
     </div>
   </div>
 
