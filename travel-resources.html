@@ -19,12 +19,12 @@
 
     /* Main Container */
     .travel-resource-box {
-      padding: 20px;
+      padding: 24px;
       max-width: 600px;
       margin: 5px auto;
       background: #ffffff;
-      border: 1px solid #e0e0e0;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #eaeaea;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
       border-radius: 12px;
       color: #333333;
     }
@@ -32,171 +32,147 @@
     /* Typography */
     h2 {
       text-align: center;
-      margin: 0 0 15px 0;
-      font-size: 22px;
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      font-weight: 800;
       color: #1a1a40;
       line-height: 1.3;
     }
 
-    h3 {
-      text-align: center;
-      margin: 20px 0 15px 0;
-      font-size: 18px;
-      color: #1a1a40;
-    }
-
     /* Featured Promo Box */
     .promo-box {
-      background: linear-gradient(135deg, #f0f7ff, #e6f9f3);
-      border: 1px solid #cce5ff;
-      border-radius: 8px;
-      padding: 15px;
+      background: #f4fbf9;
+      border: 1px solid #d8f0eb;
+      border-radius: 10px;
+      padding: 16px;
       text-align: center;
       margin-bottom: 20px;
     }
 
     .promo-text {
-      margin: 0 0 10px 0;
-      font-size: 15px;
+      margin: 0 0 12px 0;
+      font-size: 14px;
       line-height: 1.5;
+      color: #2c3e50;
+    }
+
+    .promo-code {
+      display: block;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #00a896;
+      font-weight: bold;
     }
 
     .promo-link {
       display: inline-block;
       background-color: #00a896;
       color: #ffffff;
+      font-size: 14px;
       font-weight: bold;
       text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      transition: background-color 0.2s;
+      padding: 10px 20px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
     }
 
     .promo-link:hover {
       background-color: #008f7e;
     }
 
-    .promo-code {
-      display: block;
-      margin-top: 10px;
-      font-size: 14px;
-    }
-
     /* Main Toggle Button */
-    .toggle-wrapper {
-      text-align: center;
-      margin-bottom: 15px;
-    }
-
     .toggle-btn {
-      background-color: #1a1a40;
-      color: #ffffff;
-      border: none;
-      padding: 12px 24px;
+      background-color: #f8f9fa;
+      color: #1a1a40;
+      border: 1px solid #e9ecef;
+      padding: 14px 20px;
       border-radius: 8px;
       cursor: pointer;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      justify-content: center;
-      transition: background-color 0.2s, transform 0.1s;
+      justify-content: space-between;
+      transition: all 0.2s ease;
       width: 100%;
-      max-width: 300px;
     }
 
     .toggle-btn:hover {
-      background-color: #2d2d5e;
-    }
-
-    .toggle-btn:active {
-      transform: scale(0.98);
+      background-color: #eef1f4;
+      border-color: #dbe0e5;
     }
 
     .arrow {
-      display: inline-block;
       transition: transform 0.3s ease;
-      margin-left: 8px;
+      font-size: 12px;
     }
 
     .arrow.rotate {
       transform: rotate(180deg);
     }
 
-    /* Troubleshooting Link */
-    .fallback-text {
-      text-align: center;
-      font-size: 13px;
-      margin: 10px 0;
-      color: #666;
-    }
-
-    .fallback-link {
-      font-weight: bold;
-      color: #00a896;
-      text-decoration: none;
-    }
-
-    .fallback-link:hover {
-      text-decoration: underline;
-    }
-
     /* Resource Links Stack */
     #links-container {
       display: none;
-      margin-top: 15px;
+      margin-top: 12px;
     }
 
     .resource-stack {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
 
     .resource-card {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
       padding: 12px 16px;
-      background-color: #f8f9fa;
-      border: 1px solid #e9ecef;
+      background-color: #ffffff;
+      border: 1px solid #f0f0f0;
       border-radius: 8px;
       text-decoration: none;
-      color: #333333;
       transition: all 0.2s ease;
     }
 
     .resource-card:hover {
-      background-color: #ffffff;
       border-color: #00a896;
-      box-shadow: 0 2px 8px rgba(0, 168, 150, 0.15);
-      transform: translateY(-1px);
+      background-color: #fafdfc;
+      transform: translateX(4px);
     }
 
     .resource-title {
       font-weight: bold;
-      font-size: 15px;
-      margin-right: 8px;
+      font-size: 14px;
       color: #1a1a40;
+      margin-bottom: 4px;
     }
 
     .resource-desc {
-      font-size: 13px;
-      color: #555555;
+      font-size: 12px;
+      color: #666666;
     }
 
-    /* Footer */
-    .disclaimer {
+    /* Footer / Fallback */
+    .footer-links {
       font-size: 12px;
       text-align: center;
       color: #888888;
       margin-top: 20px;
-      line-height: 1.5;
+      line-height: 1.6;
+      border-top: 1px solid #f0f0f0;
+      padding-top: 16px;
     }
 
-    .disclaimer a {
-      color: #888888;
+    .footer-links a {
+      color: #00a896;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    
+    .footer-links a:hover {
       text-decoration: underline;
     }
   </style>
@@ -205,69 +181,61 @@
 
   <div class="travel-resource-box">
 
-    <h2>Save Big on Your<br>Next Adventure!</h2>
+    <h2>Save Big on Your Next Adventure!</h2>
 
     <div class="promo-box">
       <p class="promo-text">Stay connected seamlessly while traveling with the <strong>GigSky eSIM</strong>.</p>
       <a href="https://plans.gigsky.com/RMB354/2CTPL/" target="_blank" rel="sponsored" class="promo-link">Get Your eSIM</a>
-      <span class="promo-code">Save 10% on your first order with code: <strong>CLOSERLIVES10</strong></span>
+      <span class="promo-code">Save 10% on your first order with code: CLOSERLIVES10</span>
     </div>
 
-    <h3>Discover More Ways<br>to Save and Explore</h3>
-
-    <div class="toggle-wrapper">
-      <button onclick="toggleLinks()" id="toggleButton" class="toggle-btn">
-        <span id="buttonText">Travel Resources</span>
-        <span id="arrowIcon" class="arrow">▾</span>
-      </button>
-    </div>
-
-    <p class="fallback-text">
-      Having trouble? <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top" class="fallback-link">Tap here instead</a>
-    </p>
+    <button onclick="toggleLinks()" id="toggleButton" class="toggle-btn">
+      <span id="buttonText">Explore Travel Resources</span>
+      <span id="arrowIcon" class="arrow">▼</span>
+    </button>
 
     <div id="links-container">
       <div class="resource-stack">
         <a href="https://expedia.stay22.com/closerlives/tSxuAFBYT7" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">✈️ Cheap Flights</span>
-          <span class="resource-desc">- Fantastic deals on flights and transport.</span>
+          <span class="resource-desc">Fantastic deals on flights and transport.</span>
         </a>
         
         <a href="https://booking.stay22.com/closerlives/RYx2LG7TE7" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">🏨 Local Accommodation</span>
-          <span class="resource-desc">- Great deals from hostels to hotels.</span>
+          <span class="resource-desc">Great deals from hostels to hotels.</span>
         </a>
         
         <a href="https://getyourguide.stay22.com/closerlives/tC-VXq0VK4" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">🌍 Tours & Activities</span>
-          <span class="resource-desc">- Book in advance, skip the hassle.</span>
+          <span class="resource-desc">Book in advance, skip the hassle.</span>
         </a>
         
         <a href="https://hotelscom.stay22.com/closerlives/9OLfKoRBEK" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">🏨 Flexible Hotels</span>
-          <span class="resource-desc">- Free cancellation, member prices.</span>
+          <span class="resource-desc">Free cancellation, member prices.</span>
         </a>
         
         <a href="https://vrbo.stay22.com/closerlives/jY_xM3o0Sq" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">🌍 Vrbo Rentals</span>
-          <span class="resource-desc">- Over 2 million properties worldwide.</span>
+          <span class="resource-desc">Over 2 million properties worldwide.</span>
         </a>
         
         <a href="https://tripadvisor.stay22.com/closerlives/aQ1L-D0xcs" target="_blank" rel="sponsored" class="resource-card">
           <span class="resource-title">🌍 Tripadvisor Deals</span>
-          <span class="resource-desc">- Compare, read reviews, and book.</span>
+          <span class="resource-desc">Compare, read reviews, and book.</span>
         </a>
         
         <a href="https://www.closerlives.com/travel-hub/best-insurance-for-digital-nomads-2026" target="_top" rel="sponsored" class="resource-card">
           <span class="resource-title">🩺 Nomad Insurance</span>
-          <span class="resource-desc">- Affordable global travel & health coverage.</span>
+          <span class="resource-desc">Affordable global travel & health coverage.</span>
         </a>
       </div>
+    </div>
 
-      <p class="disclaimer">
-        We may earn a commission at no extra cost to you. <br>
-        <a href="https://www.closerlives.com/policies/privacy-policy" target="_blank">Tap here</a> for details.
-      </p>
+    <div class="footer-links">
+      We may earn a commission at no extra cost to you. <a href="https://www.closerlives.com/privacy-policy" target="_blank">Tap here</a> for details.<br>
+      Having trouble? <a href="https://www.closerlives.com/travel-hub/travel-resources" target="_top">Open full page</a>.
     </div>
 
   </div>
@@ -282,7 +250,7 @@
 
       linksContainer.style.display = isVisible ? 'none' : 'block';
       arrow.classList.toggle('rotate', !isVisible);
-      text.textContent = isVisible ? 'Explore Travel Resources' : 'Close';
+      text.textContent = isVisible ? 'Close Resources' : 'Explore Travel Resources';
 
       setTimeout(() => {
         window.parent.postMessage({
