@@ -34,7 +34,7 @@
 
     p { margin: 0 0 10px; }
 
-    /* Accordion styling */
+    /* Unified Accordion styling */
     .cl-accordion {
       border-radius: 10px;
       border: 1px solid #d9d9d9;
@@ -70,8 +70,6 @@
 
     img {
       width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
       border-radius: 10px;
       margin-bottom: 12px;
     }
@@ -103,15 +101,15 @@
       background-color: #ffffff;
       color: #000000;
       border: 1px solid #000000;
+      text-decoration: none;
     }
 
     /* Color Themes */
-    .theme-blue { background-color: #1976d2; }
-    .theme-purple { background-color: #8e24aa; }
     .theme-rose { background-color: #d81b60; }
-    .theme-orange { background-color: #f9a825; }
+    .theme-purple { background-color: #8e24aa; }
+    .theme-blue { background-color: #1976d2; }
+    .theme-orange { background-color: #f9a825; color: #000; }
     .theme-grey { background-color: #757575; }
-
   </style>
 </head>
 
@@ -121,7 +119,7 @@
     <h3>Social media tools to feel inspired, expressive, and connected</h3>
 
     <p style="text-align: center;">
-      These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
+      Social media can be a powerful way to share your work, but it can also be stressful. These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
     </p>
 
     <div class="cl-accordion">
@@ -160,8 +158,8 @@
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-          <p>Protect your accounts before something goes wrong. A VPN adds a vital layer of security.</p>
-          <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn About NordVPN</a>
+          <p>Many creator problems start with insecure logins. A VPN adds a layer of protection that helps keep your accounts safe.</p>
+          <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn More About NordVPN</a>
         </div>
       </div>
     </div>
@@ -173,7 +171,7 @@
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-          <p>We focus on realistic posting rhythms and treating your audience like a community to avoid burnout.</p>
+          <p>We focus on realistic posting rhythms, boundaries, and treating your audience like a community to avoid burnout.</p>
           <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank">Read Recovery Story</a>
         </div>
       </div>
@@ -181,7 +179,7 @@
 
     <div class="cl-accordion">
       <button class="cl-accordion-header theme-grey" aria-expanded="false">
-        <span>Transparency & Policy</span>
+        <span>Affiliate Disclosure</span>
         <span>+</span>
       </button>
       <div class="cl-accordion-panel">
@@ -195,7 +193,6 @@
   </div>
 
   <script>
-    /* Height resizing script remains unchanged */
     (function () {
       function sendHeight() {
         var h = document.documentElement.scrollHeight || document.body.scrollHeight || 600;
