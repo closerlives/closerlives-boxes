@@ -20,38 +20,28 @@
     .cl-wrapper {
       max-width: 560px;
       margin: 0 auto;
-      padding: 20px 16px 10px;
+      padding: 20px 16px;
       box-sizing: border-box;
     }
 
-    h1, h2, h3 {
-      margin: 0;
-      font-weight: 700;
+    h3 {
+      margin: 0 0 20px 0;
+      font-size: 22px;
+      font-weight: 800;
+      text-align: center;
       color: #111111;
     }
 
-    h1 {
-      font-size: 18px;
-      margin-bottom: 10px;
-      text-align: center;
-      font-style: italic;
-    }
-
-    p {
-      margin: 0 0 10px;
-    }
+    p { margin: 0 0 10px; }
 
     /* Accordion styling */
     .cl-accordion {
       border-radius: 10px;
-      border: 1px solid #e0e0e0;
-      margin-bottom: 10px;
+      border: 1px solid #d9d9d9;
+      border-bottom: 6px solid #d0d0d0;
+      margin-bottom: 14px;
       overflow: hidden;
       background-color: #ffffff;
-    }
-
-    .cl-accordion:last-of-type {
-      margin-bottom: 0;
     }
 
     .cl-accordion-header {
@@ -59,24 +49,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 14px;
-      box-sizing: border-box;
+      padding: 12px 14px;
       border: none;
       cursor: pointer;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 800;
       color: #ffffff;
-    }
-
-    .cl-accordion-title {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cl-accordion-icon {
-      font-size: 18px;
-      font-weight: 700;
     }
 
     .cl-accordion-panel {
@@ -84,64 +62,55 @@
       overflow: hidden;
       transition: max-height 0.25s ease;
       background-color: #ffffff;
-      border-top: 1px solid #e0e0e0;
     }
 
     .cl-accordion-inner {
-      padding: 12px 14px 14px;
-      box-sizing: border-box;
+      padding: 14px;
     }
 
     img {
       width: 100%;
-      border-radius: 12px;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      border-radius: 10px;
       margin-bottom: 12px;
     }
 
-    .cl-btn-wrap {
+    .cl-btn {
+      display: block;
+      width: 100%;
+      padding: 10px 14px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 10px;
+      border: none;
+      background-color: #000000;
+      color: #ffffff;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
       margin-top: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
     }
 
-    .cl-btn {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  padding: 10px 14px;
-  margin: 0 auto;
-  text-align: center;
-  text-decoration: none;
-  font-size: 16px;
-  border-radius: 9999px;
-  border: 1px solid #222222;
-  background-color: #222222;
-  color: #ffffff;
-  box-sizing: border-box;   /* <— this prevents overflow */
-  cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
+    .cl-btn.cl-btn-secondary {
+      background-color: #f2f2f2;
+      color: #000000;
+      border: 1px solid #d9d9d9;
+    }
 
-.cl-btn.cl-btn-secondary {
-  background-color: #ffffff;
-  color: #222222;
-}
+    .cl-btn:hover {
+      background-color: #ffffff;
+      color: #000000;
+      border: 1px solid #000000;
+    }
 
-.cl-btn:hover,
-.cl-btn:focus,
-.cl-btn.cl-btn-secondary:hover,
-.cl-btn.cl-btn-secondary:focus {
-  background-color: #90caf9;
-  color: #000000;
-}
-
-    /* Colour coding */
-    .cl-h-ig-recovery { background-color: #d81b60; }
-    .cl-h-ig-tracking { background-color: #8e24aa; }
-    .cl-h-ig-safety   { background-color: #1976d2; }
-    .cl-h-ig-mindset  { background-color: #f9a825; color:#222222; }
-    .cl-h-affiliate   { background-color: #00695c; }
+    /* Color Themes */
+    .theme-blue { background-color: #1976d2; }
+    .theme-purple { background-color: #8e24aa; }
+    .theme-rose { background-color: #d81b60; }
+    .theme-orange { background-color: #f9a825; }
+    .theme-grey { background-color: #757575; }
 
   </style>
 </head>
@@ -149,146 +118,84 @@
 <body>
   <div class="cl-wrapper">
 
-    <h1>Social media tools to feel safer, calmer, and more in control</h1>
+    <h3>Social media tools to feel inspired, expressive, and connected</h3>
 
-    <p class="cl-intro">
-      Social media can be a powerful way to share your work, but it can also be stressful when platforms change the rules.  
+    <p style="text-align: center;">
       These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
     </p>
 
-    <!-- 1. Instagram Recovery -->
     <div class="cl-accordion">
-      <button class="cl-accordion-header cl-h-ig-recovery" aria-expanded="false">
-        <span class="cl-accordion-title">Instagram Recovery & Support</span>
-        <span class="cl-accordion-icon">+</span>
+      <button class="cl-accordion-header theme-rose" aria-expanded="false">
+        <span>Instagram Recovery & Support</span>
+        <span>+</span>
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <img 
-            src="https://static.wixstatic.com/media/971500_5d1a17d77ad5453db17026016cd64c11~mv2.webp"
-            alt="A guide on reactivating a disabled Instagram account, depicted with a visual metaphor of a padlocked chain."
-          />
-
-          <h2>When your Instagram account is disabled or restricted</h2>
-
-          <p>
-            If your Instagram account has been disabled, restricted, or is under review, you are not alone.  
-            Our recovery resources walk you through realistic timelines, appeal routes, and what to expect.
-          </p>
-
-          <div class="cl-btn-wrap">
-            <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank">Join the Instagram Support Group</a>
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank">Read the Instagram Recovery Guide</a>
-          </div>
-
+          <img src="https://static.wixstatic.com/media/971500_5d1a17d77ad5453db17026016cd64c11~mv2.webp" alt="Recovery guide" />
+          <p>If your account has been disabled or is under review, our resources walk you through realistic timelines and appeal routes.</p>
+          <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank">Join Support Group</a>
+          <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank">Read Recovery Guide</a>
         </div>
       </div>
     </div>
 
-    <!-- 2. Tracking Tools -->
     <div class="cl-accordion">
-      <button class="cl-accordion-header cl-h-ig-tracking" aria-expanded="false">
-        <span class="cl-accordion-title">Track & Understand Your Growth</span>
-        <span class="cl-accordion-icon">+</span>
+      <button class="cl-accordion-header theme-purple" aria-expanded="false">
+        <span>Track & Understand Growth</span>
+        <span>+</span>
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <img 
-            src="https://static.wixstatic.com/media/971500_661b533ae1774d79a6cbbfaa62cb1c2a~mv2.webp"
-            alt="A person holding a smartphone displaying the Instagram logo and from Meta text, warning not to use 3rd-party apps to unfollow."
-          />
-
-          <h2>See what is really happening with your account</h2>
-
-          <p>
-            Our follower tracking guide helps you spot drops, shadowbans, or new growth patterns  
-            without obsessing over every number.
-          </p>
-
-          <div class="cl-btn-wrap">
-            <a class="cl-btn" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank">Use the Follower Tracking Guide</a>
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/travel-and-lifestyle-blog/categories/social-media" target="_blank">Browse Social Media Growth Blogs</a>
-          </div>
-
+          <img src="https://static.wixstatic.com/media/971500_661b533ae1774d79a6cbbfaa62cb1c2a~mv2.webp" alt="Tracking guide" />
+          <p>Our follower tracking guide helps you spot drops or growth patterns without obsessing over every number.</p>
+          <a class="cl-btn" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank">Use Tracking Guide</a>
         </div>
       </div>
     </div>
 
-    <!-- 3. Digital Safety -->
     <div class="cl-accordion">
-      <button class="cl-accordion-header cl-h-ig-safety" aria-expanded="false">
-        <span class="cl-accordion-title">Safer Logins & Online Security</span>
-        <span class="cl-accordion-icon">+</span>
+      <button class="cl-accordion-header theme-blue" aria-expanded="false">
+        <span>Safer Logins & Security</span>
+        <span>+</span>
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <h2>Protect your accounts before something goes wrong</h2>
-
-          <p>
-            Many creator problems start with shared Wi-Fi or insecure logins.  
-            A VPN adds a layer of protection that helps keep your accounts safe.
-          </p>
-
-          <div class="cl-btn-wrap">
-            <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn More About NordVPN</a>
-          </div>
-
+          <p>Protect your accounts before something goes wrong. A VPN adds a vital layer of security.</p>
+          <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn About NordVPN</a>
         </div>
       </div>
     </div>
 
-    <!-- 4. Creator Mindset -->
     <div class="cl-accordion">
-      <button class="cl-accordion-header cl-h-ig-mindset" aria-expanded="false">
-        <span class="cl-accordion-title">Content, Boundaries & Creator Mindset</span>
-        <span class="cl-accordion-icon">+</span>
+      <button class="cl-accordion-header theme-orange" aria-expanded="false">
+        <span>Content & Mindset</span>
+        <span>+</span>
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <h2>Grow your platforms without burning out</h2>
-
-          <p>
-            We focus on realistic posting rhythms, boundaries, and treating your audience like a community.
-          </p>
-
-          <div class="cl-btn-wrap">
-            <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank">Read Our Instagram Recovery Story</a>
-            <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media" target="_blank">Browse All Social Media Blogs</a>
-          </div>
-
+          <p>We focus on realistic posting rhythms and treating your audience like a community to avoid burnout.</p>
+          <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank">Read Recovery Story</a>
         </div>
       </div>
     </div>
 
-    <!-- 5. Affiliate Disclosure -->
     <div class="cl-accordion">
-      <button class="cl-accordion-header cl-h-affiliate" aria-expanded="false">
-        <span class="cl-accordion-title">Affiliate Disclosure</span>
-        <span class="cl-accordion-icon">+</span>
+      <button class="cl-accordion-header theme-grey" aria-expanded="false">
+        <span>Transparency & Policy</span>
+        <span>+</span>
       </button>
       <div class="cl-accordion-panel">
         <div class="cl-accordion-inner">
-
-          <p>
-            Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.
-          </p>
-
-          <div class="cl-btn-wrap">
-            <a class="cl-btn" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank">View Affiliate Policy</a>
-          </div>
-
+          <p>Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.</p>
+          <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank">View Affiliate Policy</a>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Auto-resize script -->
   <script>
+    /* Height resizing script remains unchanged */
     (function () {
       function sendHeight() {
         var h = document.documentElement.scrollHeight || document.body.scrollHeight || 600;
@@ -296,55 +203,24 @@
           window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
         }
       }
-
-      function setupAccordions() {
-        var accordions = document.querySelectorAll(".cl-accordion");
-        accordions.forEach(function (acc) {
-          var header = acc.querySelector(".cl-accordion-header");
-          var panel = acc.querySelector(".cl-accordion-panel");
-          var icon = acc.querySelector(".cl-accordion-icon");
-
-          header.addEventListener("click", function () {
-            var isOpen = header.getAttribute("aria-expanded") === "true";
-
-            accordions.forEach(function (other) {
-              var h = other.querySelector(".cl-accordion-header");
-              var p = other.querySelector(".cl-accordion-panel");
-              var i = other.querySelector(".cl-accordion-icon");
-
-              h.setAttribute("aria-expanded", "false");
-              p.style.maxHeight = null;
-              i.textContent = "+";
-            });
-
-            if (!isOpen) {
-              header.setAttribute("aria-expanded", "true");
-              panel.style.maxHeight = panel.scrollHeight + "px";
-              icon.textContent = "–";
-            }
-
-            setTimeout(sendHeight, 260);
+      document.querySelectorAll(".cl-accordion-header").forEach(function(header) {
+        header.addEventListener("click", function() {
+          var panel = this.nextElementSibling;
+          var isOpen = this.getAttribute("aria-expanded") === "true";
+          document.querySelectorAll(".cl-accordion-panel").forEach(p => { 
+            p.style.maxHeight = null; 
+            p.previousElementSibling.setAttribute("aria-expanded", "false"); 
           });
+          if (!isOpen) {
+            this.setAttribute("aria-expanded", "true");
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+          setTimeout(sendHeight, 300);
         });
-      }
-
-      window.addEventListener("load", function () {
-        setupAccordions();
-        sendHeight();
-        setTimeout(sendHeight, 350);
       });
-
-      let sync = 0;
-      function extraSync() {
-        if (sync < 10) {
-          sendHeight();
-          sync++;
-          setTimeout(extraSync, 300);
-        }
-      }
-      extraSync();
+      window.addEventListener("load", sendHeight);
+      setInterval(sendHeight, 1000);
     })();
   </script>
-
 </body>
 </html>
