@@ -6,218 +6,253 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
     html, body {
       margin: 0;
       padding: 0;
+      width: 100%;
+      background: #ffffff;
       overflow-x: hidden;
       font-family: Lato, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      background-color: #ffffff;
-      color: #222222;
     }
 
-    .cl-wrapper {
+    .wrap {
+      width: 100%;
       max-width: 560px;
       margin: 0 auto;
-      padding: 20px 16px;
+      display: grid;
+      gap: 14px;
+      overflow: hidden;
       box-sizing: border-box;
+      padding: 20px 10px; /* layout buffer for mobile viewport edges */
     }
 
-    h3 {
-      margin: 0 0 20px 0;
-      font-size: 22px;
+    @media (max-width: 400px) {
+      .wrap { max-width: 300px; }
+      img.hero { width: 100%; height: auto; }
+    }
+
+    .card, .panel {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    /* Anchor parameters unified with design specs */
+    a { color: #0000ff; font-weight: 700; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    h3.section-title {
+      margin: 0 0 10px 0;
+      font-size: 20px;
       font-weight: 800;
       text-align: center;
       color: #111111;
+      font-style: italic;
+      line-height: 1.3;
     }
 
-    p { margin: 0 0 10px; }
-
-    /* Unified Accordion styling */
-    .cl-accordion {
-      border-radius: 10px;
-      border: 1px solid #d9d9d9;
+    .card {
+      border: 1px solid #b0b0b0;
       border-bottom: 6px solid #d0d0d0;
-      margin-bottom: 14px;
-      overflow: hidden;
-      background-color: #ffffff;
-    }
-
-    .cl-accordion-header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 14px;
-      border: none;
-      cursor: pointer;
-      font-size: 16px;
-      font-weight: 800;
-      color: #ffffff;
-    }
-
-    .cl-accordion-panel {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.25s ease;
-      background-color: #ffffff;
-    }
-
-    .cl-accordion-inner {
-      padding: 14px;
-    }
-
-    img {
-      width: 100%;
       border-radius: 10px;
-      margin-bottom: 12px;
+      background: #fff;
+      overflow: hidden;
     }
 
-    .cl-btn {
+    /* Unified Design Tints */
+    .theme-rose { background: rgba(255, 235, 238, 0.55); }
+    .theme-purple { background: rgba(243, 229, 245, 0.6); }
+    .theme-blue { background: rgba(227, 238, 255, 0.55); }
+    .theme-orange { background: rgba(255, 243, 224, 0.7); }
+    .theme-grey { background: rgba(245, 245, 245, 0.8); }
+
+    details { border-radius: 10px; }
+    summary { list-style: none; cursor: pointer; user-select: none; padding: 12px 14px; display: flex; align-items: center; gap: 10px; }
+    summary::-webkit-details-marker { display: none; }
+
+    .logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      background: #f2f2f2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+    }
+
+    .headings { flex: 1; }
+    h3.title { margin: 0; font-size: 18px; font-weight: 800; color: #111111; }
+    h4.strap { margin: 2px 0 0 0; font-size: 16px; font-weight: 400; color: #0b2a6f; font-style: italic; }
+    .chev { width: 10px; height: 10px; border-right: 2px solid #111; border-bottom: 2px solid #111; transform: rotate(45deg); transition: transform 0.2s ease; }
+    details[open] .chev { transform: rotate(225deg); }
+
+    .panel { padding: 0 14px 14px; }
+    .hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 10px; margin-bottom: 20px; }
+
+    .desc-2 { margin-bottom: 12px; font-size: 16px; line-height: 1.6; color: #222222; }
+
+    /* Button variants aligned to component definitions */
+    .btn {
       display: block;
       width: 100%;
-      padding: 10px 14px;
+      max-width: 100%;
       text-align: center;
-      text-decoration: none;
+      padding: 10px 12px;
       font-size: 16px;
       font-weight: 700;
       border-radius: 10px;
+      text-decoration: none;
       border: none;
-      background-color: #000000;
-      color: #ffffff;
-      box-sizing: border-box;
       transition: all 0.3s ease;
-      margin-top: 8px;
+      margin-top: 10px;
     }
+    .btn:first-of-type { margin-top: 0; }
+    
+    .btn-rose { background: #d81b60; color: #fff; }
+    .btn-purple { background: #8e24aa; color: #fff; }
+    .btn-blue { background: #1976d2; color: #fff; }
+    .btn-orange { background: #f9a825; color: #222222; }
+    .btn-grey { background: #424242; color: #fff; }
+    .btn-secondary { background: #ffffff; color: #222222; border: 1px solid #222222; }
 
-    .cl-btn.cl-btn-secondary {
-      background-color: #f2f2f2;
-      color: #000000;
-      border: 1px solid #d9d9d9;
-    }
-
-    .cl-btn:hover {
-      background-color: #ffffff;
-      color: #000000;
-      border: 1px solid #000000;
+    .btn:hover {
+      background: #90caf9 !important;
+      color: #000000 !important;
+      border: 1px solid #90caf9;
       text-decoration: none;
     }
-
-    /* Color Themes */
-    .theme-rose { background-color: #d81b60; }
-    .theme-purple { background-color: #8e24aa; }
-    .theme-blue { background-color: #1976d2; }
-    .theme-orange { background-color: #f9a825; color: #000; }
-    .theme-grey { background-color: #757575; }
   </style>
-</head>
-
-<body>
-  <div class="cl-wrapper">
-
-    <h3>Social media tools to feel inspired, expressive, and connected</h3>
-
-    <p style="text-align: center;">
-      Social media can be a powerful way to share your work, but it can also be stressful. These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
-    </p>
-
-    <div class="cl-accordion">
-      <button class="cl-accordion-header theme-rose" aria-expanded="false">
-        <span>Instagram Recovery & Support</span>
-        <span>+</span>
-      </button>
-      <div class="cl-accordion-panel">
-        <div class="cl-accordion-inner">
-          <img src="https://static.wixstatic.com/media/971500_5d1a17d77ad5453db17026016cd64c11~mv2.webp" alt="Recovery guide" />
-          <p>If your account has been disabled or is under review, our resources walk you through realistic timelines and appeal routes.</p>
-          <a class="cl-btn" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank">Join Support Group</a>
-          <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank">Read Recovery Guide</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="cl-accordion">
-      <button class="cl-accordion-header theme-purple" aria-expanded="false">
-        <span>Track & Understand Growth</span>
-        <span>+</span>
-      </button>
-      <div class="cl-accordion-panel">
-        <div class="cl-accordion-inner">
-          <img src="https://static.wixstatic.com/media/971500_661b533ae1774d79a6cbbfaa62cb1c2a~mv2.webp" alt="Tracking guide" />
-          <p>Our follower tracking guide helps you spot drops or growth patterns without obsessing over every number.</p>
-          <a class="cl-btn" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank">Use Tracking Guide</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="cl-accordion">
-      <button class="cl-accordion-header theme-blue" aria-expanded="false">
-        <span>Safer Logins & Security</span>
-        <span>+</span>
-      </button>
-      <div class="cl-accordion-panel">
-        <div class="cl-accordion-inner">
-          <p>Many creator problems start with insecure logins. A VPN adds a layer of protection that helps keep your accounts safe.</p>
-          <a class="cl-btn cl-btn-secondary" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank">Learn More About NordVPN</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="cl-accordion">
-      <button class="cl-accordion-header theme-orange" aria-expanded="false">
-        <span>Content & Mindset</span>
-        <span>+</span>
-      </button>
-      <div class="cl-accordion-panel">
-        <div class="cl-accordion-inner">
-          <p>We focus on realistic posting rhythms, boundaries, and treating your audience like a community to avoid burnout.</p>
-          <a class="cl-btn" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank">Read Recovery Story</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="cl-accordion">
-      <button class="cl-accordion-header theme-grey" aria-expanded="false">
-        <span>Affiliate Disclosure</span>
-        <span>+</span>
-      </button>
-      <div class="cl-accordion-panel">
-        <div class="cl-accordion-inner">
-          <p>Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.</p>
-          <a class="cl-btn cl-btn-secondary" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank">View Affiliate Policy</a>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
   <script>
-    (function () {
-      function sendHeight() {
-        var h = document.documentElement.scrollHeight || document.body.scrollHeight || 600;
-        if (window.parent !== window) {
-          window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
-        }
-      }
-      document.querySelectorAll(".cl-accordion-header").forEach(function(header) {
-        header.addEventListener("click", function() {
-          var panel = this.nextElementSibling;
-          var isOpen = this.getAttribute("aria-expanded") === "true";
-          document.querySelectorAll(".cl-accordion-panel").forEach(p => { 
-            p.style.maxHeight = null; 
-            p.previousElementSibling.setAttribute("aria-expanded", "false"); 
-          });
-          if (!isOpen) {
-            this.setAttribute("aria-expanded", "true");
-            panel.style.maxHeight = panel.scrollHeight + "px";
+    document.addEventListener('DOMContentLoaded', () => {
+      const allDetails = document.querySelectorAll('details');
+      allDetails.forEach((detail) => {
+        detail.addEventListener('toggle', () => {
+          if (detail.open) {
+            allDetails.forEach((other) => {
+              if (other !== detail) other.removeAttribute('open');
+            });
           }
-          setTimeout(sendHeight, 300);
         });
       });
-      window.addEventListener("load", sendHeight);
-      setInterval(sendHeight, 1000);
-    })();
+    });
   </script>
+</head>
+<body>
+<main class="wrap" role="region" aria-label="Social media resources and community interfaces">
+  
+  <h3 class="section-title">Social media tools to feel inspired, expressive, and connected</h3>
+
+  <p class="desc-2" style="text-align: center; margin-bottom: 16px;">
+    Social media can be a powerful way to share your work, but it can also be stressful. These resources focus on recovery, safety, growth, and mindset, so you can show up online without losing yourself.
+  </p>
+
+  <section class="card theme-rose">
+    <details>
+      <summary>
+        <div class="logo">❤️</div>
+        <div class="headings">
+          <h3 class="title">Instagram Recovery & Support</h3>
+          <h4 class="strap">Grounded timelines and active support routes</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_5d1a17d77ad5453db17026016cd64c11~mv2.webp" alt="A guide on reactivating a disabled Instagram account, depicted with a visual metaphor of a padlocked chain.">
+        <p class="desc-2">If your account has been disabled or is under review, our resources walk you through realistic timelines and appeal routes.</p>
+        <a class="btn btn-rose" href="https://www.closerlives.com/community-group/instagram-disabled-accounts-support-tips" target="_blank" rel="noopener noreferrer">Join Support Group</a>
+        <a class="btn btn-secondary" href="https://www.closerlives.com/blogs/social-media/instagram-account-disabled-recovery" target="_blank" rel="noopener noreferrer">Read Recovery Guide</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="card theme-purple">
+    <details>
+      <summary>
+        <div class="logo">📊</div>
+        <div class="headings">
+          <h3 class="title">Track & Understand Growth</h3>
+          <h4 class="strap">Insightful trends without the internal obsession</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_661b533ae1774d79a6cbbfaa62cb1c2a~mv2.webp" alt="A person holding a smartphone displaying the Instagram logo and from Meta text, warning not to use 3rd-party apps to unfollow.">
+        <p class="desc-2">Our follower tracking guide helps you spot drops or growth patterns without obsessing over every number.</p>
+        <a class="btn btn-purple" href="https://www.closerlives.com/blogs/social-media/instagram-follower-tracking-guide" target="_blank" rel="noopener noreferrer">Use Tracking Guide</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="card theme-blue">
+    <details>
+      <summary>
+        <div class="logo">🛡️</div>
+        <div class="headings">
+          <h3 class="title">Safer Logins & Security</h3>
+          <h4 class="strap">Hardened configurations for creative platforms</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Many creator problems start with insecure logins. A VPN adds a layer of protection that helps keep your accounts safe.</p>
+        <a class="btn btn-blue" href="https://nordvpn.com/special/?utm_medium=affiliate&utm_term=&utm_content=&utm_campaign=off15&utm_source=aff120331" target="_blank" rel="noopener noreferrer sponsored">Learn More About NordVPN</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="card theme-orange">
+    <details>
+      <summary>
+        <div class="logo">✨</div>
+        <div class="headings">
+          <h3 class="title">Content & Mindset</h3>
+          <h4 class="strap">Structured rhythms that avoid systemic burnout</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">We focus on realistic posting rhythms, boundaries, and treating your audience like a community to avoid burnout.</p>
+        <a class="btn btn-orange" href="https://www.closerlives.com/blogs/my-instagram-account-was-disabled-here-is-how-i-got-it-back-in-2022" target="_blank" rel="noopener noreferrer">Read Recovery Story</a>
+      </div>
+    </details>
+  </section>
+
+  <section class="card theme-grey">
+    <details>
+      <summary>
+        <div class="logo">📢</div>
+        <div class="headings">
+          <h3 class="title">Affiliate Disclosure</h3>
+          <h4 class="strap">Transparency & Partnerships</h4>
+        </div>
+        <div class="chev"></div>
+      </summary>
+      <div class="panel">
+        <p class="desc-2">Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.</p>
+        <a class="btn btn-grey" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_blank" rel="noopener noreferrer">View Affiliate Policy</a>
+      </div>
+    </details>
+  </section>
+
+</main>
+
+<script>
+  (function () {
+    function sendHeight() {
+      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
+      }
+    }
+    window.addEventListener("load", sendHeight);
+    if (window.ResizeObserver) {
+      new ResizeObserver(sendHeight).observe(document.body);
+    }
+    setInterval(sendHeight, 1500);
+  })();
+</script>
+
 </body>
 </html>
