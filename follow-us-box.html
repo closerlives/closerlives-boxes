@@ -13,162 +13,144 @@
       box-sizing: border-box;
       font-family: Lato, Arial, sans-serif;
       background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     *, *::before, *::after {
       box-sizing: inherit;
     }
 
-    .follow-box {
-      width: 280px;
-      height: 420px;
-      margin: 0 auto;
-      background: #000;
-      border: 1px solid #b0b0b0;
-      border-bottom: 6px solid #d0d0d0;
-      border-radius: 10px;
-      position: relative;
-      overflow: hidden;
-      text-align: center;
-      padding: 10px;
+    .community-container {
+      width: 270px;
+      height: 410px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .follow-box:hover {
-      border: 2px solid #1a1a40;
-      border-bottom: 6px solid #1a1a40;
+    .community-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
     }
 
-    .follow-box::before {
-      content: "";
-      background: url('https://static.wixstatic.com/media/971500_d0672a77208f4c32a515be5b5b61bd3e~mv2.webp') no-repeat center center;
-      background-size: cover;
-      opacity: 0.9;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-    }
-
-    .follow-box-content {
-      position: relative;
-      z-index: 1;
-      color: #ffffff;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .follow-box img.logo {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin: 10px 0 10px;
-      border: 2px solid #fff;
-    }
-
-    .follow-box-content h2 {
-      font-size: 18px;
-      font-weight: bold;
-      margin: 0 0 10px;
-      color: #ffffff;
-    }
-
-    .follow-box-content p {
-      font-size: 16px;
-      line-height: 1.4;
-      margin: 0 0 20px;
-      color: #ffffff;
-      padding: 0 5px;
-    }
-
-    .follow-buttons {
+    .community-content {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      width: 100%;
     }
 
-    .follow-button {
+    .community-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #1a1a40;
+      line-height: 1.25;
+      margin: 0;
+      text-align: left;
+    }
+
+    .community-description {
+      font-size: 13px;
+      color: #4a4a4a;
+      line-height: 1.45;
+      text-align: left;
+      margin-bottom: 4px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin-top: auto; 
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 9px 0;
+      font-size: 13px;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    /* Primary CTA: Create an Account */
+    .btn-primary {
+      background-color: #00a896;
+      color: #ffffff;
+      border: 2px solid #00a896;
+    }
+
+    .btn-primary:hover {
+      background-color: #ffffff;
+      color: #00a896;
+      border-color: #00a896;
+    }
+
+    /* Secondary CTA: Social Links */
+    .btn-secondary {
+      background-color: #f7f7f7;
+      color: #1a1a40;
+      border: 2px solid #e0e0e0;
+    }
+
+    .btn-secondary:hover {
+      background-color: #ffffff;
+      border-color: #1a1a40;
+    }
+
+    .branding {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 20px;
-      padding: 8px 0;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: bold;
-      width: 100%;
-      cursor: pointer;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-      text-transform: uppercase;
-      border: 2px solid transparent;
-      position: relative;
-    }
-
-    .follow-button img {
-      position: absolute;
-      left: 10px;
-      width: 20px;
-      height: 20px;
-    }
-
-    .subscribe-btn {
-      background-color: #000000;
-      border-color: grey;
-    }
-
-    .instagram-btn {
-      background-color: #E95420;
-      border-color: #E95420;
-    }
-
-    .instagram-btn img {
-      border-radius: 5px;
-    }
-
-    .youtube-btn {
-      background-color: #FF0000;
-      border-color: #FF0000;
-    }
-
-    .youtube-btn img {
-      border: 2px solid white;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    .follow-button:hover {
-      background-color: #ffffff;
-      color: #000000;
-      border-color: #000000;
+      gap: 4px;
+      font-size: 11px;
+      color: #7a7a7a;
+      margin-top: 4px;
     }
   </style>
 </head>
 <body>
-  <div class="follow-box">
-    <div class="follow-box-content">
-      <img src="https://static.wixstatic.com/media/971500_cf853cdb8055456c96f6d21db06e5188~mv2.png" alt="White text on a black background reads “Closer LIVES,” with “Closer” in a cursive font above “LIVES” in bold, uppercase letters." class="logo" />
-      <h2>Join Our Community</h2>
-      <p>Follow Closer Lives for blogs, updates, and exclusive content on travel, lifestyle, and living outside the box.</p>
-      <div class="follow-buttons">
-        <a href="https://www.closerlives.com/subscribe" target="_blank" rel="noopener noreferrer nofollow" class="follow-button subscribe-btn">Create an Account</a>
-        <a href="https://www.instagram.com/jennandleon/" target="_blank" rel="noopener noreferrer nofollow" class="follow-button instagram-btn">
-          <img src="https://static.wixstatic.com/media/971500_63d885e2f3ce416fbdb78148647bf098~mv2.jpg" alt="Instagram Icon">Follow us on Instagram
-        </a>
-        <a href="https://www.youtube.com/@JennandLeon" target="_blank" rel="noopener noreferrer nofollow" class="follow-button youtube-btn">
-          <img src="https://static.wixstatic.com/media/971500_55f1be968bcd4505a7df17c17242c69d~mv2.png" alt="YouTube Icon">Join 15k+ on YouTube
-        </a>
+
+  <div class="community-container">
+    <div class="community-content">
+      <h3 class="community-title">Join the<br>Closer Lives Collective</h3>
+      
+      <div class="community-description">
+        Don't just read the stories—be part of them. Create a free account to unlock community spaces, or follow our journeys live from the road.
+      </div>
+    </div>
+    
+    <div class="button-group">
+      <a href="https://www.closerlives.com/register" target="_top" class="btn btn-primary">
+        Create an Account
+      </a>
+      <a href="https://www.instagram.com/closerlives" target="_blank" class="btn btn-secondary">
+        Follow on Instagram
+      </a>
+      <a href="https://www.youtube.com/@closerlives" target="_blank" class="btn btn-secondary">
+        Join 15K+ on YouTube
+      </a>
+      
+      <div class="branding">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#7a7a7a" stroke="#7a7a7a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+        </svg>
+        <span>From <em>Closer Lives</em></span>
       </div>
     </div>
   </div>
+
 </body>
 </html>
