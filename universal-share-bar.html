@@ -1,465 +1,164 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Closer Lives Universal Share Bar</title>
+<script>
+(function () {
 
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      box-sizing: border-box;
-      font-family: Lato, Arial, sans-serif;
-      background: transparent;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  const allowedHostnames = new Set([
+    "closerlives.com",
+    "www.closerlives.com"
+  ]);
 
-    *, *::before, *::after {
-      box-sizing: inherit;
-    }
-
-    .social-share-bar {
-      text-align: center;
-      width: 100%;
-      max-width: 280px;
-      margin: 5px auto;
-      padding: 10px;
-      background-color: #ffffff;
-      border-radius: 10px;
-      border: 1px solid #b0b0b0;
-      border-bottom: 6px solid #d0d0d0;
-      overflow: hidden;
-    }
-
-    .share-title {
-      font-size: 14px;
-      color: #000;
-      font-weight: bold;
-      display: block;
-      margin-bottom: 10px;
-    }
-
-    .share-icons {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      gap: 8px;
-    }
-
-    .share-icons a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 28px;
-      height: 28px;
-      text-decoration: none;
-    }
-
-    .share-icons img {
-      width: 28px;
-      height: 28px;
-      display: block;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="social-share-bar" id="shareBar">
-
-    <span class="share-title" id="shareTitle">
-      Share This Post
-    </span>
-
-    <div class="share-icons">
-
-      <a id="fbShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post on Facebook">
-        <img
-          src="https://static.wixstatic.com/media/971500_cdf6a8b90ccd45949000331f2102743a~mv2.webp"
-          alt="Share this post on Facebook">
-      </a>
-
-      <a id="liShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post on LinkedIn">
-        <img
-          src="https://static.wixstatic.com/media/971500_88c32773c94a4f6dac0b531fdd793ba4~mv2.webp"
-          alt="Share this post on LinkedIn">
-      </a>
-
-      <a id="gmailShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post via Gmail">
-        <img
-          src="https://static.wixstatic.com/media/971500_3377c90935d04003aed7b9f365e22e53~mv2.webp"
-          alt="Share this post via Gmail">
-      </a>
-
-      <a id="pinShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post on Pinterest">
-        <img
-          src="https://static.wixstatic.com/media/971500_48d4e7576ee344c1ae6315dcb85892c5~mv2.png"
-          alt="Share this post on Pinterest">
-      </a>
-
-      <a id="xShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post on X">
-        <img
-          src="https://static.wixstatic.com/shapes/971500_0c748df58ad24d308c797aeeb4b297a6.svg"
-          alt="Share this post on X">
-      </a>
-
-      <a id="outlookShare"
-         target="_blank"
-         rel="noopener noreferrer nofollow"
-         aria-label="Share this post via Outlook">
-        <img
-          src="https://static.wixstatic.com/media/971500_30f68ec2722847d483367c85b804a15f~mv2.png"
-          alt="Share this post via Outlook">
-      </a>
-
-      <a id="copyShare"
-         href="#"
-         aria-label="Copy link to this post">
-        <img
-          src="https://static.wixstatic.com/media/971500_280afa9151874c89a1402669590f9fe7~mv2.png"
-          alt="Copy link to this post">
-      </a>
-
-    </div>
-  </div>
+  let currentPostUrl = null;
 
 
-  <script>
-    (function () {
+  /* -------------------------
+     VALIDATE URL
+  ------------------------- */
 
-      const allowedHostnames = new Set([
-        "closerlives.com",
-        "www.closerlives.com"
-      ]);
+  function cleanUrl(value) {
 
+    if (!value) return null;
 
-      /* -------------------------
-         CLEAN URL
-      ------------------------- */
+    try {
 
-      function cleanUrl(value) {
+      const url = new URL(value);
 
-        if (!value) return null;
-
-        try {
-
-          const url = new URL(value);
-
-          if (!allowedHostnames.has(
-            url.hostname.toLowerCase()
-          )) {
-            return null;
-          }
-
-          url.hash = "";
-          url.search = "";
-
-          return url.href.replace(/\/$/, "");
-
-        } catch (error) {
-
-          return null;
-
-        }
-      }
-
-
-      /* -------------------------
-         GET BLOG URL
-      ------------------------- */
-
-      function detectPostUrl() {
-
-        const params =
-          new URLSearchParams(
-            window.location.search
-          );
-
-        const suppliedUrl =
-          cleanUrl(
-            params.get("url")
-          );
-
-        if (suppliedUrl) {
-          return suppliedUrl;
-        }
-
-
-        const referrer =
-          cleanUrl(
-            document.referrer
-          );
-
-        if (referrer) {
-          return referrer;
-        }
-
-
+      if (!allowedHostnames.has(
+        url.hostname.toLowerCase()
+      )) {
         return null;
       }
 
+      url.hash = "";
+      url.search = "";
 
-      /* -------------------------
-         CREATE EMAIL TITLE
-      ------------------------- */
+      return url.href.replace(/\/$/, "");
 
-      function titleFromUrl(postUrl) {
+    } catch (error) {
 
-        try {
+      return null;
 
-          let slug =
-            new URL(postUrl)
-              .pathname
-              .split("/")
-              .filter(Boolean)
-              .pop()
-              ||
-              "Closer Lives Post";
+    }
+  }
 
-          slug =
-            decodeURIComponent(slug);
 
-          return slug
-            .replace(/[-_]+/g, " ")
-            .replace(
-              /\b\w/g,
-              character =>
-                character.toUpperCase()
-            )
-            .trim();
+  /* -------------------------
+     CREATE POST TITLE
+  ------------------------- */
 
-        } catch (error) {
+  function titleFromUrl(postUrl) {
 
-          return "Closer Lives Post";
+    try {
 
-        }
+      let slug =
+        new URL(postUrl)
+          .pathname
+          .split("/")
+          .filter(Boolean)
+          .pop() ||
+          "Closer Lives Post";
+
+      slug = decodeURIComponent(slug);
+
+      return slug
+        .replace(/[-_]+/g, " ")
+        .replace(
+          /\b\w/g,
+          character =>
+            character.toUpperCase()
+        )
+        .trim();
+
+    } catch (error) {
+
+      return "Closer Lives Post";
+
+    }
+  }
+
+
+  /* -------------------------
+     BUILD SHARE LINKS
+  ------------------------- */
+
+  function buildShareLinks(postUrl) {
+
+    const cleanedUrl =
+      cleanUrl(postUrl);
+
+    if (!cleanedUrl) {
+      return;
+    }
+
+    currentPostUrl = cleanedUrl;
+
+    const encodedUrl =
+      encodeURIComponent(cleanedUrl);
+
+    const encodedSubject =
+      encodeURIComponent(
+        titleFromUrl(cleanedUrl)
+      );
+
+    const encodedBody =
+      encodeURIComponent(
+        `I thought you might enjoy this post:\n${cleanedUrl}`
+      );
+
+
+    document.getElementById("fbShare").href =
+      `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+    document.getElementById("liShare").href =
+      `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
+
+    document.getElementById("gmailShare").href =
+      `https://mail.google.com/mail/?view=cm&fs=1&su=${encodedSubject}&body=${encodedBody}`;
+
+    document.getElementById("pinShare").href =
+      `https://pinterest.com/pin/create/button/?url=${encodedUrl}`;
+
+    document.getElementById("xShare").href =
+      `https://twitter.com/intent/tweet?url=${encodedUrl}`;
+
+    document.getElementById("outlookShare").href =
+      `https://outlook.office.com/mail/deeplink/compose?subject=${encodedSubject}&body=${encodedBody}`;
+
+  }
+
+
+  /* -------------------------
+     RECEIVE URL FROM WIX
+  ------------------------- */
+
+  window.addEventListener(
+    "message",
+    function (event) {
+
+      if (
+        event.data &&
+        event.data.type === "SET_POST_URL" &&
+        event.data.url
+      ) {
+
+        buildShareLinks(
+          event.data.url
+        );
+
       }
 
-
-      /* -------------------------
-         BUILD SHARE LINKS
-      ------------------------- */
-
-      const postUrl =
-        detectPostUrl();
-
-      if (!postUrl) {
-        return;
-      }
-
-
-      const encodedUrl =
-        encodeURIComponent(
-          postUrl
-        );
-
-      const encodedSubject =
-        encodeURIComponent(
-          titleFromUrl(postUrl)
-        );
-
-      const encodedBody =
-        encodeURIComponent(
-          `I thought you might enjoy this post:\n${postUrl}`
-        );
-
-
-      /* Facebook */
-
-      document
-        .getElementById("fbShare")
-        .href =
-        `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-
-
-      /* LinkedIn */
-
-      document
-        .getElementById("liShare")
-        .href =
-        `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
-
-
-      /* Gmail Web Compose */
-
-      document
-        .getElementById("gmailShare")
-        .href =
-        `https://mail.google.com/mail/?view=cm&fs=1&su=${encodedSubject}&body=${encodedBody}`;
-
-
-      /* Pinterest */
-
-      document
-        .getElementById("pinShare")
-        .href =
-        `https://pinterest.com/pin/create/button/?url=${encodedUrl}`;
-
-
-      /* X */
-
-      document
-        .getElementById("xShare")
-        .href =
-        `https://twitter.com/intent/tweet?url=${encodedUrl}`;
-
-
-      /* Outlook Web Compose */
-
-      document
-        .getElementById("outlookShare")
-        .href =
-        `https://outlook.office.com/mail/deeplink/compose?subject=${encodedSubject}&body=${encodedBody}`;
-
-
-      /* -------------------------
-         COPY LINK
-      ------------------------- */
-
-      const shareTitle =
-        document.getElementById(
-          "shareTitle"
-        );
-
-
-      function showCopied() {
-
-        const originalText =
-          shareTitle.textContent;
-
-        shareTitle.textContent =
-          "✓ Link Copied!";
-
-        window.setTimeout(
-          function () {
-
-            shareTitle.textContent =
-              originalText;
-
-          },
-          1500
-        );
-      }
-
-
-      document
-        .getElementById("copyShare")
-        .addEventListener(
-          "click",
-          async function (event) {
-
-            event.preventDefault();
-
-
-            /* Modern clipboard method */
-
-            try {
-
-              if (
-                navigator.clipboard &&
-                window.isSecureContext
-              ) {
-
-                await navigator.clipboard
-                  .writeText(postUrl);
-
-                showCopied();
-
-                return;
-              }
-
-
-              /* -------------------------
-                 WIX / IFRAME FALLBACK
-              ------------------------- */
-
-              const textArea =
-                document.createElement(
-                  "textarea"
-                );
-
-              textArea.value =
-                postUrl;
-
-              textArea.setAttribute(
-                "readonly",
-                ""
-              );
-
-              textArea.style.position =
-                "fixed";
-
-              textArea.style.left =
-                "-9999px";
-
-              textArea.style.top =
-                "-9999px";
-
-
-              document.body.appendChild(
-                textArea
-              );
-
-
-              textArea.focus();
-
-              textArea.select();
-
-
-              const successful =
-                document.execCommand(
-                  "copy"
-                );
-
-
-              document.body.removeChild(
-                textArea
-              );
-
-
-              if (successful) {
-
-                showCopied();
-
-              }
-
-
-            } catch (error) {
-
-              console.error(
-                "Unable to copy link:",
-                error
-              );
-
-            }
-
-          }
-        );
-
-    })();
-  </script>
-
-</body>
-</html>
+    }
+  );
+
+
+  /* -------------------------
+     TELL WIX WE'RE READY
+  ------------------------- */
+
+  window.parent.postMessage(
+    {
+      type: "READY"
+    },
+    "*"
+  );
+
+})();
+</script>
