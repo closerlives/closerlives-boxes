@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Closer Lives Universal Share Bar</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      box-sizing: border-box;
+      font-family: Lato, Arial, sans-serif;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    *, *::before, *::after {
+      box-sizing: inherit;
+    }
+
+    .social-share-bar {
+      text-align: center;
+      width: 100%;
+      max-width: 280px;
+      margin: 5px auto;
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      border: 1px solid #b0b0b0;
+      border-bottom: 6px solid #d0d0d0;
+      overflow: hidden;
+    }
+
+    .share-title {
+      font-size: 16px;
+      color: #000;
+      font-weight: bold;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .share-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      gap: 8px;
+    }
+
+    .share-icons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      text-decoration: none;
+    }
+
+    .share-icons img {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="social-share-bar" id="shareBar">
+    <span class="share-title">
+      Share This Post
+    </span>
+
+    <div class="share-icons">
+
+      <a id="fbShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post on Facebook">
+        <img
+          src="https://static.wixstatic.com/media/971500_cdf6a8b90ccd45949000331f2102743a~mv2.webp"
+          alt="Share this post on Facebook">
+      </a>
+
+      <a id="liShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post on LinkedIn">
+        <img
+          src="https://static.wixstatic.com/media/971500_88c32773c94a4f6dac0b531fdd793ba4~mv2.webp"
+          alt="Share this post on LinkedIn">
+      </a>
+
+      <a id="gmailShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post via email">
+        <img
+          src="https://static.wixstatic.com/media/971500_3377c90935d04003aed7b9f365e22e53~mv2.webp"
+          alt="Share this post via email">
+      </a>
+
+      <a id="pinShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post on Pinterest">
+        <img
+          src="https://static.wixstatic.com/media/971500_48d4e7576ee344c1ae6315dcb85892c5~mv2.png"
+          alt="Share this post on Pinterest">
+      </a>
+
+      <a id="xShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post on X">
+        <img
+          src="https://static.wixstatic.com/shapes/971500_0c748df58ad24d308c797aeeb4b297a6.svg"
+          alt="Share this post on X">
+      </a>
+
+      <a id="outlookShare"
+         target="_blank"
+         rel="noopener noreferrer nofollow"
+         aria-label="Share this post via Outlook email">
+        <img
+          src="https://static.wixstatic.com/media/971500_30f68ec2722847d483367c85b804a15f~mv2.png"
+          alt="Share this post via Outlook email">
+      </a>
+
+      <a id="copyShare"
+         href="#"
+         aria-label="Copy link to this post">
+        <img
+          src="https://static.wixstatic.com/media/971500_280afa9151874c89a1402669590f9fe7~mv2.png"
+          alt="Copy link to this post">
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+
+      const allowedHostnames = new Set([
+        "closerlives.com",
+        "www.closerlives.com"
+      ]);
+
+      function cleanUrl(value) {
+        if (!value) return null;
+
+        try {
+          const url = new URL(value);
+
+          if (!allowedHostnames.has(url.hostname.toLowerCase())) {
+            return null;
+          }
+
+          url.hash = "";
+          url.search = "";
+
+          return url.href.replace(/\/$/, "");
+
+        } catch (error) {
+          return null;
+        }
+      }
+
+
+      function queryFallback() {
+        const params = new URLSearchParams(window.location.search);
+
+        return cleanUrl(
+          params.get("url")
+        );
+      }
+
+
+      function detectPostUrl() {
+
+        /* Optional manual fallback for testing */
+        const manualFallback = queryFallback();
+
+        if (manualFallback) {
+          return manualFallback;
+        }
+
+
+        /*
+          Main Wix method.
+
+          When this GitHub Pages page is loaded inside
+          a Wix HTML iframe, document.referrer should
+          normally contain the parent blog post URL.
+        */
+
+        const referrer = cleanUrl(
+          document.referrer
+        );
+
+        if (referrer) {
+          return referrer;
+        }
+
+
+        /*
+          Secondary browser fallback.
+        */
+
+        try {
+
+          const origins =
+            window.location.ancestorOrigins;
+
+          if (origins && origins.length) {
+
+            for (
+              let i = 0;
+              i < origins.length;
+              i += 1
+            ) {
+
+              const candidate =
+                cleanUrl(origins[i]);
+
+              if (candidate) {
+                return candidate;
+              }
+            }
+          }
+
+        } catch (error) {
+
+          /*
+            Cross-origin restrictions are normal
+            in some Wix embed configurations.
+          */
+
+        }
+
+        return null;
+      }
+
+
+      function titleFromUrl(postUrl) {
+
+        try {
+
+          let slug =
+            new URL(postUrl)
+              .pathname
+              .split("/")
+              .filter(Boolean)
+              .pop()
+              ||
+              "Closer Lives Post";
+
+          slug =
+            decodeURIComponent(slug);
+
+          return slug
+            .replace(/[-_]+/g, " ")
+            .replace(
+              /\b\w/g,
+              character =>
+                character.toUpperCase()
+            )
+            .trim();
+
+        } catch (error) {
+
+          return "Closer Lives Post";
+        }
+      }
+
+
+      function disableSharing() {
+
+        const shareBar =
+          document.getElementById(
+            "shareBar"
+          );
+
+        shareBar.setAttribute(
+          "data-url-detected",
+          "false"
+        );
+
+        [
+          "fbShare",
+          "liShare",
+          "gmailShare",
+          "pinShare",
+          "xShare",
+          "outlookShare"
+        ].forEach(id => {
+
+          const element =
+            document.getElementById(id);
+
+          element.removeAttribute("href");
+
+          element.style.cursor =
+            "not-allowed";
+
+          element.setAttribute(
+            "aria-disabled",
+            "true"
+          );
+        });
+
+        document
+          .getElementById("copyShare")
+          .style.cursor =
+          "not-allowed";
+
+        console.warn(
+          "Closer Lives share bar: unable to detect the parent Closer Lives page URL."
+        );
+      }
+
+
+      const postUrl =
+        detectPostUrl();
+
+
+      if (!postUrl) {
+
+        disableSharing();
+
+        return;
+      }
+
+
+      const shareBar =
+        document.getElementById(
+          "shareBar"
+        );
+
+      shareBar.setAttribute(
+        "data-url-detected",
+        "true"
+      );
+
+      shareBar.setAttribute(
+        "data-post-url",
+        postUrl
+      );
+
+
+      const encodedUrl =
+        encodeURIComponent(postUrl);
+
+      const postTitle =
+        titleFromUrl(postUrl);
+
+      const encodedSubject =
+        encodeURIComponent(
+          postTitle
+        );
+
+      const encodedBody =
+        encodeURIComponent(
+          `I thought you might enjoy this post:\n${postUrl}`
+        );
+
+
+      document
+        .getElementById("fbShare")
+        .href =
+        `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+
+      document
+        .getElementById("liShare")
+        .href =
+        `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
+
+
+      document
+        .getElementById("gmailShare")
+        .href =
+        `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+
+
+      document
+        .getElementById("pinShare")
+        .href =
+        `https://pinterest.com/pin/create/button/?url=${encodedUrl}`;
+
+
+      document
+        .getElementById("xShare")
+        .href =
+        `https://twitter.com/intent/tweet?url=${encodedUrl}`;
+
+
+      document
+        .getElementById("outlookShare")
+        .href =
+        `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+
+
+      document
+        .getElementById("copyShare")
+        .addEventListener(
+          "click",
+          function (event) {
+
+            event.preventDefault();
+
+            if (
+              navigator.clipboard &&
+              navigator.clipboard.writeText
+            ) {
+
+              navigator.clipboard
+                .writeText(postUrl)
+                .then(() => {
+
+                  alert(
+                    "Link copied to clipboard!"
+                  );
+
+                })
+                .catch(() => {
+
+                  prompt(
+                    "Copy this link:",
+                    postUrl
+                  );
+
+                });
+
+            } else {
+
+              prompt(
+                "Copy this link:",
+                postUrl
+              );
+            }
+          }
+        );
+
+    })();
+  </script>
+
+</body>
+</html>
