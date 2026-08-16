@@ -73,8 +73,9 @@
 <body>
 
   <div class="social-share-bar" id="shareBar">
-    <span class="share-title">
-      Share This Pos
+
+    <span class="share-title" id="shareTitle">
+      Share This Post
     </span>
 
     <div class="share-icons">
@@ -100,10 +101,10 @@
       <a id="gmailShare"
          target="_blank"
          rel="noopener noreferrer nofollow"
-         aria-label="Share this post via email">
+         aria-label="Share this post via Gmail">
         <img
           src="https://static.wixstatic.com/media/971500_3377c90935d04003aed7b9f365e22e53~mv2.webp"
-          alt="Share this post via email">
+          alt="Share this post via Gmail">
       </a>
 
       <a id="pinShare"
@@ -127,10 +128,10 @@
       <a id="outlookShare"
          target="_blank"
          rel="noopener noreferrer nofollow"
-         aria-label="Share this post via Outlook email">
+         aria-label="Share this post via Outlook">
         <img
           src="https://static.wixstatic.com/media/971500_30f68ec2722847d483367c85b804a15f~mv2.png"
-          alt="Share this post via Outlook email">
+          alt="Share this post via Outlook">
       </a>
 
       <a id="copyShare"
@@ -144,6 +145,7 @@
     </div>
   </div>
 
+
   <script>
     (function () {
 
@@ -152,13 +154,22 @@
         "www.closerlives.com"
       ]);
 
+
+      /* -------------------------
+         CLEAN URL
+      ------------------------- */
+
       function cleanUrl(value) {
+
         if (!value) return null;
 
         try {
+
           const url = new URL(value);
 
-          if (!allowedHostnames.has(url.hostname.toLowerCase())) {
+          if (!allowedHostnames.has(
+            url.hostname.toLowerCase()
+          )) {
             return null;
           }
 
@@ -168,85 +179,51 @@
           return url.href.replace(/\/$/, "");
 
         } catch (error) {
+
           return null;
+
         }
       }
 
 
-      function queryFallback() {
-        const params = new URLSearchParams(window.location.search);
-
-        return cleanUrl(
-          params.get("url")
-        );
-      }
-
+      /* -------------------------
+         GET BLOG URL
+      ------------------------- */
 
       function detectPostUrl() {
 
-        /* Optional manual fallback for testing */
-        const manualFallback = queryFallback();
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
 
-        if (manualFallback) {
-          return manualFallback;
+        const suppliedUrl =
+          cleanUrl(
+            params.get("url")
+          );
+
+        if (suppliedUrl) {
+          return suppliedUrl;
         }
 
 
-        /*
-          Main Wix method.
-
-          When this GitHub Pages page is loaded inside
-          a Wix HTML iframe, document.referrer should
-          normally contain the parent blog post URL.
-        */
-
-        const referrer = cleanUrl(
-          document.referrer
-        );
+        const referrer =
+          cleanUrl(
+            document.referrer
+          );
 
         if (referrer) {
           return referrer;
         }
 
 
-        /*
-          Secondary browser fallback.
-        */
-
-        try {
-
-          const origins =
-            window.location.ancestorOrigins;
-
-          if (origins && origins.length) {
-
-            for (
-              let i = 0;
-              i < origins.length;
-              i += 1
-            ) {
-
-              const candidate =
-                cleanUrl(origins[i]);
-
-              if (candidate) {
-                return candidate;
-              }
-            }
-          }
-
-        } catch (error) {
-
-          /*
-            Cross-origin restrictions are normal
-            in some Wix embed configurations.
-          */
-
-        }
-
         return null;
       }
 
+
+      /* -------------------------
+         CREATE EMAIL TITLE
+      ------------------------- */
 
       function titleFromUrl(postUrl) {
 
@@ -276,93 +253,31 @@
         } catch (error) {
 
           return "Closer Lives Post";
+
         }
       }
 
 
-      function disableSharing() {
-
-        const shareBar =
-          document.getElementById(
-            "shareBar"
-          );
-
-        shareBar.setAttribute(
-          "data-url-detected",
-          "false"
-        );
-
-        [
-          "fbShare",
-          "liShare",
-          "gmailShare",
-          "pinShare",
-          "xShare",
-          "outlookShare"
-        ].forEach(id => {
-
-          const element =
-            document.getElementById(id);
-
-          element.removeAttribute("href");
-
-          element.style.cursor =
-            "not-allowed";
-
-          element.setAttribute(
-            "aria-disabled",
-            "true"
-          );
-        });
-
-        document
-          .getElementById("copyShare")
-          .style.cursor =
-          "not-allowed";
-
-        console.warn(
-          "Closer Lives share bar: unable to detect the parent Closer Lives page URL."
-        );
-      }
-
+      /* -------------------------
+         BUILD SHARE LINKS
+      ------------------------- */
 
       const postUrl =
         detectPostUrl();
 
-
       if (!postUrl) {
-
-        disableSharing();
-
         return;
       }
 
 
-      const shareBar =
-        document.getElementById(
-          "shareBar"
-        );
-
-      shareBar.setAttribute(
-        "data-url-detected",
-        "true"
-      );
-
-      shareBar.setAttribute(
-        "data-post-url",
-        postUrl
-      );
-
-
       const encodedUrl =
-        encodeURIComponent(postUrl);
-
-      const postTitle =
-        titleFromUrl(postUrl);
+        encodeURIComponent(
+          postUrl
+        );
 
       const encodedSubject =
         encodeURIComponent(
-          postTitle
+          titleFromUrl(postUrl)
         );
 
       const encodedBody =
@@ -371,11 +286,15 @@
         );
 
 
+      /* Facebook */
+
       document
         .getElementById("fbShare")
         .href =
         `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
 
+
+      /* LinkedIn */
 
       document
         .getElementById("liShare")
@@ -383,11 +302,15 @@
         `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
 
 
+      /* Gmail Web Compose */
+
       document
         .getElementById("gmailShare")
         .href =
-        `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+        `https://mail.google.com/mail/?view=cm&fs=1&su=${encodedSubject}&body=${encodedBody}`;
 
+
+      /* Pinterest */
 
       document
         .getElementById("pinShare")
@@ -395,56 +318,143 @@
         `https://pinterest.com/pin/create/button/?url=${encodedUrl}`;
 
 
+      /* X */
+
       document
         .getElementById("xShare")
         .href =
         `https://twitter.com/intent/tweet?url=${encodedUrl}`;
 
 
+      /* Outlook Web Compose */
+
       document
         .getElementById("outlookShare")
         .href =
-        `mailto:?subject=${encodedSubject}&body=${encodedBody}`;
+        `https://outlook.office.com/mail/deeplink/compose?subject=${encodedSubject}&body=${encodedBody}`;
+
+
+      /* -------------------------
+         COPY LINK
+      ------------------------- */
+
+      const shareTitle =
+        document.getElementById(
+          "shareTitle"
+        );
+
+
+      function showCopied() {
+
+        const originalText =
+          shareTitle.textContent;
+
+        shareTitle.textContent =
+          "✓ Link Copied!";
+
+        window.setTimeout(
+          function () {
+
+            shareTitle.textContent =
+              originalText;
+
+          },
+          1500
+        );
+      }
 
 
       document
         .getElementById("copyShare")
         .addEventListener(
           "click",
-          function (event) {
+          async function (event) {
 
             event.preventDefault();
 
-            if (
-              navigator.clipboard &&
-              navigator.clipboard.writeText
-            ) {
 
-              navigator.clipboard
-                .writeText(postUrl)
-                .then(() => {
+            /* Modern clipboard method */
 
-                  alert(
-                    "Link copied to clipboard!"
-                  );
+            try {
 
-                })
-                .catch(() => {
+              if (
+                navigator.clipboard &&
+                window.isSecureContext
+              ) {
 
-                  prompt(
-                    "Copy this link:",
-                    postUrl
-                  );
+                await navigator.clipboard
+                  .writeText(postUrl);
 
-                });
+                showCopied();
 
-            } else {
+                return;
+              }
 
-              prompt(
-                "Copy this link:",
-                postUrl
+
+              /* -------------------------
+                 WIX / IFRAME FALLBACK
+              ------------------------- */
+
+              const textArea =
+                document.createElement(
+                  "textarea"
+                );
+
+              textArea.value =
+                postUrl;
+
+              textArea.setAttribute(
+                "readonly",
+                ""
               );
+
+              textArea.style.position =
+                "fixed";
+
+              textArea.style.left =
+                "-9999px";
+
+              textArea.style.top =
+                "-9999px";
+
+
+              document.body.appendChild(
+                textArea
+              );
+
+
+              textArea.focus();
+
+              textArea.select();
+
+
+              const successful =
+                document.execCommand(
+                  "copy"
+                );
+
+
+              document.body.removeChild(
+                textArea
+              );
+
+
+              if (successful) {
+
+                showCopied();
+
+              }
+
+
+            } catch (error) {
+
+              console.error(
+                "Unable to copy link:",
+                error
+              );
+
             }
+
           }
         );
 
