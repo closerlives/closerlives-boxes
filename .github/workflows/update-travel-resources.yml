@@ -24,8 +24,9 @@ jobs:
           import sys
 
           files = sorted(
-              Path(".").glob("*post-travel-resources.html")
-          )
+    path for path in Path(".").glob("*post-travel-resources.html")
+    if path.name != "generic-blog-post-travel-resources.html"
+)
 
           final_script = '''<!-- Auto height script for Wix -->
           <script>
