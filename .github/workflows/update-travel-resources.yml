@@ -1,4 +1,4 @@
-name: Update 12Go Resource Links
+name: Improve Travel Box Resizing
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Update 12Go links
+      - name: Improve resize handling
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -26,25 +26,70 @@ jobs:
           files = sorted(Path(".").glob("*post-travel-resources.html"))
           updated_files = []
 
-          old_pattern = re.compile(
-              r'<a\s+href="https://12go\.asia/\?z=9193611"'
-              r'\s+target="_blank"'
-              r'\s+rel="noopener sponsored">'
-              r'12Go system</a>',
-              re.I
-          )
+          new_script = r'''<!-- Auto height script for Wix -->
+          <script>
+            (function () {
+              function postHeight() {
+                var height = Math.max(
+                  document.documentElement.scrollHeight,
+                  document.body.scrollHeight
+                );
 
-          replacement = (
-              '<a href="https://booking.closerlives.com/en" '
-              'target="_blank" '
-              'rel="noopener sponsored">12Go system</a>'
+                parent.postMessage(
+                  {
+                    type: "CL_RESIZE",
+                    height: height
+                  },
+                  "*"
+                );
+              }
+
+              function sendHeight() {
+                requestAnimationFrame(function () {
+                  requestAnimationFrame(postHeight);
+                });
+              }
+
+              window.addEventListener("load", function () {
+                sendHeight();
+                setTimeout(sendHeight, 100);
+                setTimeout(sendHeight, 300);
+              });
+
+              document.querySelectorAll("details").forEach(function (detail) {
+                detail.addEventListener("toggle", function () {
+                  sendHeight();
+
+                  // Recheck once layout/transitions have completed.
+                  setTimeout(sendHeight, 100);
+                  setTimeout(sendHeight, 300);
+                  setTimeout(sendHeight, 600);
+                });
+              });
+
+              var resizeObserver = new ResizeObserver(function () {
+                sendHeight();
+              });
+
+              resizeObserver.observe(document.documentElement);
+
+              // Fallback for delayed embeds, maps, fonts and other content.
+              setInterval(sendHeight, 1500);
+            })();
+          </script>'''
+
+          pattern = re.compile(
+              r'<!-- Auto height script for Wix -->\s*'
+              r'<script>.*?type:\s*"CL_RESIZE".*?</script>',
+              re.S
           )
 
           for path in files:
               content = path.read_text(encoding="utf-8")
-              updated_content, count = old_pattern.subn(
-                  replacement,
-                  content
+              updated_content, count = pattern.subn(
+                  new_script,
+                  content,
+                  count=1
               )
 
               if count:
@@ -52,26 +97,22 @@ jobs:
                       updated_content,
                       encoding="utf-8"
                   )
-                  updated_files.append((str(path), count))
+                  updated_files.append(str(path))
 
           print(
-              f"Scanned {len(files)} "
-              "post-travel-resources files."
+              f"Scanned {len(files)} post-travel-resources files."
           )
 
           print(
               f"Updated {len(updated_files)} files."
           )
 
-          for filename, count in updated_files:
-              print(
-                  f"Updated: {filename} "
-                  f"({count} link replacement(s))"
-              )
+          for filename in updated_files:
+              print(f"Updated: {filename}")
 
           if not updated_files:
               print(
-                  "ERROR: No matching 12Go links were found."
+                  "ERROR: No existing CL_RESIZE scripts were matched."
               )
               sys.exit(1)
           PY
@@ -88,5 +129,5 @@ jobs:
             exit 1
           fi
 
-          git commit -m "Update 12Go resource links"
+          git commit -m "Improve travel resource box resizing"
           git push
