@@ -320,9 +320,13 @@ html, body {
   let lastHeight = 0;
 
   function postHeight() {
-    const height = Math.ceil(wrap.getBoundingClientRect().height);
+    const height = Math.ceil(
+      wrap.getBoundingClientRect().height
+    );
 
+    // Only message Wix when the height has genuinely changed.
     if (height === lastHeight) return;
+
     lastHeight = height;
 
     parent.postMessage(
@@ -340,31 +344,49 @@ html, body {
     });
   }
 
+  // Debounce accordion/layout changes so Wix receives
+  // the settled height rather than several intermediate heights.
   function settleHeight() {
     clearTimeout(resizeTimer);
 
-    sendHeight();
-
-    resizeTimer = setTimeout(sendHeight, 50);
-    setTimeout(sendHeight, 150);
-    setTimeout(sendHeight, 300);
-    setTimeout(sendHeight, 600);
+    resizeTimer = setTimeout(function () {
+      sendHeight();
+    }, 50);
   }
 
-  window.addEventListener("load", settleHeight);
+  // Initial height after the page has loaded.
+  window.addEventListener("load", function () {
+    settleHeight();
 
-  document.querySelectorAll("details").forEach(function (detail) {
-    detail.addEventListener("toggle", settleHeight);
+    // One delayed check for images/widgets that finish shortly after load.
+    setTimeout(settleHeight, 300);
   });
 
+  // Recalculate whenever an accordion opens or closes.
+  document.querySelectorAll("details").forEach(function (detail) {
+    detail.addEventListener("toggle", function () {
+      settleHeight();
+    });
+  });
+
+  // Watch the actual content wrapper for genuine size changes.
+  // This catches accordion contractions as well as expansions,
+  // delayed images, maps and other embedded content.
   const resizeObserver = new ResizeObserver(function () {
-    sendHeight();
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(function () {
+      sendHeight();
+    }, 50);
   });
 
   resizeObserver.observe(wrap);
 
+  // Recheck once web fonts have finished loading.
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(settleHeight);
+    document.fonts.ready.then(function () {
+      settleHeight();
+    });
   }
 })();
 </script>
