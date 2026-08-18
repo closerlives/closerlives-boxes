@@ -314,10 +314,13 @@ html, body {
 <script>
   (function () {
     function postHeight() {
-      var height = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      );
+      var wrap = document.querySelector(".wrap");
+
+if (!wrap) return;
+
+var height = Math.ceil(
+  wrap.getBoundingClientRect().height
+);
 
       parent.postMessage(
         {
