@@ -211,7 +211,7 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_149054f9655548dc92218b9248d09828~mv2.webp" alt="A graphic of the Instagram logo appearing shattered like broken glass against a dark background, with the bold white text "Is Instagram Dead?" centered at the bottom.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_149054f9655548dc92218b9248d09828~mv2.webp" alt="A graphic of the Instagram logo appearing shattered like broken glass against a dark background, with the bold white text &quot;Is Instagram Dead?&quot; centered at the bottom.">
         <p class="desc-2">The algorithm changes, reach drops, and it feels like a ghost town. We dive into whether the platform is actually dying—and how to pivot your strategy without losing your mind.</p>
         <a class="btn btn-orange" href="https://www.closerlives.com/blog/post/from-reward-to-burnout-has-instagram-already-died-for-creators" target="_top">READ THE POST</a>
       </div>
@@ -230,27 +230,76 @@
       </summary>
       <div class="panel">
         <p class="desc-2">Some links are affiliate links, meaning we may earn a small commission at no extra cost to you.</p>
-        <a class="btn btn-grey" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_top" rel="noopener noreferrer">VIEW AFFILIATE POLICY</a>
+        <a class="btn btn-grey" href="https://www.closerlives.com/policies/affiliate-disclosure" target="_top">VIEW AFFILIATE POLICY</a>
       </div>
     </details>
   </section>
 
 </main>
 
+<!-- Auto height script for Wix -->
 <script>
-  (function () {
+(function () {
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
+
+    let resizeTimer = null;
+    let lastHeight = 0;
+
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
+
+        if (height === lastHeight) return;
+        lastHeight = height;
+
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
+    }
+
     function sendHeight() {
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
-      }
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
     }
-    window.addEventListener("load", sendHeight);
-    if (window.ResizeObserver) {
-      new ResizeObserver(sendHeight).observe(document.body);
+
+    function settleHeight() {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
     }
-    setInterval(sendHeight, 1500);
-  })();
+
+    window.addEventListener("load", function () {
+        sendHeight();
+        setTimeout(sendHeight, 100);
+    });
+
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
+    });
+
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
+    });
+
+    resizeObserver.observe(wrap);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
+})();
 </script>
 
 </body>
