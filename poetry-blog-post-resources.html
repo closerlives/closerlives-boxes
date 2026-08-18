@@ -187,7 +187,7 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_56bcea62fb074306bd067fb877b1a142~mv2.webp" alt="Wooden letterpress block letters spelling out "POETRY" alongside the Closer Lives logo on a light textured canvas background.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_56bcea62fb074306bd067fb877b1a142~mv2.webp" alt="Wooden letterpress block letters spelling out &quot;POETRY&quot; alongside the Closer Lives logo on a light textured canvas background.">
         <p class="desc-2">A warm, collaborative community where writers share drafts, finished pieces, ideas, feedback, and inspiration.</p>
         <a class="btn btn-purple" href="https://www.closerlives.com/community-group/closer-lives-poetry-collective" target="_top">Visit the Poetry Collective</a>
       </div>
@@ -205,7 +205,7 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp" alt="Book cover for "Out of the Shadows: From Darkness to Light" by Leon Gregori, featuring a black-and-white graphic ink illustration of a coastal harbor town, pier, and lighthouse under a full moon.">
+        <img class="hero" src="https://static.wixstatic.com/media/971500_ec2eac85a5ce48f59b068a4134213b07~mv2.webp" alt="Book cover for &quot;Out of the Shadows: From Darkness to Light&quot; by Leon Gregori, featuring a black-and-white graphic ink illustration of a coastal harbor town, pier, and lighthouse under a full moon.">
         <p class="desc-2">Explore our poetry hub, creative reflections, and two of our most-read poems.</p>
         <a class="btn btn-teal" href="https://www.closerlives.com/blogs/poetry" target="_top">Visit the Poetry Hub</a>
         <a class="btn btn-secondary" href="https://www.closerlives.com/about-us/leon-gregori#outoftheshadows" target="_top">Explore “Out of the Shadows”</a>
@@ -294,20 +294,69 @@
 
 </main>
 
+<!-- Auto height script for Wix -->
 <script>
-  (function () {
+(function () {
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
+
+    let resizeTimer = null;
+    let lastHeight = 0;
+
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
+
+        if (height === lastHeight) return;
+        lastHeight = height;
+
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
+    }
+
     function sendHeight() {
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
-      }
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
     }
-    window.addEventListener("load", sendHeight);
-    if (window.ResizeObserver) {
-      new ResizeObserver(sendHeight).observe(document.body);
+
+    function settleHeight() {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
     }
-    setInterval(sendHeight, 1500);
-  })();
+
+    window.addEventListener("load", function () {
+        sendHeight();
+        setTimeout(sendHeight, 100);
+    });
+
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
+    });
+
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
+    });
+
+    resizeObserver.observe(wrap);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
+})();
 </script>
 
 </body>
