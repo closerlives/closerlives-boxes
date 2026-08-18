@@ -1,4 +1,4 @@
-name: Fix All Travel Resource Resize
+name: Fix All Travel Resource Auto Height
 
 on:
   workflow_dispatch:
@@ -7,86 +7,94 @@ permissions:
   contents: write
 
 jobs:
-  fix-travel-resource-resize:
+  fix-travel-resource-auto-height:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Patch all country travel resource boxes
+      - name: Replace Travel auto-height scripts with proven Social Media pattern
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
 
-          # Targets every country-specific Travel Resources file.
-          # Deliberately excludes the generic travel-resources.html file.
           files = sorted(Path(".").glob("*-blog-post-travel-resources.html"))
 
           if not files:
               raise SystemExit("No *-blog-post-travel-resources.html files found.")
 
-          marker_start = "<!-- CL_RESIZE_SYNC_START -->"
-          marker_end = "<!-- CL_RESIZE_SYNC_END -->"
+          marker_start = "<!-- CL_TRAVEL_AUTO_HEIGHT_START -->"
+          marker_end = "<!-- CL_TRAVEL_AUTO_HEIGHT_END -->"
 
-          resize_block = '''<!-- CL_RESIZE_SYNC_START -->
+          auto_height_block = '''<!-- CL_TRAVEL_AUTO_HEIGHT_START -->
+          <!-- Auto height script for Wix -->
           <script>
           (function () {
-            function reportHeight() {
-              var height = Math.max(
-                document.body ? document.body.scrollHeight : 0,
-                document.documentElement ? document.documentElement.scrollHeight : 0,
-                document.body ? document.body.offsetHeight : 0,
-                document.documentElement ? document.documentElement.offsetHeight : 0
-              );
+              const wrap = document.querySelector(".wrap");
+              if (!wrap) return;
 
-              window.parent.postMessage(
-                {
-                  type: "CL_RESIZE",
-                  height: height
-                },
-                "*"
-              );
-            }
+              let resizeTimer = null;
+              let lastHeight = 0;
 
-            function scheduleHeightReports() {
-              requestAnimationFrame(function () {
-                requestAnimationFrame(reportHeight);
+              function postHeight() {
+                  const height = Math.ceil(
+                      wrap.getBoundingClientRect().height
+                  );
+
+                  if (height === lastHeight) return;
+                  lastHeight = height;
+
+                  parent.postMessage(
+                      {
+                          type: "CL_RESIZE",
+                          height: height
+                      },
+                      "*"
+                  );
+              }
+
+              function sendHeight() {
+                  requestAnimationFrame(function () {
+                      requestAnimationFrame(postHeight);
+                  });
+              }
+
+              function settleHeight() {
+                  clearTimeout(resizeTimer);
+
+                  resizeTimer = setTimeout(function () {
+                      sendHeight();
+                  }, 50);
+              }
+
+              window.addEventListener("load", function () {
+                  sendHeight();
+                  setTimeout(sendHeight, 100);
               });
-              setTimeout(reportHeight, 50);
-              setTimeout(reportHeight, 150);
-              setTimeout(reportHeight, 350);
-            }
 
-            window.addEventListener("load", scheduleHeightReports);
-            window.addEventListener("resize", scheduleHeightReports);
-
-            document.addEventListener("click", function () {
-              scheduleHeightReports();
-            });
-
-            document.addEventListener("toggle", function () {
-              scheduleHeightReports();
-            }, true);
-
-            if ("MutationObserver" in window) {
-              var observer = new MutationObserver(function () {
-                scheduleHeightReports();
+              document.querySelectorAll("details").forEach(function (details) {
+                  details.addEventListener("toggle", function () {
+                      settleHeight();
+                  });
               });
 
-              observer.observe(document.documentElement, {
-                attributes: true,
-                childList: true,
-                subtree: true
+              const resizeObserver = new ResizeObserver(function () {
+                  settleHeight();
               });
-            }
 
-            scheduleHeightReports();
+              resizeObserver.observe(wrap);
+
+              if (document.fonts && document.fonts.ready) {
+                  document.fonts.ready.then(function () {
+                      sendHeight();
+                  });
+              }
           })();
           </script>
-          <!-- CL_RESIZE_SYNC_END -->'''
+          <!-- CL_TRAVEL_AUTO_HEIGHT_END -->'''
 
           changed = []
           unchanged = []
@@ -95,19 +103,49 @@ jobs:
               html = path.read_text(encoding="utf-8")
               original = html
 
-              if marker_start in html and marker_end in html:
-                  pattern = re.compile(
-                      re.escape(marker_start) + r".*?" + re.escape(marker_end),
+              # Remove any previously managed Travel auto-height block.
+              managed_patterns = [
+                  re.compile(
+                      r'<!-- CL_RESIZE_SYNC_START -->.*?<!-- CL_RESIZE_SYNC_END -->',
+                      flags=re.S
+                  ),
+                  re.compile(
+                      r'<!-- CL_TRAVEL_AUTO_HEIGHT_START -->.*?<!-- CL_TRAVEL_AUTO_HEIGHT_END -->',
                       flags=re.S
                   )
-                  html = pattern.sub(resize_block, html)
+              ]
+
+              for pattern in managed_patterns:
+                  html = pattern.sub("", html)
+
+              # Remove an older existing "Auto height script for Wix" block
+              # if present, so there is only one resize system.
+              old_auto = re.compile(
+                  r'<!-- Auto height script for Wix -->\s*<script>.*?</script>',
+                  flags=re.S | re.I
+              )
+              html = old_auto.sub("", html)
+
+              # Remove other standalone scripts that post CL_RESIZE, to avoid
+              # duplicate or conflicting height calculations.
+              scripts = re.findall(r'<script\b[^>]*>.*?</script>', html, flags=re.S | re.I)
+              for script in scripts:
+                  if 'CL_RESIZE' in script and 'parent.postMessage' in script:
+                      html = html.replace(script, "")
+
+              closing_body = re.search(r"</body\s*>", html, flags=re.I)
+
+              if closing_body:
+                  idx = closing_body.start()
+                  html = (
+                      html[:idx].rstrip()
+                      + "\n\n"
+                      + auto_height_block
+                      + "\n\n"
+                      + html[idx:]
+                  )
               else:
-                  closing_body = re.search(r"</body\\s*>", html, flags=re.I)
-                  if closing_body:
-                      idx = closing_body.start()
-                      html = html[:idx].rstrip() + "\\n\\n" + resize_block + "\\n" + html[idx:]
-                  else:
-                      html = html.rstrip() + "\\n\\n" + resize_block + "\\n"
+                  html = html.rstrip() + "\n\n" + auto_height_block + "\n"
 
               if html != original:
                   path.write_text(html, encoding="utf-8")
@@ -116,7 +154,7 @@ jobs:
                   unchanged.append(str(path))
 
           print(f"Travel resource files found: {len(files)}")
-          print(f"Changed: {len(changed)}")
+          print(f"Updated: {len(changed)}")
           for item in changed:
               print(f"  UPDATED: {item}")
 
@@ -135,6 +173,7 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           git add -- '*-blog-post-travel-resources.html'
-          git commit -m "Fix resize reporting for all travel resource boxes"
+          git commit -m "Match Travel resource auto-height to Social Media"
           git push
