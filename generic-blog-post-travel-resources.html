@@ -328,16 +328,74 @@ html, body {
  
 </main>
 
+<!-- Auto height script for Wix -->
 <script>
-  (function () {
-    function sendHeight() {
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-      parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
-    }
-    window.addEventListener("load", sendHeight);
-    new ResizeObserver(sendHeight).observe(document.body);
-    setInterval(sendHeight, 1500);
-  })();
+(function () {
+  const wrap = document.querySelector(".wrap");
+  if (!wrap) return;
+
+  let resizeTimer = null;
+  let lastHeight = 0;
+
+  function postHeight() {
+    const height = Math.ceil(
+      wrap.getBoundingClientRect().height
+    );
+
+    if (height === lastHeight) return;
+
+    lastHeight = height;
+
+    parent.postMessage(
+      {
+        type: "CL_RESIZE",
+        height: height
+      },
+      "*"
+    );
+  }
+
+  function sendHeight() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(postHeight);
+    });
+  }
+
+  function settleHeight() {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(function () {
+      sendHeight();
+    }, 50);
+  }
+
+  window.addEventListener("load", function () {
+    settleHeight();
+    setTimeout(settleHeight, 300);
+  });
+
+  document.querySelectorAll("details").forEach(function (detail) {
+    detail.addEventListener("toggle", function () {
+      settleHeight();
+    });
+  });
+
+  const resizeObserver = new ResizeObserver(function () {
+    clearTimeout(resizeTimer);
+
+    resizeTimer = setTimeout(function () {
+      sendHeight();
+    }, 50);
+  });
+
+  resizeObserver.observe(wrap);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () {
+      settleHeight();
+    });
+  }
+})();
 </script>
 
 </body>
