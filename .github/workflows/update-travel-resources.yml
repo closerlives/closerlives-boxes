@@ -21,59 +21,59 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           import re
+          import sys
 
           files = sorted(Path(".").glob("*post-travel-resources.html"))
-
           updated_files = []
+
+          old_pattern = re.compile(
+              r'<a\s+href="https://12go\.asia/\?z=9193611"'
+              r'\s+target="_blank"'
+              r'\s+rel="noopener sponsored">'
+              r'12Go system</a>',
+              re.I
+          )
+
+          replacement = (
+              '<a href="https://booking.closerlives.com/en" '
+              'target="_blank" '
+              'rel="noopener sponsored">12Go system</a>'
+          )
 
           for path in files:
               content = path.read_text(encoding="utf-8")
-              original = content
-
-              def update_12go_link(match):
-                  attrs = match.group(1)
-                  link_text = match.group(2)
-
-                  # Remove any existing href and rel attributes.
-                  attrs = re.sub(
-                      r'\s+href="[^"]*"',
-                      '',
-                      attrs,
-                      flags=re.I
-                  )
-
-                  attrs = re.sub(
-                      r'\s+rel="[^"]*"',
-                      '',
-                      attrs,
-                      flags=re.I
-                  )
-
-                  return (
-                      '<a'
-                      + attrs
-                      + ' href="https://booking.closerlives.com/en"'
-                      + ' rel="noopener sponsored">'
-                      + link_text
-                      + '</a>'
-                  )
-
-              content = re.sub(
-                  r'<a\b([^>]*)>(\s*Powered by 12Go system\s*)</a>',
-                  update_12go_link,
-                  content,
-                  flags=re.I
+              updated_content, count = old_pattern.subn(
+                  replacement,
+                  content
               )
 
-              if content != original:
-                  path.write_text(content, encoding="utf-8")
-                  updated_files.append(str(path))
+              if count:
+                  path.write_text(
+                      updated_content,
+                      encoding="utf-8"
+                  )
+                  updated_files.append((str(path), count))
 
-          print(f"Scanned {len(files)} post-travel-resources files.")
-          print(f"Updated {len(updated_files)} files.")
+          print(
+              f"Scanned {len(files)} "
+              "post-travel-resources files."
+          )
 
-          for filename in updated_files:
-              print(f"Updated: {filename}")
+          print(
+              f"Updated {len(updated_files)} files."
+          )
+
+          for filename, count in updated_files:
+              print(
+                  f"Updated: {filename} "
+                  f"({count} link replacement(s))"
+              )
+
+          if not updated_files:
+              print(
+                  "ERROR: No matching 12Go links were found."
+              )
+              sys.exit(1)
           PY
 
       - name: Commit updates
@@ -84,8 +84,9 @@ jobs:
           git add -- '*post-travel-resources.html'
 
           if git diff --cached --quiet; then
-            echo "No 12Go links required updating."
-          else
-            git commit -m "Update 12Go resource links"
-            git push
+            echo "ERROR: No HTML changes to commit."
+            exit 1
           fi
+
+          git commit -m "Update 12Go resource links"
+          git push
