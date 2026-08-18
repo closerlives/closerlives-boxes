@@ -312,57 +312,61 @@ html, body {
 
 <!-- Auto height script for Wix -->
 <script>
-  (function () {
-    function postHeight() {
-      var wrap = document.querySelector(".wrap");
+(function () {
+  const wrap = document.querySelector(".wrap");
+  if (!wrap) return;
 
-if (!wrap) return;
+  let resizeTimer = null;
+  let lastHeight = 0;
 
-var height = Math.ceil(
-  wrap.getBoundingClientRect().height
-);
+  function postHeight() {
+    const height = Math.ceil(wrap.getBoundingClientRect().height);
 
-      parent.postMessage(
-        {
-          type: "CL_RESIZE",
-          height: height
-        },
-        "*"
-      );
-    }
+    if (height === lastHeight) return;
+    lastHeight = height;
 
-    function sendHeight() {
-      requestAnimationFrame(function () {
-        requestAnimationFrame(postHeight);
-      });
-    }
+    parent.postMessage(
+      {
+        type: "CL_RESIZE",
+        height: height
+      },
+      "*"
+    );
+  }
 
-    window.addEventListener("load", function () {
-      sendHeight();
-      setTimeout(sendHeight, 100);
-      setTimeout(sendHeight, 300);
+  function sendHeight() {
+    requestAnimationFrame(function () {
+      requestAnimationFrame(postHeight);
     });
+  }
 
-    document.querySelectorAll("details").forEach(function (detail) {
-      detail.addEventListener("toggle", function () {
-        sendHeight();
+  function settleHeight() {
+    clearTimeout(resizeTimer);
 
-        // Recheck once layout/transitions have completed.
-        setTimeout(sendHeight, 100);
-        setTimeout(sendHeight, 300);
-        setTimeout(sendHeight, 600);
-      });
-    });
+    sendHeight();
 
-    var resizeObserver = new ResizeObserver(function () {
-      sendHeight();
-    });
+    resizeTimer = setTimeout(sendHeight, 50);
+    setTimeout(sendHeight, 150);
+    setTimeout(sendHeight, 300);
+    setTimeout(sendHeight, 600);
+  }
 
-    resizeObserver.observe(document.documentElement);
+  window.addEventListener("load", settleHeight);
 
-    // Fallback for delayed embeds, maps, fonts and other content.
-    setInterval(sendHeight, 1500);
-  })();
+  document.querySelectorAll("details").forEach(function (detail) {
+    detail.addEventListener("toggle", settleHeight);
+  });
+
+  const resizeObserver = new ResizeObserver(function () {
+    sendHeight();
+  });
+
+  resizeObserver.observe(wrap);
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(settleHeight);
+  }
+})();
 </script>
 
 </body>
