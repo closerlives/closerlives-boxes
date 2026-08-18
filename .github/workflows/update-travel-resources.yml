@@ -2,6 +2,11 @@ name: Fix All Travel Resource Auto Height
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/update-travel-resources.yml'
 
 permissions:
   contents: write
@@ -14,166 +19,126 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Replace Travel auto-height scripts with proven Social Media pattern
+      - name: Replace all country Travel auto-height scripts
         shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
 
-          files = sorted(Path(".").glob("*-blog-post-travel-resources.html"))
+          files = sorted(Path('.').glob('*-blog-post-travel-resources.html'))
 
           if not files:
-              raise SystemExit("No *-blog-post-travel-resources.html files found.")
+              raise SystemExit('No country Travel Resources files found.')
 
-          marker_start = "<!-- CL_TRAVEL_AUTO_HEIGHT_START -->"
-          marker_end = "<!-- CL_TRAVEL_AUTO_HEIGHT_END -->"
+          exact_script = '''<!-- Auto height script for Wix -->
+<script>
+(function () {
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
 
-          auto_height_block = '''<!-- CL_TRAVEL_AUTO_HEIGHT_START -->
-          <!-- Auto height script for Wix -->
-          <script>
-          (function () {
-              const wrap = document.querySelector(".wrap");
-              if (!wrap) return;
+    let resizeTimer = null;
+    let lastHeight = 0;
 
-              let resizeTimer = null;
-              let lastHeight = 0;
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
 
-              function postHeight() {
-                  const height = Math.ceil(
-                      wrap.getBoundingClientRect().height
-                  );
+        if (height === lastHeight) return;
+        lastHeight = height;
 
-                  if (height === lastHeight) return;
-                  lastHeight = height;
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
+    }
 
-                  parent.postMessage(
-                      {
-                          type: "CL_RESIZE",
-                          height: height
-                      },
-                      "*"
-                  );
-              }
+    function sendHeight() {
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
+    }
 
-              function sendHeight() {
-                  requestAnimationFrame(function () {
-                      requestAnimationFrame(postHeight);
-                  });
-              }
+    function settleHeight() {
+        clearTimeout(resizeTimer);
 
-              function settleHeight() {
-                  clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
+    }
 
-                  resizeTimer = setTimeout(function () {
-                      sendHeight();
-                  }, 50);
-              }
+    window.addEventListener("load", function () {
+        sendHeight();
+        setTimeout(sendHeight, 100);
+    });
 
-              window.addEventListener("load", function () {
-                  sendHeight();
-                  setTimeout(sendHeight, 100);
-              });
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
+    });
 
-              document.querySelectorAll("details").forEach(function (details) {
-                  details.addEventListener("toggle", function () {
-                      settleHeight();
-                  });
-              });
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
+    });
 
-              const resizeObserver = new ResizeObserver(function () {
-                  settleHeight();
-              });
+    resizeObserver.observe(wrap);
 
-              resizeObserver.observe(wrap);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
+})();
+</script>'''
 
-              if (document.fonts && document.fonts.ready) {
-                  document.fonts.ready.then(function () {
-                      sendHeight();
-                  });
-              }
-          })();
-          </script>
-          <!-- CL_TRAVEL_AUTO_HEIGHT_END -->'''
+          # Replace the existing auto-height section immediately before </body>.
+          # This matches both the older Travel implementation and any prior managed version.
+          pattern = re.compile(
+              r'(?:<!-- CL_TRAVEL_AUTO_HEIGHT_START -->\s*)?'
+              r'<!-- Auto height script for Wix -->\s*'
+              r'<script>.*?</script>'
+              r'(?:\s*<!-- CL_TRAVEL_AUTO_HEIGHT_END -->)?',
+              flags=re.S | re.I
+          )
 
           changed = []
-          unchanged = []
 
           for path in files:
-              html = path.read_text(encoding="utf-8")
-              original = html
+              html = path.read_text(encoding='utf-8')
 
-              # Remove any previously managed Travel auto-height block.
-              managed_patterns = [
-                  re.compile(
-                      r'<!-- CL_RESIZE_SYNC_START -->.*?<!-- CL_RESIZE_SYNC_END -->',
-                      flags=re.S
-                  ),
-                  re.compile(
-                      r'<!-- CL_TRAVEL_AUTO_HEIGHT_START -->.*?<!-- CL_TRAVEL_AUTO_HEIGHT_END -->',
-                      flags=re.S
-                  )
-              ]
-
-              for pattern in managed_patterns:
-                  html = pattern.sub("", html)
-
-              # Remove an older existing "Auto height script for Wix" block
-              # if present, so there is only one resize system.
-              old_auto = re.compile(
-                  r'<!-- Auto height script for Wix -->\s*<script>.*?</script>',
-                  flags=re.S | re.I
-              )
-              html = old_auto.sub("", html)
-
-              # Remove other standalone scripts that post CL_RESIZE, to avoid
-              # duplicate or conflicting height calculations.
-              scripts = re.findall(r'<script\b[^>]*>.*?</script>', html, flags=re.S | re.I)
-              for script in scripts:
-                  if 'CL_RESIZE' in script and 'parent.postMessage' in script:
-                      html = html.replace(script, "")
-
-              closing_body = re.search(r"</body\s*>", html, flags=re.I)
-
-              if closing_body:
-                  idx = closing_body.start()
-                  html = (
-                      html[:idx].rstrip()
-                      + "\n\n"
-                      + auto_height_block
-                      + "\n\n"
-                      + html[idx:]
-                  )
+              if pattern.search(html):
+                  new_html = pattern.sub(exact_script, html, count=1)
               else:
-                  html = html.rstrip() + "\n\n" + auto_height_block + "\n"
+                  body = re.search(r'</body\s*>', html, flags=re.I)
+                  if not body:
+                      raise SystemExit(f'Missing </body> in {path}')
+                  new_html = html[:body.start()].rstrip() + '\n\n' + exact_script + '\n\n' + html[body.start():]
 
-              if html != original:
-                  path.write_text(html, encoding="utf-8")
+              if new_html != html:
+                  path.write_text(new_html, encoding='utf-8')
                   changed.append(str(path))
-              else:
-                  unchanged.append(str(path))
 
-          print(f"Travel resource files found: {len(files)}")
-          print(f"Updated: {len(changed)}")
-          for item in changed:
-              print(f"  UPDATED: {item}")
-
-          print(f"Already current: {len(unchanged)}")
-          for item in unchanged:
-              print(f"  OK: {item}")
+          print(f'Country Travel files found: {len(files)}')
+          print(f'Files changed: {len(changed)}')
+          for path in changed:
+              print('UPDATED:', path)
           PY
 
-      - name: Commit and push
+      - name: Commit and push changes
         shell: bash
         run: |
-          if git diff --quiet; then
-            echo "No changes required."
+          if git diff --quiet -- '*-blog-post-travel-resources.html'; then
+            echo 'All Travel resource files already match the working pattern.'
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -- '*-blog-post-travel-resources.html'
-          git commit -m "Match Travel resource auto-height to Social Media"
+          git commit -m 'Apply working auto-height pattern to all Travel resources'
           git push
