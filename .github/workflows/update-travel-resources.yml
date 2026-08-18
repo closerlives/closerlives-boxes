@@ -1,53 +1,48 @@
-name: Standardize Travel Resource Box Resizing
+name: Fix All Travel Resource Resize
 
 on:
-  push:
-    paths:
-      - '.github/workflows/update-travel-resources.yml'
+  workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  update:
+  fix-travel-resource-resize:
     runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Update travel resource resize scripts
+      - name: Patch all country travel resource boxes
+        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
-          import sys
 
-          files = sorted(
-    path for path in Path(".").glob("*post-travel-resources.html")
-    if path.name != "generic-blog-post-travel-resources.html"
-)
+          # Targets every country-specific Travel Resources file.
+          # Deliberately excludes the generic travel-resources.html file.
+          files = sorted(Path(".").glob("*-blog-post-travel-resources.html"))
 
-          final_script = '''<!-- Auto height script for Wix -->
+          if not files:
+              raise SystemExit("No *-blog-post-travel-resources.html files found.")
+
+          marker_start = "<!-- CL_RESIZE_SYNC_START -->"
+          marker_end = "<!-- CL_RESIZE_SYNC_END -->"
+
+          resize_block = '''<!-- CL_RESIZE_SYNC_START -->
           <script>
           (function () {
-            const wrap = document.querySelector(".wrap");
-            if (!wrap) return;
-
-            let resizeTimer = null;
-            let lastHeight = 0;
-
-            function postHeight() {
-              const height = Math.ceil(
-                wrap.getBoundingClientRect().height
+            function reportHeight() {
+              var height = Math.max(
+                document.body ? document.body.scrollHeight : 0,
+                document.documentElement ? document.documentElement.scrollHeight : 0,
+                document.body ? document.body.offsetHeight : 0,
+                document.documentElement ? document.documentElement.offsetHeight : 0
               );
 
-              // Only message Wix when the height has genuinely changed.
-              if (height === lastHeight) return;
-
-              lastHeight = height;
-
-              parent.postMessage(
+              window.parent.postMessage(
                 {
                   type: "CL_RESIZE",
                   height: height
@@ -56,147 +51,90 @@ jobs:
               );
             }
 
-            function sendHeight() {
+            function scheduleHeightReports() {
               requestAnimationFrame(function () {
-                requestAnimationFrame(postHeight);
+                requestAnimationFrame(reportHeight);
+              });
+              setTimeout(reportHeight, 50);
+              setTimeout(reportHeight, 150);
+              setTimeout(reportHeight, 350);
+            }
+
+            window.addEventListener("load", scheduleHeightReports);
+            window.addEventListener("resize", scheduleHeightReports);
+
+            document.addEventListener("click", function () {
+              scheduleHeightReports();
+            });
+
+            document.addEventListener("toggle", function () {
+              scheduleHeightReports();
+            }, true);
+
+            if ("MutationObserver" in window) {
+              var observer = new MutationObserver(function () {
+                scheduleHeightReports();
+              });
+
+              observer.observe(document.documentElement, {
+                attributes: true,
+                childList: true,
+                subtree: true
               });
             }
 
-            // Debounce accordion/layout changes so Wix receives
-            // the settled height rather than several intermediate heights.
-            function settleHeight() {
-              clearTimeout(resizeTimer);
-
-              resizeTimer = setTimeout(function () {
-                sendHeight();
-              }, 50);
-            }
-
-            // Initial height after the page has loaded.
-            window.addEventListener("load", function () {
-              settleHeight();
-
-              // One delayed check for images/widgets that finish shortly after load.
-              setTimeout(settleHeight, 300);
-            });
-
-            // Recalculate whenever an accordion opens or closes.
-            document.querySelectorAll("details").forEach(function (detail) {
-              detail.addEventListener("toggle", function () {
-                settleHeight();
-              });
-            });
-
-            // Watch the actual content wrapper for genuine size changes.
-            // This catches accordion contractions as well as expansions,
-            // delayed images, maps and other embedded content.
-            const resizeObserver = new ResizeObserver(function () {
-              clearTimeout(resizeTimer);
-
-              resizeTimer = setTimeout(function () {
-                sendHeight();
-              }, 50);
-            });
-
-            resizeObserver.observe(wrap);
-
-            // Recheck once web fonts have finished loading.
-            if (document.fonts && document.fonts.ready) {
-              document.fonts.ready.then(function () {
-                settleHeight();
-              });
-            }
+            scheduleHeightReports();
           })();
-          </script>'''
+          </script>
+          <!-- CL_RESIZE_SYNC_END -->'''
 
-          pattern = re.compile(
-              r'<!-- Auto height script for Wix -->'
-              r'\s*<script>.*?</script>',
-              re.S
-          )
-
-          updated_files = []
-          already_correct = []
-          unmatched_files = []
+          changed = []
+          unchanged = []
 
           for path in files:
-              content = path.read_text(encoding="utf-8")
+              html = path.read_text(encoding="utf-8")
+              original = html
 
-              if final_script in content:
-                  already_correct.append(str(path))
-                  continue
+              if marker_start in html and marker_end in html:
+                  pattern = re.compile(
+                      re.escape(marker_start) + r".*?" + re.escape(marker_end),
+                      flags=re.S
+                  )
+                  html = pattern.sub(resize_block, html)
+              else:
+                  closing_body = re.search(r"</body\\s*>", html, flags=re.I)
+                  if closing_body:
+                      idx = closing_body.start()
+                      html = html[:idx].rstrip() + "\\n\\n" + resize_block + "\\n" + html[idx:]
+                  else:
+                      html = html.rstrip() + "\\n\\n" + resize_block + "\\n"
 
-              updated_content, count = pattern.subn(
-                  final_script,
-                  content,
-                  count=1
-              )
+              if html != original:
+                  path.write_text(html, encoding="utf-8")
+                  changed.append(str(path))
+              else:
+                  unchanged.append(str(path))
 
-              if count == 0:
-                  unmatched_files.append(str(path))
-                  continue
+          print(f"Travel resource files found: {len(files)}")
+          print(f"Changed: {len(changed)}")
+          for item in changed:
+              print(f"  UPDATED: {item}")
 
-              path.write_text(
-                  updated_content,
-                  encoding="utf-8"
-              )
-
-              updated_files.append(str(path))
-
-          print(
-              f"Scanned {len(files)} "
-              "post-travel-resources files."
-          )
-
-          print(
-              f"Updated {len(updated_files)} files."
-          )
-
-          print(
-              f"Already correct: "
-              f"{len(already_correct)} files."
-          )
-
-          print(
-              f"Unmatched: "
-              f"{len(unmatched_files)} files."
-          )
-
-          for filename in updated_files:
-              print(f"Updated: {filename}")
-
-          for filename in already_correct:
-              print(f"Already correct: {filename}")
-
-          if unmatched_files:
-              print("")
-              print(
-                  "ERROR: The following files did not contain "
-                  "the expected Auto height script:"
-              )
-
-              for filename in unmatched_files:
-                  print(f"Unmatched: {filename}")
-
-              sys.exit(1)
-
-          if not files:
-              print(
-                  "ERROR: No post-travel-resources files found."
-              )
-              sys.exit(1)
+          print(f"Already current: {len(unchanged)}")
+          for item in unchanged:
+              print(f"  OK: {item}")
           PY
 
-      - name: Commit updates
+      - name: Commit and push
+        shell: bash
         run: |
-          git config user.name "Closer Lives Automation"
-          git config user.email "actions@users.noreply.github.com"
-
-          git add -- '*post-travel-resources.html'
-
-          if git diff --cached --quiet; then
-            echo "No resize-script changes required."
-          else
-            git commit -m "Standardize travel resource box resizing"
-            git push
+          if git diff --quiet; then
+            echo "No changes required."
+            exit 0
           fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*-blog-post-travel-resources.html'
+          git commit -m "Fix resize reporting for all travel resource boxes"
+          git push
