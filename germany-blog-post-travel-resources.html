@@ -313,12 +313,51 @@ html, body {
 <!-- Auto height script for Wix -->
 <script>
   (function () {
-    function sendHeight() {
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-      parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
+    function postHeight() {
+      var height = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight
+      );
+
+      parent.postMessage(
+        {
+          type: "CL_RESIZE",
+          height: height
+        },
+        "*"
+      );
     }
-    window.addEventListener("load", sendHeight);
-    new ResizeObserver(sendHeight).observe(document.body);
+
+    function sendHeight() {
+      requestAnimationFrame(function () {
+        requestAnimationFrame(postHeight);
+      });
+    }
+
+    window.addEventListener("load", function () {
+      sendHeight();
+      setTimeout(sendHeight, 100);
+      setTimeout(sendHeight, 300);
+    });
+
+    document.querySelectorAll("details").forEach(function (detail) {
+      detail.addEventListener("toggle", function () {
+        sendHeight();
+
+        // Recheck once layout/transitions have completed.
+        setTimeout(sendHeight, 100);
+        setTimeout(sendHeight, 300);
+        setTimeout(sendHeight, 600);
+      });
+    });
+
+    var resizeObserver = new ResizeObserver(function () {
+      sendHeight();
+    });
+
+    resizeObserver.observe(document.documentElement);
+
+    // Fallback for delayed embeds, maps, fonts and other content.
     setInterval(sendHeight, 1500);
   })();
 </script>
