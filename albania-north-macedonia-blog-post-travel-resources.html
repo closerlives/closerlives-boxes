@@ -334,57 +334,72 @@ html, body {
   </section>
 </main>
 
+<!-- CL_TRAVEL_AUTO_HEIGHT_START -->
 <!-- Auto height script for Wix -->
 <script>
-  (function () {
-    function postHeight() {
-      var height = Math.max(
-        document.documentElement.scrollHeight,
-        document.body.scrollHeight
-      );
+(function () {
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
 
-      parent.postMessage(
-        {
-          type: "CL_RESIZE",
-          height: height
-        },
-        "*"
-      );
+    let resizeTimer = null;
+    let lastHeight = 0;
+
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
+
+        if (height === lastHeight) return;
+        lastHeight = height;
+
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
     }
 
     function sendHeight() {
-      requestAnimationFrame(function () {
-        requestAnimationFrame(postHeight);
-      });
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
+    }
+
+    function settleHeight() {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
     }
 
     window.addEventListener("load", function () {
-      sendHeight();
-      setTimeout(sendHeight, 100);
-      setTimeout(sendHeight, 300);
-    });
-
-    document.querySelectorAll("details").forEach(function (detail) {
-      detail.addEventListener("toggle", function () {
         sendHeight();
-
-        // Recheck once layout/transitions have completed.
         setTimeout(sendHeight, 100);
-        setTimeout(sendHeight, 300);
-        setTimeout(sendHeight, 600);
-      });
     });
 
-    var resizeObserver = new ResizeObserver(function () {
-      sendHeight();
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
     });
 
-    resizeObserver.observe(document.documentElement);
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
+    });
 
-    // Fallback for delayed embeds, maps, fonts and other content.
-    setInterval(sendHeight, 1500);
-  })();
+    resizeObserver.observe(wrap);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
+})();
 </script>
+<!-- CL_TRAVEL_AUTO_HEIGHT_END -->
 
 </body>
 </html>

@@ -328,75 +328,72 @@ html, body {
  
 </main>
 
+<!-- CL_TRAVEL_AUTO_HEIGHT_START -->
 <!-- Auto height script for Wix -->
 <script>
 (function () {
-  const wrap = document.querySelector(".wrap");
-  if (!wrap) return;
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
 
-  let resizeTimer = null;
-  let lastHeight = 0;
+    let resizeTimer = null;
+    let lastHeight = 0;
 
-  function postHeight() {
-    const height = Math.ceil(
-      wrap.getBoundingClientRect().height
-    );
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
 
-    if (height === lastHeight) return;
+        if (height === lastHeight) return;
+        lastHeight = height;
 
-    lastHeight = height;
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
+    }
 
-    parent.postMessage(
-      {
-        type: "CL_RESIZE",
-        height: height
-      },
-      "*"
-    );
-  }
+    function sendHeight() {
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
+    }
 
-  function sendHeight() {
-    requestAnimationFrame(function () {
-      requestAnimationFrame(postHeight);
+    function settleHeight() {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
+    }
+
+    window.addEventListener("load", function () {
+        sendHeight();
+        setTimeout(sendHeight, 100);
     });
-  }
 
-  function settleHeight() {
-    clearTimeout(resizeTimer);
-
-    resizeTimer = setTimeout(function () {
-      sendHeight();
-    }, 50);
-  }
-
-  window.addEventListener("load", function () {
-    settleHeight();
-    setTimeout(settleHeight, 300);
-  });
-
-  document.querySelectorAll("details").forEach(function (detail) {
-    detail.addEventListener("toggle", function () {
-      settleHeight();
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
     });
-  });
 
-  const resizeObserver = new ResizeObserver(function () {
-    clearTimeout(resizeTimer);
-
-    resizeTimer = setTimeout(function () {
-      sendHeight();
-    }, 50);
-  });
-
-  resizeObserver.observe(wrap);
-
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () {
-      settleHeight();
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
     });
-  }
+
+    resizeObserver.observe(wrap);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
 })();
 </script>
+<!-- CL_TRAVEL_AUTO_HEIGHT_END -->
 
 </body>
 </html>
