@@ -1,4 +1,4 @@
-name: Improve Travel Box Resizing
+name: Standardize Travel Resource Box Resizing
 
 on:
   push:
@@ -16,103 +16,172 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Improve resize handling
+      - name: Update travel resource resize scripts
         run: |
           python - <<'PY'
           from pathlib import Path
           import re
           import sys
 
-          files = sorted(Path(".").glob("*post-travel-resources.html"))
-          updated_files = []
+          files = sorted(
+              Path(".").glob("*post-travel-resources.html")
+          )
 
-          new_script = r'''<!-- Auto height script for Wix -->
+          final_script = '''<!-- Auto height script for Wix -->
           <script>
-            (function () {
-              function postHeight() {
-                var height = Math.max(
-                  document.documentElement.scrollHeight,
-                  document.body.scrollHeight
-                );
+          (function () {
+            const wrap = document.querySelector(".wrap");
+            if (!wrap) return;
 
-                parent.postMessage(
-                  {
-                    type: "CL_RESIZE",
-                    height: height
-                  },
-                  "*"
-                );
-              }
+            let resizeTimer = null;
+            let lastHeight = 0;
 
-              function sendHeight() {
-                requestAnimationFrame(function () {
-                  requestAnimationFrame(postHeight);
-                });
-              }
+            function postHeight() {
+              const height = Math.ceil(
+                wrap.getBoundingClientRect().height
+              );
 
-              window.addEventListener("load", function () {
+              // Only message Wix when the height has genuinely changed.
+              if (height === lastHeight) return;
+
+              lastHeight = height;
+
+              parent.postMessage(
+                {
+                  type: "CL_RESIZE",
+                  height: height
+                },
+                "*"
+              );
+            }
+
+            function sendHeight() {
+              requestAnimationFrame(function () {
+                requestAnimationFrame(postHeight);
+              });
+            }
+
+            // Debounce accordion/layout changes so Wix receives
+            // the settled height rather than several intermediate heights.
+            function settleHeight() {
+              clearTimeout(resizeTimer);
+
+              resizeTimer = setTimeout(function () {
                 sendHeight();
-                setTimeout(sendHeight, 100);
-                setTimeout(sendHeight, 300);
+              }, 50);
+            }
+
+            // Initial height after the page has loaded.
+            window.addEventListener("load", function () {
+              settleHeight();
+
+              // One delayed check for images/widgets that finish shortly after load.
+              setTimeout(settleHeight, 300);
+            });
+
+            // Recalculate whenever an accordion opens or closes.
+            document.querySelectorAll("details").forEach(function (detail) {
+              detail.addEventListener("toggle", function () {
+                settleHeight();
               });
+            });
 
-              document.querySelectorAll("details").forEach(function (detail) {
-                detail.addEventListener("toggle", function () {
-                  sendHeight();
+            // Watch the actual content wrapper for genuine size changes.
+            // This catches accordion contractions as well as expansions,
+            // delayed images, maps and other embedded content.
+            const resizeObserver = new ResizeObserver(function () {
+              clearTimeout(resizeTimer);
 
-                  // Recheck once layout/transitions have completed.
-                  setTimeout(sendHeight, 100);
-                  setTimeout(sendHeight, 300);
-                  setTimeout(sendHeight, 600);
-                });
-              });
-
-              var resizeObserver = new ResizeObserver(function () {
+              resizeTimer = setTimeout(function () {
                 sendHeight();
+              }, 50);
+            });
+
+            resizeObserver.observe(wrap);
+
+            // Recheck once web fonts have finished loading.
+            if (document.fonts && document.fonts.ready) {
+              document.fonts.ready.then(function () {
+                settleHeight();
               });
-
-              resizeObserver.observe(document.documentElement);
-
-              // Fallback for delayed embeds, maps, fonts and other content.
-              setInterval(sendHeight, 1500);
-            })();
+            }
+          })();
           </script>'''
 
           pattern = re.compile(
-              r'<!-- Auto height script for Wix -->\s*'
-              r'<script>.*?type:\s*"CL_RESIZE".*?</script>',
+              r'<!-- Auto height script for Wix -->'
+              r'\s*<script>.*?</script>',
               re.S
           )
 
+          updated_files = []
+          already_correct = []
+          unmatched_files = []
+
           for path in files:
               content = path.read_text(encoding="utf-8")
+
+              if final_script in content:
+                  already_correct.append(str(path))
+                  continue
+
               updated_content, count = pattern.subn(
-                  new_script,
+                  final_script,
                   content,
                   count=1
               )
 
-              if count:
-                  path.write_text(
-                      updated_content,
-                      encoding="utf-8"
-                  )
-                  updated_files.append(str(path))
+              if count == 0:
+                  unmatched_files.append(str(path))
+                  continue
+
+              path.write_text(
+                  updated_content,
+                  encoding="utf-8"
+              )
+
+              updated_files.append(str(path))
 
           print(
-              f"Scanned {len(files)} post-travel-resources files."
+              f"Scanned {len(files)} "
+              "post-travel-resources files."
           )
 
           print(
               f"Updated {len(updated_files)} files."
           )
 
+          print(
+              f"Already correct: "
+              f"{len(already_correct)} files."
+          )
+
+          print(
+              f"Unmatched: "
+              f"{len(unmatched_files)} files."
+          )
+
           for filename in updated_files:
               print(f"Updated: {filename}")
 
-          if not updated_files:
+          for filename in already_correct:
+              print(f"Already correct: {filename}")
+
+          if unmatched_files:
+              print("")
               print(
-                  "ERROR: No existing CL_RESIZE scripts were matched."
+                  "ERROR: The following files did not contain "
+                  "the expected Auto height script:"
+              )
+
+              for filename in unmatched_files:
+                  print(f"Unmatched: {filename}")
+
+              sys.exit(1)
+
+          if not files:
+              print(
+                  "ERROR: No post-travel-resources files found."
               )
               sys.exit(1)
           PY
@@ -125,9 +194,8 @@ jobs:
           git add -- '*post-travel-resources.html'
 
           if git diff --cached --quiet; then
-            echo "ERROR: No HTML changes to commit."
-            exit 1
+            echo "No resize-script changes required."
+          else
+            git commit -m "Standardize travel resource box resizing"
+            git push
           fi
-
-          git commit -m "Improve travel resource box resizing"
-          git push
