@@ -232,11 +232,11 @@
         <div class="chev"></div>
       </summary>
       <div class="panel">
-        <img class="hero" src="https://static.wixstatic.com/media/971500_f124761014f94711bdbe6ded35a2c815~mv2.webp" alt="Jenn smiling against a sparkling grey and white background, representing Closer Lives.>
+        <img class="hero" src="https://static.wixstatic.com/media/971500_f124761014f94711bdbe6ded35a2c815~mv2.webp" alt="Jenn smiling against a sparkling grey and white background, representing Closer Lives.">
         <p class="desc-2">Going grey in public, online, and on camera is personal and powerful. Jenn shares her real experience of questions, judgments, and freedom in our grey hair blogs and community spaces.</p>
         <p class="desc-2">If you are embracing your own silver journey, our Embracing the Silver Lining community gives you a space to talk through the emotional side and practical care tips.</p>
         <a class="btn btn-rose" href="https://www.closerlives.com/community-group/embracing-the-silver-lining-community-group" target="_top">JOIN THE SILVER LINING COMMUNITY</a>
-        <a class="btn btn-secondary" href="https://www.closerlives.com/blogs/embracing-the-silver-lining" target="_top">READ JENN'S GREY HAIR JOURNEY BLOGSs</a>
+        <a class="btn btn-secondary" href="https://www.closerlives.com/blogs/embracing-the-silver-lining" target="_top">READ JENN'S GREY HAIR JOURNEY BLOGS</a>
       </div>
     </details>
   </section>
@@ -283,20 +283,69 @@
 
 </main>
 
+<!-- Auto height script for Wix -->
 <script>
-  (function () {
+(function () {
+    const wrap = document.querySelector(".wrap");
+    if (!wrap) return;
+
+    let resizeTimer = null;
+    let lastHeight = 0;
+
+    function postHeight() {
+        const height = Math.ceil(
+            wrap.getBoundingClientRect().height
+        );
+
+        if (height === lastHeight) return;
+        lastHeight = height;
+
+        parent.postMessage(
+            {
+                type: "CL_RESIZE",
+                height: height
+            },
+            "*"
+        );
+    }
+
     function sendHeight() {
-      var h = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({ type: "CL_RESIZE", height: h }, "*");
-      }
+        requestAnimationFrame(function () {
+            requestAnimationFrame(postHeight);
+        });
     }
-    window.addEventListener("load", sendHeight);
-    if (window.ResizeObserver) {
-      new ResizeObserver(sendHeight).observe(document.body);
+
+    function settleHeight() {
+        clearTimeout(resizeTimer);
+
+        resizeTimer = setTimeout(function () {
+            sendHeight();
+        }, 50);
     }
-    setInterval(sendHeight, 1500);
-  })();
+
+    window.addEventListener("load", function () {
+        sendHeight();
+        setTimeout(sendHeight, 100);
+    });
+
+    document.querySelectorAll("details").forEach(function (details) {
+        details.addEventListener("toggle", function () {
+            settleHeight();
+        });
+    });
+
+    const resizeObserver = new ResizeObserver(function () {
+        settleHeight();
+    });
+
+    resizeObserver.observe(wrap);
+
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(function () {
+            sendHeight();
+        });
+    }
+})();
 </script>
 
 </body>
