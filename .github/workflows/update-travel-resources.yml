@@ -1,0 +1,63 @@
+name: Update Travel Resource Boxes
+on:
+  push:
+    paths:
+      - '.github/workflows/update-travel-resources.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update all post travel resource boxes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          files=sorted(Path('.').glob('*post-travel-resources.html'))
+          def section(s,marker,fn):
+              pos=s.find(marker)
+              if pos<0:return s
+              a=s.rfind('<section',0,pos);b=s.find('</section>',pos)
+              if a<0 or b<0:return s
+              b+=10
+              return s[:a]+fn(s[a:b])+s[b:]
+          for p in files:
+              s=p.read_text(encoding='utf-8')
+              s=re.sub(r'(p\.section-subtitle\s*\{[^}]*?font-weight:\s*)(?:bold|[5-9]00)(\s*;)',r'\g<1>400\2',s,flags=re.S)
+              s=re.sub(r'(\ba\s*\{[^}]*?color:\s*)#[0-9A-Fa-f]{3,6}',r'\g<1>#1D4ED8',s,flags=re.S)
+              def insurance(x):
+                  x=re.sub(r'<h3 class="title">.*?</h3>','<h3 class="title">Travel Insurance</h3>',x,count=1,flags=re.S)
+                  x=re.sub(r'<h4 class="strap">.*?</h4>','<h4 class="strap">Compare Top Plans for Digital Nomads, Expats &amp; Long-Term Travelers</h4>',x,count=1,flags=re.S)
+                  x=re.sub(r'<img class="hero"[^>]*>','<img class="hero" src="https://static.wixstatic.com/media/971500_617d70e7fc8f404bba6e793b877e3824~mv2.webp" alt="A businessman holding glowing insurance icons between his hands, featuring text that reads &quot;Travel Insurance: Compare Top Plans for Digital Nomads, Expats, Remote Workers &amp; Long-Term Travelers&quot; with the Closer Lives logo.">',x,count=1,flags=re.S)
+                  x=re.sub(r'<p class="desc-2">.*?</p>','<p class="desc-2">Compare leading travel insurance options for digital nomads, expats, remote workers, and long-term travelers. Explore our guide to coverage, key differences, and the plans available to help you choose insurance that fits your journey.</p>',x,count=1,flags=re.S)
+                  x=re.sub(r'<a class="btn btn-lightblue"[^>]*>.*?</a>','<a class="btn btn-lightblue" href="https://www.closerlives.com/travel-hub/best-insurance-for-digital-nomads-2026" target="_top">COMPARE TRAVEL INSURANCE</a>',x,count=1,flags=re.S)
+                  return x
+              if 'Nomad Insurance by SafetyWing' in s:s=section(s,'Nomad Insurance by SafetyWing',insurance)
+              def gyg(x):
+                  x=re.sub(r'<img class="hero"[^>]*>','<img class="hero" src="https://static.wixstatic.com/media/971500_8ff76971eb934c04b530085970107903~mv2.webp" alt="A scenic view of the Seine River in Paris with tourist tour boats cruising past tree-lined banks, the Eiffel Tower rising in the background under a blue sky, and the GetYourGuide logo in the upper right.">',x,count=1,flags=re.S)
+                  x=re.sub(r'\srel="([^"]*)"',lambda m:(' rel="'+' '.join(v for v in m.group(1).split() if v!='noreferrer')+'"') if [v for v in m.group(1).split() if v!='noreferrer'] else '',x)
+                  return x
+              s=section(s,'Discover Tours & Experiences with GetYourGuide',gyg)
+              def hubs(x):
+                  imgs=list(re.finditer(r'<img class="hero"[^>]*>',x,flags=re.S))
+                  reps=['<img class="hero" src="https://static.wixstatic.com/media/971500_27c470d2eaff4a52843c21ba945e6059~mv2.webp" alt="A man and a woman riding red ATVs in the desert with the Pyramids of Giza in the background, titled &quot;Resource Hub&quot; alongside the Closer Lives logo.">','<img class="hero" src="https://static.wixstatic.com/media/971500_aae82e1ceb074844939f0bd3d8b83427~mv2.webp" alt="Silhouettes of two people wearing head coverings side-by-side at dusk, overlaid with the text &quot;Travel Hub&quot; and the Closer Lives logo.">']
+                  for m,rep in reversed(list(zip(imgs[:2],reps))):x=x[:m.start()]+rep+x[m.end():]
+                  return x
+              s=section(s,'Resource Hub & Travel Hub',hubs)
+              def internal(m):
+                  tag=m.group(0)
+                  if not re.search(r'href="https://(?:www\.)?closerlives\.com/',tag,re.I):return tag
+                  tag=re.sub(r'\s+target="[^"]*"','',tag);tag=re.sub(r'\s+rel="[^"]*"','',tag)
+                  return tag[:-1]+' target="_top">'
+              s=re.sub(r'<a\b[^>]*>',internal,s)
+              p.write_text(s,encoding='utf-8')
+          print('Updated',len(files),'files')
+          PY
+      - name: Commit updates
+        run: |
+          git config user.name 'Closer Lives Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- '*post-travel-resources.html'
+          if ! git diff --cached --quiet; then git commit -m 'Update all post travel resource boxes' && git push; fi
